@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import './App.scss';
+import '../styles/global.scss';
 
 import Layout from '../components/ui/Layout';
 import { BrowserRouter } from 'react-router-dom';
