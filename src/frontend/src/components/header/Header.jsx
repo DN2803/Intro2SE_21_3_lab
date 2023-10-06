@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Button } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
 
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/Logo.png";
 
 import "./header.scss";
 
@@ -94,8 +94,7 @@ const Header = () => {
                         <div className="navigation" ref={menuRef} onClick={toggleMenu}>
                             <ul
                                 className="menu d-flex justify-content-center
-                        gap-3"
-                            >
+                        gap-3">
                                 {nav__links.map((item, index) => (
                                     <li className="nav__item" key={index}>
                                         {/* Khi hover vào item nào trên navbar
@@ -111,29 +110,25 @@ const Header = () => {
                                         </NavLink>
                                     </li>
                                 ))}
-                            </ul>
-                        </div>
-                        {/* ======================= */}
-
-                        {/* ========================= */}
-                        <div
-                            className="nav__right d-flex align-items-center
-                    gap-3"
-                        >
+                            {/* ========================= */}
                             <div
-                                className="nav__btns d-flex align-items-center
-                        gap-3"
+                                className="nav__btns d-flex align-items-center gap-4"
                             >
-                                <Button className="btn secondary__btn">
+                                <Button className="btn primary__btn">
                                     <Link to="/login">Đăng nhập</Link>
                                 </Button>
                             </div>
-
                             {/* Trên mobile */}
-                            <span className="mobile__menu">
-                                <i className="ri-menu-line" onClick={toggleMenu}></i>
+                            <span className='mobile__menu'>
+                                <i className='ri-menu-line' onClick={toggleMenu}></i>
                             </span>
+                            </ul>
+                            
+                        
                         </div>
+                        {/* ======================= */}
+
+                        
                     </div>
                 </Row>
             </Container>
