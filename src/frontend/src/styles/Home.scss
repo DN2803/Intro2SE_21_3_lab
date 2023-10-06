@@ -32,3 +32,13 @@
 
     
 }
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .intro {
+        background: none;
+        background-color: #ffffff;
+        height: 10000px;
+        max-height: 1000vh;
+        
+    }
+}

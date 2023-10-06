@@ -118,17 +118,17 @@ const Header = () => {
                                     <Link to="/login">Đăng nhập</Link>
                                 </Button>
                             </div>
-                            {/* Trên mobile */}
-                            <span className='mobile__menu'>
-                                <i className='ri-menu-line' onClick={toggleMenu}></i>
-                            </span>
+                            
                             </ul>
                             
                         
                         </div>
                         {/* ======================= */}
 
-                        
+                    {/* Trên mobile */}
+                    <span className='mobile__menu'>
+                                <i className='ri-menu-line' onClick={toggleMenu}></i>
+                            </span>
                     </div>
                 </Row>
             </Container>
