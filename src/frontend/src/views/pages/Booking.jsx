@@ -4,7 +4,7 @@ import img1 from '../../assets/images/1.png'
 import DoctorCard from "../../components/doctorCard/doctorCard";
 
 import '../../styles/Booking.scss'
-
+// result list query from database 
 const doctors = [
     {
     hashtag:1,
@@ -22,8 +22,11 @@ const Booking = () => {
                 <input type="text" placeholder="Search.."/>
             </div>
             <div className="doctor-list">
-            
-                <DoctorCard doctor={doctors[0]}/>
+                {doctors.map(doctor_index=> (
+                    <DoctorCard doctor={doctor_index}/>
+                ))
+                }
+                
             </div>
             </Col>
         </Row>
