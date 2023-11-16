@@ -86,7 +86,6 @@ const Header = () => {
                         {/* ======= logo ========= */}
                         <div className="logo d-flex flex-row"  >
                             <img className="ellipse" alt="" src={logo} />
-                            <div className="text-wrapper">Teyvat</div>
                         </div>
                         {/* ====================== */}
 

@@ -1,21 +1,19 @@
 
 @import './variables.scss';
+@import './global.scss';
 .intro {
-    background: center/cover url(../assets/images/homeBg.png);
-    
-    height: 100vh;
+    //background-color: #1111;
+
     max-height: 1000vh;
     &-content {
-        padding: 30px 0;
+        padding: 20px 0;
 
         h1{
-            font-size: 5.2rem;
+            font-size: 4rem;
             font-weight: 700; 
             margin-top: 5.5rem ;
             margin-bottom: 3rem;
             color: $primary-color;
-
-            letter-spacing: .25rem;
             text-shadow: 3px 2px #ffffff;
 
             .hightlight {
@@ -26,19 +24,102 @@
             line-height: 1.5rem;
             margin-bottom: 2.5rem;
         }
+        .box__Image {
+            height: 80%;
         
+        }
+    
     }
 
 
     
 }
+
+.client {
+    &-subtitile{
+        size: 2rem;
+        text-align: center;
+        padding-top: 2rem;
+        color: $primary-color;
+    }
+    &-features{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5rem;
+        border: 10rem;
+        &-item {
+            background-color: fffff;
+            padding: 2rem;
+            border-radius: 1rem;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            &-img {
+                height: 200px;
+                width: 300px;
+                //object-fit: cover;
+                //align-self: center;
+            }
+            &-title {
+                size: 1.1rem;
+                text-align: center !important;
+                color: $primary-color !important;
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+
+        }
+    }
+}
+
+.contactCTA{
+    padding: 5rem;
+    .container{
+        background: $linear-primary-color;
+        border-radius: 10px;
+    
+
+    }
+    
+    margin: 3rem;
+    &-infor {
+        margin: 2rem;
+        margin-left: 6rem;
+        color: #ffffff;
+        letter-spacing: .2rem;
+    }
+    
+    .booking__btn {
+        display:flex;
+        justify-content: center;
+        text-align:center;
+        margin: 3rem 2rem;
+    }
+}
+
+
 /* Mobile */
 @media screen and (max-width: 768px) {
     .intro {
         background: none;
         background-color: #ffffff;
-        height: 10000px;
-        max-height: 1000vh;
+        //max-height: 1000vh;
+        &-content {
+            h1{
+                font-size: 2.2rem ;
+            }
+        }
         
+        .box__Image{
+            height: auto;
+            width: 100%;
+        }
+        
+    
+    }
+    .client-features {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
