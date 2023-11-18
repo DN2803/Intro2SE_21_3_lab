@@ -33,7 +33,7 @@ const Home = () => {
                 <Col lg = '1' md = '12'></Col>
                 <Col lg = '5' md = '12'>
                     <div className="box__Image">
-                        <img src = {image1}/>
+                        <img src = {image1} alt=""/>
                     </div>
                 </Col>
 

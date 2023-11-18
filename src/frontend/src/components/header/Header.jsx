@@ -51,24 +51,7 @@ const Header = () => {
         setShowSubnav(!showSubnav);
     };
 
-    //   ----------------------
-    const handleClickOutsideSubnav = (event) => {
-        if (
-            showSubnav &&
-            headerRef.current &&
-            !headerRef.current.contains(event.target)
-        ) {
-            setShowSubnav(false);
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener("click", handleClickOutsideSubnav);
-
-        return () =>
-            document.removeEventListener("click", handleClickOutsideSubnav);
-    }, [showSubnav]);
-
+   
     //   menu
     // Bấm vào icon menu thì hiện menu list
     const menuRef = useRef(null);
@@ -85,7 +68,7 @@ const Header = () => {
                     >
                         {/* ======= logo ========= */}
                         <div className="logo d-flex flex-row"  >
-                            <img className="ellipse" alt="" src={logo} />
+                            <img className="ellipse" alt="nice" src={logo} />
                         </div>
                         {/* ====================== */}
 
