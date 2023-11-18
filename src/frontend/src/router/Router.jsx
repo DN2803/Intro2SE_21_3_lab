@@ -11,7 +11,7 @@ import Normal from "../components/ui/Normal";
 import Logged from "../components/ui/Logged";
 import BookingDetail from "../views/pages/BookingDetail";
 import DoctorDetail from "../views/pages/DoctorDetail";
-
+import Feedback from "../views/pages/Feedback";
 // page sau khi đăng nhập xong mới coi được
 
 import EmployeeManager from "../views/loggedpages/adminuser/EmployeeManager";
@@ -20,6 +20,7 @@ import CustomerReview from "../views/loggedpages/adminuser/CustomerReview";
 import Statistics from "../views/loggedpages/adminuser/Statistics";
 import WarehouseDoctor from "../views/loggedpages/doctoruser/WarehouseDoctor";
 import WarehouseParmacist from "../views/loggedpages/parmacistuser/WarehouseParmacist";
+
 
 
 const PrivateRoutes = () => {
@@ -39,6 +40,7 @@ const Routers = () => {
                 <Route path='/booking/:id' element={<BookingDetail/>}/>
                 <Route path='/aboutus' element={<AboutUs/>}/>
                 <Route path='/doctor/:id' element = {<DoctorDetail/>}/>
+                <Route path='/feedback' element = {<Feedback/>}/>
             </Route>
             <Route element = {<PrivateRoutes/>}>
                 <Route path='/login/:id' element={<Logged/>}>

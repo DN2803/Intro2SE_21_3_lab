@@ -8,7 +8,7 @@ import "./header.scss";
 
 const nav__links = [
     {
-        path: "./home",
+        path: "./",
         display: "Trang chủ",
     },
 

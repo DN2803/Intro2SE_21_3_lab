@@ -24,7 +24,7 @@ const quick__links = [
     url: "#",
   },
   {
-    display: "Dặt lịch hẹn",
+    display: "Đặt lịch hẹn",
     url: "#",
   },
 ];
@@ -71,7 +71,9 @@ const Footer = () => {
             </ListGroup>
           </Col>
           <Col md="4" lg ="3" className="mb-4">
-              <h5 className="text-uppercase fw-bold mb-4">Đánh giá chúng tôi</h5>
+              <div className="text-uppercase fw-bold mb-4">
+                <Link to = {`/feedback`}>Đánh giá chúng tôi</Link> 
+              </div>
 
               <div className="form-outline form-white mb-4">
                 <p>Nhận thêm thông tin về chúng tôi</p>

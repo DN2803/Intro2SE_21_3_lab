@@ -11,11 +11,17 @@ const BookingDetail = () => {
 
     //const {name} = doctors
     const name = 'name of doctor' + id
-
+    var apppointment = {
+        name: '',
+        address: '',
+        phonenumber: '',
+        email: '',
+        time:'',
+        servicetype: 0,
+        nameDoctor: ''
+    }
     const getValue = () => {
-        var apppointment = {
-            
-        }
+       
         return apppointment
     }
     
@@ -78,7 +84,7 @@ const BookingDetail = () => {
                 </select>                
                 <label htmlFor="doctorname">Tên bác sĩ</label>
                     <h5>{name}</h5>
-                <Button className="btn primary__btn" onClick={getValue}>Xác nhận</Button>
+                <Button className="btn primary__btn">Xác nhận</Button>
                 </Row>
             </Container>
                 
