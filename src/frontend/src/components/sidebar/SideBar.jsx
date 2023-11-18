@@ -33,11 +33,11 @@ const nav__links__admin = [
 const nav__links__parmacist = [
 
     {
-        path: './parmacist/patients',
+        path: './pharmacist/patients',
         display: 'Bệnh nhân trong ngày'
     },
     {
-        path: './parmacist/warehouse',
+        path: './pharmacist/warehouse',
         display: 'Kho thuốc'
     }
 ]
@@ -55,7 +55,7 @@ const Sidebar = ({user}) => {
             break;
         case 3: 
             nav__links = nav__links__parmacist
-            role = 'Parmacist'
+            role = 'Pharmacist'
             break;
         default:
             break;

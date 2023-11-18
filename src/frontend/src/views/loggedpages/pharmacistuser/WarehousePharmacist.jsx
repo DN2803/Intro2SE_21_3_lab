@@ -1,10 +1,10 @@
 import React from "react";
 
-const WarehouseParmacist = () =>{
+const WarehousePharmacist = () =>{
     return (
         <>
         Trang quản lý kho thuốc của phòng khám
         </>
     )
 }
-export default WarehouseParmacist
+export default WarehousePharmacist

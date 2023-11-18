@@ -19,9 +19,8 @@ import PatientListDoctor from "../views/loggedpages/doctoruser/PatientListDoctor
 import CustomerReview from "../views/loggedpages/adminuser/CustomerReview";
 import Statistics from "../views/loggedpages/adminuser/Statistics";
 import WarehouseDoctor from "../views/loggedpages/doctoruser/WarehouseDoctor";
-import WarehouseParmacist from "../views/loggedpages/parmacistuser/WarehouseParmacist";
-
-
+import WarehousePharmacist from "../views/loggedpages/pharmacistuser/WarehousePharmacist";
+import PatientListPharmacist from "../views/loggedpages/pharmacistuser/PatientListPharmacist";
 
 const PrivateRoutes = () => {
     const isAuth = true
@@ -52,8 +51,8 @@ const Routers = () => {
                     <Route path='doctor/patients' element = {<PatientListDoctor/>}/>
                     <Route path='doctor/warehouse' element = {<WarehouseDoctor/>}/>
 
-                    <Route path='parmacist/patients' element = {<PatientListDoctor/>}/>
-                    <Route path='parmacist/warehouse' element = {<WarehouseParmacist/>}/>
+                    <Route path='pharmacist/patients' element = {<PatientListPharmacist/>}/>
+                    <Route path='pharmacist/warehouse' element = {<WarehousePharmacist/>}/>
                 </Route>
             </Route>
                 
