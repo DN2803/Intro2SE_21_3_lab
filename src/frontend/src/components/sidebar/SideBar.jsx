@@ -4,41 +4,55 @@ import { NavLink} from "react-router-dom";
 import { Row} from "reactstrap";
 import { useState } from "react";
 import { TbLogout2 } from "react-icons/tb";
+import { BsFillFilePersonFill, BsInboxesFill, BsFillPersonFill, BsBarChartLineFill, BsFillHouseFill,BsFileEarmarkCheck } from "react-icons/bs";
 import './sidebar.scss'
 
 const nav__links__doctor = [
     {
         path: './doctor/patients',
         display: 'Bệnh nhân trong ngày',
+        icon: <BsFillFilePersonFill className="icon"/>
     },
     {
         path: './doctor/warehouse',
         display: 'Xem kho thuốc',
+        icon: <BsInboxesFill className="icon"/>
     }
 ]
 const nav__links__admin = [
     {
+        path: './admin/dashboard',
+        display: 'Dashboard',
+        icon: <BsFillHouseFill className="icon" />
+    },
+    {
         path: './admin/customerreview',
         display: 'Đánh giá của khách hàng',
+        icon: <BsBarChartLineFill className="icon"/>
     },
-    {
-        path: './admin/statistics',
-        display: 'Thống kê'
-    },
+    
     {
         path: './admin/employee',
-        display: 'Quản lý nhân viên'
+        display: 'Nhân viên',
+        icon: <BsFillPersonFill className="icon"/>
     }
 ]
 const nav__links__parmacist = [
 
     {
         path: './pharmacist/patients',
-        display: 'Bệnh nhân trong ngày'
+        display: 'Bệnh nhân trong ngày',
+        icon: <BsFillFilePersonFill className="icon"/>
     },
     {
         path: './pharmacist/warehouse',
-        display: 'Kho thuốc'
+        display: 'Kho thuốc',
+        icon: <BsInboxesFill className="icon"/>
+    },
+    {
+        path: './pharmacist/invoice',
+        display: 'Hóa đơn',
+        icon: <BsFileEarmarkCheck className="icon"/>
     }
 ]
 const Sidebar = ({user}) => {
@@ -83,6 +97,7 @@ const Sidebar = ({user}) => {
                         <li className="list-group-item" key={index}>
                             {/* Khi hover vào item nào trên navbar
                                 thì active màu cho item đó */}
+                            
                             <NavLink
                                     to={item.path}
                                     className={(navClass) =>
@@ -90,6 +105,7 @@ const Sidebar = ({user}) => {
                                     }
                                     onClick={item.subNav ? handleExploreClick : null} // Thêm sự kiện onClick
                                     >
+                                    {item.icon}
                                     {item.display}
                             </NavLink>
                         </li>

@@ -1,9 +1,32 @@
 import React from "react";
-
+import '../../../styles/CustomerReview.scss'
+import { Container } from "reactstrap";
 const CustomerReview = () =>{
+    const title = [
+        {Header: "ID", accessor: 'id'},
+        {Header: "Họ Tên", accessor: 'name'},
+        {Header: "Email", accessor: 'email'},
+        {Header: "Điện thoại", accessor: 'phone'},
+        {Header: "Mô tả"},
+        {Header: "Đánh giá"}
+    ];
     return (
         <>
-        trang xem hết đánh giá của khách hàng 
+        <Container>
+        <div className="table-customer">
+            <table>
+                <thead>
+                    {
+                        title.map(t => {
+                            return (<td key={t}>{t.Header}</td>)
+                        })
+                    }
+                </thead>
+            </table>
+        
+        </div>
+        </Container>
+        
         </>
     )
 } 

@@ -1,10 +1,13 @@
 import React from "react";
 
-const Statistics = () => {
+const Dashboard = () => {
     return (
         <>
         trang thống kê số liệu thu chi của phòng khám
+        <section>
+            
+        </section>
         </>
     )
 }
-export default Statistics
+export default Dashboard

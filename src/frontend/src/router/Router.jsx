@@ -17,10 +17,11 @@ import Feedback from "../views/pages/Feedback";
 import EmployeeManager from "../views/loggedpages/adminuser/EmployeeManager";
 import PatientListDoctor from "../views/loggedpages/doctoruser/PatientListDoctor";
 import CustomerReview from "../views/loggedpages/adminuser/CustomerReview";
-import Statistics from "../views/loggedpages/adminuser/Statistics";
+import Dashboard from "../views/loggedpages/adminuser/Dashboard";
 import WarehouseDoctor from "../views/loggedpages/doctoruser/WarehouseDoctor";
 import WarehousePharmacist from "../views/loggedpages/pharmacistuser/WarehousePharmacist";
 import PatientListPharmacist from "../views/loggedpages/pharmacistuser/PatientListPharmacist";
+import Invoice from "../views/loggedpages/pharmacistuser/Invoice";
 
 const PrivateRoutes = () => {
     const isAuth = true
@@ -46,13 +47,14 @@ const Routers = () => {
                     
                     <Route path='admin/employee' element = {<EmployeeManager/>}/>
                     <Route path='admin/customerreview' element = {<CustomerReview/>}/>
-                    <Route path='admin/statistics' element = {<Statistics/>}/>
+                    <Route path='admin/dashboard' element = {<Dashboard/>}/>
 
                     <Route path='doctor/patients' element = {<PatientListDoctor/>}/>
                     <Route path='doctor/warehouse' element = {<WarehouseDoctor/>}/>
 
                     <Route path='pharmacist/patients' element = {<PatientListPharmacist/>}/>
                     <Route path='pharmacist/warehouse' element = {<WarehousePharmacist/>}/>
+                    <Route path='pharmacist/invoice' element= {<Invoice/>}/>
                 </Route>
             </Route>
                 
