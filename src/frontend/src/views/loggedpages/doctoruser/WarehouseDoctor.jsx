@@ -4,6 +4,7 @@ const WarehouseDoctor = () => {
     return (
         <>
         trang xem kho thuốc của bác sĩ
+        
         </>
     )
 }

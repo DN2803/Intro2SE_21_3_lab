@@ -3,8 +3,8 @@ import {Routes, Route, Outlet, Navigate} from 'react-router-dom'
 
 //page ai coi cx được nè
 
-import Home from '../views/pages/Home'
-import Login from '../views/pages/Login'
+import Home from '../views/pages/Home';
+import Login from '../views/pages/Login';
 import Booking from "../views/pages/Booking";
 import AboutUs from "../views/pages/AboutUs";
 import Normal from "../components/ui/Normal";
@@ -16,6 +16,7 @@ import Feedback from "../views/pages/Feedback";
 
 import EmployeeManager from "../views/loggedpages/adminuser/EmployeeManager";
 import PatientListDoctor from "../views/loggedpages/doctoruser/PatientListDoctor";
+import PatientDetail from "../views/loggedpages/doctoruser/PatientDetail";
 import CustomerReview from "../views/loggedpages/adminuser/CustomerReview";
 import Dashboard from "../views/loggedpages/adminuser/Dashboard";
 import WarehouseDoctor from "../views/loggedpages/doctoruser/WarehouseDoctor";
@@ -49,7 +50,11 @@ const Routers = () => {
                     <Route path='admin/customerreview' element = {<CustomerReview/>}/>
                     <Route path='admin/dashboard' element = {<Dashboard/>}/>
 
-                    <Route path='doctor/patients' element = {<PatientListDoctor/>}/>
+                    <Route path='doctor/patients' element = {<PatientListDoctor/>}>
+                        {/* <Route path='patient/:id' element={<PatientDetail/>}/>   */}
+                    </Route>
+                    <Route path='doctor/patients/:idpatient' element={<PatientDetail/>}/>
+                    
                     <Route path='doctor/warehouse' element = {<WarehouseDoctor/>}/>
 
                     <Route path='pharmacist/patients' element = {<PatientListPharmacist/>}/>
