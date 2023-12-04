@@ -1,17 +1,22 @@
 import React from "react";
-import { Container, Row, Col, Form } from 'reactstrap'
+import { Container, Row, Col, Form } from 'reactstrap';
+import "../../styles/Login.scss";
+import { submitForm } from "../../utils/fetchFromAPI";
 
-
-import "../../styles/Login.scss"
 const Login = () => {
 
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+        submitForm(event.target);
+    };
+
     return (
-            <section className="login__section">
-                <Container>
-                    <Row lg ='3'>
-                    <Col lg ='8' className='m-auto'>
+        <section className="login__section">
+            <Container>
+                <Row lg='3'>
+                    <Col lg='8' className='m-auto'>
                         <div className="login_form d-flex align-items-center justify-content-center">
-                            <Form>
+                            <Form onSubmit={handleSubmit}>
                                 <h3>Please login.</h3>
                                 <div className="form-group ">
                                     <label htmlFor="exampleInputEmail1">Email address</label>
@@ -25,16 +30,13 @@ const Login = () => {
                                 <div className='form-group' style={{ marginTop: '2vh' }}>
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                     &nbsp; <a href="/">Back to Home</a>
-                            </div>
+                                </div>
                             </Form>
                         </div>
-                        </Col>
-                    </Row>
+                    </Col>
+                </Row>
             </Container>
-            </section>
-        
+        </section>
     );
 };
-
-
 export default Login;
