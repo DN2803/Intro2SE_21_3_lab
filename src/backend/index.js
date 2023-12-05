@@ -23,16 +23,7 @@ db.connectToDatabase()
 });
 
 app.use(loginRoute);
-// // Define your endpoint
-// app.post('/login', (req, res) => {
-//   // Nhận dữ liệu từ phía Frontend
-//   const { email, password } = req.body;
 
-//   // Thực hiện xử lý dữ liệu, ví dụ: in ra console
-//   console.log('Received data from Frontend:');
-//   console.log('Email:', email);
-//   console.log('Password:', password);
-// });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

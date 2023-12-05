@@ -20,7 +20,7 @@ const Login = () => {
                                 <h3>Please login.</h3>
                                 <div className="form-group ">
                                     <label htmlFor="exampleInputEmail1">Username</label>
-                                    <input type="text" className="form-control"  />
+                                    <input type="text" className="form-control" id="exampleInputEmail1" />
                                     
                                 </div>
                                 <div className="form-group ">

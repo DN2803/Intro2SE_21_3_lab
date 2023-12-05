@@ -1,5 +1,5 @@
 export async function submitForm(submitForm) {
-    const email = document.getElementById('exampleInputEmail1').value;
+    const text = document.getElementById('exampleInputEmail1').value;
     const password = document.getElementById('exampleInputPassword1').value;
   
     try {
@@ -9,7 +9,7 @@ export async function submitForm(submitForm) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
+          text: text,
           password: password,
         }),
       });
