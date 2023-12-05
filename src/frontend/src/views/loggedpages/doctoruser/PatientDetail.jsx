@@ -48,16 +48,15 @@ const PatientDetail = () => {
                         </Row>
                     </Col>
                 </Row>
+                
             </div>
             <div className="patient-history">
+            <label>Lịch sử khám</label>
 
                 
 
-
             </div>
         </div>
-        chứa thông tin hồ sơ bệnh án của bệnh nhân nếu bệnh nhân đã từng khám tại cơ sở
-        có nút tạo bệnh án
         </>
     )
 }

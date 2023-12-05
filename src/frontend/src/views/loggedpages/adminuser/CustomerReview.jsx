@@ -11,7 +11,7 @@ const CustomerReview = () =>{
     ];
     return (
         <>
-        <Container>  
+        <Container className="customer">  
         <div className="table-customer">
             <table>
                 <thead>
