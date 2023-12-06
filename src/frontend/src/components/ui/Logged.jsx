@@ -7,32 +7,35 @@ import Sidebar from "../sidebar/SideBar";
 import img1 from "../../assets/images/1.png"
 // after check in database 
 // get user from data base 
+
 const users = 
-[{
-    username: 'username1',
-    type: 1,
-    avatar: img1
-},
 {
-    username: 'usename2',
-    type: 2,
-    avatar:img1
-},
-{
-    username: 'usename3',
-    type:3,
+    username: "",
+    type: 3,
     avatar: img1
+
 }
-]
+
 
 const Logged = () => {
     const id = useParams().id
+    console.log(id);    
+    users.username = id;
+    console.log(id.search("doctor"));
+    if (id.search("doctor") === 0) {
+        users.type = 2;
+    }
+    if (id.search("admin") === 0) {
+        users.type = 1;
+    }
+    console.log(users.type);
+    
     return(
         <>
         <Container>
             <Row>
                 <Col lg = '3' sm='12'>
-                    <Sidebar user={users[id-1]}></Sidebar>
+                    <Sidebar user={users}></Sidebar>
                 </Col>
                 <Col lg = '9' sm = '12'>
                     <Outlet/>
