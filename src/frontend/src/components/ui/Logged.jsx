@@ -29,7 +29,7 @@ const Logged = () => {
         users.type = 1;
     }
     console.log(users.type);
-    
+    {localStorage.removeItem('isAuth')}
     return(
         <>
         <Container>

@@ -18,7 +18,7 @@ export async function submitForm(submitForm) {
         const data = await response.json();
         console.log('Response from BE:', data);
         // Handle successful response from the backend
-        return data.loginName;
+        return data;
       } else {
         console.error('Error:', response.statusText);
         // Handle error response from the backend

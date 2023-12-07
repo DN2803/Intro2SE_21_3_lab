@@ -25,9 +25,12 @@ import PatientListPharmacist from "../views/loggedpages/pharmacistuser/PatientLi
 import Invoice from "../views/loggedpages/pharmacistuser/Invoice";
 
 const PrivateRoutes = () => {
-    const isAuth = true
+    let isAuth = false;
+    const Auth = localStorage.getItem('isAuth');
+    isAuth = Auth === 'true';   
+    console.log(isAuth);
+    //
     // call api to check logged 
-  
     return isAuth ? <Outlet /> : <Navigate to='/login' />
   }
 

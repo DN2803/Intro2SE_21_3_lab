@@ -8,20 +8,30 @@ const Login = () => {
     const navigate = useNavigate();
     const [data, setData] = useState("");
     const [isLogged, setIsLogged] = useState(true);
-    const handleSubmit = (event) => {
-        event.preventDefault(); // Prevent default form submission behavior
-        let user = submitForm(event.target);
-        setData(user);
-        console.log("data login", data);
-        if (!data){
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            // Assuming submitForm returns a Promise
+            let user = await submitForm(event.target);
+            user = user.loginName;
+            console.log(user);
+            setData(user);
+            if (!user) {
+                setIsLogged(false);
+            } else {
+                setIsLogged(true);
+                localStorage.setItem('isAuth', true.toString());
+                navigate(`./${user}`);
+
+            }
+        } catch (error) {
+            // Handle any errors that occurred during form submission
+            console.error("Error during form submission:", error);
             setIsLogged(false);
-        } 
-        else {
-            let usertype = data.loginName;
-            navigate(`./${usertype}`)
         }
-        console.log("done ?", isLogged);
-    
+
     };
     
 
