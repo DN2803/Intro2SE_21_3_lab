@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 import { Form, Button } from "reactstrap";
 import { createAppointment } from "../../utils/fetchFromAPI";
 import "../../styles/BookingDetail.scss";
+
 const BookingDetail = () => {
   const { id } = useParams();
   const idDoctor = id.split(" ", 2)[0];
+  console.log(idDoctor);
   const firstSpaceIndex = id.indexOf(" ");
 
-  // Remove the first character and the space
   const nameDoctor = id.slice(firstSpaceIndex + 1);
-  console.log(idDoctor, nameDoctor);
 
   const handleConfirm = async () => {
     const requiredFields = [
@@ -73,6 +73,7 @@ const BookingDetail = () => {
         type: type,
         doctor: doctor,
         date: date,
+        id: idDoctor
       };
 
       // Gọi hàm gửi dữ liệu lịch hẹn lên server (thay thế bằng hàm thực tế)

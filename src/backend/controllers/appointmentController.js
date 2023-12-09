@@ -13,6 +13,7 @@ exports.createAppointment = async (req, res) => {
       type,
       doctor,
       date,
+      id
     } = req.body;
 
     console.log("Received appointment data from Frontend:");
@@ -25,6 +26,7 @@ exports.createAppointment = async (req, res) => {
     console.log("Type:", type);
     console.log("Doctor:", doctor);
     console.log("Date:", date);
+    console.log("ID:", id);
 
     // Trả về thông tin chi tiết trong response
     return res.status(201).json({

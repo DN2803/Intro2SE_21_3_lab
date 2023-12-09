@@ -2,9 +2,31 @@ const db = require("../models/connect");
 const sql = require("mssql");
 
 class AppointmentModel {
+  constructor({
+    name,//
+    gender,//
+    address,//
+    phonenumber,//
+    email,//
+    period,//
+    type,
+    date,//
+    doctorID,//
+    status,//
+  }) {
+    this.name = name;
+    this.gender = gender;
+    this.address = address;
+    this.phonenumber = phonenumber;
+    this.email = email;
+    this.period = period;
+    this.type = type;
+    this.date = date;
+    this.doctorID = doctorID;
+    this.status = status;
+  }
   static async createAppointment(appointmentData) {
     let pool;
-
     try {
       pool = await db.connectToDatabase();
 
