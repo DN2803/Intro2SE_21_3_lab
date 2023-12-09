@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 import './doctorCard.scss'
 const DoctorCard = ({doctor}) => {
-
+;
     const { hashtag, name, img, specialty} = doctor;
-
+    const data = hashtag +' '+ name
     return (
     <>
     <div className="doctor-card">
@@ -39,7 +39,7 @@ const DoctorCard = ({doctor}) => {
                 </Col>
                 <Col lg ='4' sm ='12'>
                     <Button className="btn primary__btn">
-                        <Link to={`/booking/${hashtag}`}>Đặt lịch ngay</Link>
+                        <Link to={`/booking/${data}`}>Đặt lịch ngay</Link>
                     </Button>
                 </Col>
                 

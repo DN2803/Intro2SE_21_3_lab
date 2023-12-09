@@ -1,52 +1,117 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Form, Button } from "reactstrap";
-
+import { createAppointment } from "../../utils/fetchFromAPI";
 import "../../styles/BookingDetail.scss";
+
 const BookingDetail = () => {
   const { id } = useParams();
+  const idDoctor = id.split(" ", 2)[0];
+  console.log(idDoctor);
+  const firstSpaceIndex = id.indexOf(" ");
 
-  // call API load a doctor have id  = id
-  //const doctors = doctorsData.find(doctors => doctors.id ===id)
+  const nameDoctor = id.slice(firstSpaceIndex + 1);
 
-  //const {name} = doctors
-  const name = "name of doctor" + id;
-  var apppointment = {
-    name: "",
-    address: "",
-    phonenumber: "",
-    email: "",
-    time: "",
-    servicetype: 0,
-    nameDoctor: "",
-  };
-  const getValue = () => {
-    return apppointment;
+  const handleConfirm = async () => {
+    const requiredFields = [
+      "Họ_tên",
+      "Địa_chỉ",
+      "Số_điện_thoại",
+      "Email",
+      "Ngày",
+    ];
+
+    for (const field of requiredFields) {
+      const element = document.getElementById(field);
+      if (!element) {
+        alert(`Element with ID '${field}' not found.`);
+        return;
+      }
+
+      const value = element.value.trim();
+      if (!value) {
+        alert(`Vui lòng điền đầy đủ thông tin cho ${field.replace("_", " ")}.`);
+        return;
+      }
+
+
+      const phoneNumberRegex = /^\d{10}$/;
+      if (
+        !phoneNumberRegex.test(document.getElementById("Số_điện_thoại").value)
+      ) {
+        alert("Số điện thoại không hợp lệ. Vui lòng nhập 10 số.");
+        return;
+      }
+      
+      if (field === "Email" && !element.checkValidity()) {
+        alert(
+          "Email không hợp lệ. Vui lòng nhập địa chỉ email đúng định dạng."
+        );
+        return;
+      }
+    }
+    try {
+      // Lấy giá trị từ các trường input
+      const fullname = document.getElementById("Họ_tên").value;
+      const gender = document.getElementById("Giới_tính").value;
+      const address = document.getElementById("Địa_chỉ").value;
+      const phoneNumber = document.getElementById("Số_điện_thoại").value;
+      const email = document.getElementById("Email").value;
+      const date = document.getElementById("Ngày").value;
+      const period = document.getElementById("Buổi").value;
+      const type = document.getElementById("Dịch_vụ").value;
+      const doctor = document.getElementById("Tên_bác_sĩ").value;
+
+      // Tạo đối tượng appointmentData từ dữ liệu thu thập được
+      const appointmentData = {
+        name: fullname,
+        gender: gender,
+        address: address,
+        phonenumber: phoneNumber,
+        email: email,
+        period: period,
+        type: type,
+        doctor: doctor,
+        date: date,
+        id: idDoctor
+      };
+
+      // Gọi hàm gửi dữ liệu lịch hẹn lên server (thay thế bằng hàm thực tế)
+      await createAppointment(appointmentData);
+
+      // Hiển thị thông báo thành công (thay thế bằng cách thực hiện thực tế)
+      alert("Đặt lịch thành công!");
+    } catch (error) {
+      console.error("Error creating appointment:", error.message);
+      // Xử lý lỗi nếu có
+      alert("Đã xảy ra lỗi khi đặt lịch. Vui lòng thử lại sau.");
+    }
   };
 
   return (
     <>
       <div className="booking-form">
-      
         <Form>
-        <h1>ĐẶT LỊCH KHÁM VỚI CHÚNG TÔI</h1>
+          <h1>ĐẶT LỊCH KHÁM VỚI CHÚNG TÔI</h1>
 
           <div className="form-group">
             <label htmlFor="fullname">Họ Tên</label>
-            <input
-              type="text"
-              placeholder="Enter Fullname"
-              required
-              id="fullname"
-            />
+            <input type="text" placeholder="Nhập họ tên" required id="Họ_tên" />
+          </div>
+          <div className="form-group">
+            <label>Giới tính</label>
+            <select id="Giới_tính" required>
+              <option value="Nam"> Nam</option>
+              <option value="Nữ"> Nữ</option>
+            </select>
           </div>
           <div className="form-group">
             <label htmlFor="text">Địa chỉ</label>
             <input
               type="text"
-              placeholder="Enter address"
+              placeholder="Nhập địa chỉ"
               required
-              id="address"
+              id="Địa_chỉ"
             />
           </div>
 
@@ -56,7 +121,7 @@ const BookingDetail = () => {
               type="tel"
               placeholder="0123456789"
               required
-              id="phone-number"
+              id="Số_điện_thoại"
             />
           </div>
 
@@ -66,35 +131,43 @@ const BookingDetail = () => {
               type="email"
               placeholder="example@gmail.com"
               required
-              id="email"
+              id="Email"
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="time">Thời gian dự kiến</label>
             <div className="form-group-time">
-              <select id="time" required>
-                <option value="1"> 07h30 ~ 11h00</option>
-                <option value="2"> 13h00 ~ 16h30</option>
+              <select id="Buổi" required>
+                <option value="Sáng"> Sáng</option>
+                <option value="Chiều"> Chiều</option>
               </select>
 
-              <input type="date" required id="date" />
+              <input type="date" id="Ngày" required></input>
             </div>
           </div>
 
           <div className="form-group">
             <label htmlFor="services">Dịch vụ khám</label>
-            <select id="services" required>
-              <option value="1">Khám tổng quát</option>
-              <option value="2">Khám chuyên sâu</option>
+            <select id="Dịch_vụ" required>
+              <option value="Khám tổng quát">Khám tổng quát</option>
+              <option value="Khám chuyên sâu">Khám chuyên sâu</option>
             </select>
           </div>
 
           <div className="form-group">
             <label htmlFor="doctorname">Tên bác sĩ</label>
-            <h6>{name}</h6>
+            <input
+              type="text"
+              readOnly
+              required
+              id="Tên_bác_sĩ"
+              value={nameDoctor}
+            />
           </div>
-          <Button className="form-btn primary__btn">Xác nhận</Button>
+          <Button onClick={handleConfirm} className="form-btn primary__btn">
+            Xác nhận
+          </Button>
         </Form>
       </div>
     </>
