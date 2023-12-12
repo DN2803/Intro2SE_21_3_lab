@@ -26,6 +26,7 @@ body {
   border: none !important;
   border-radius: 20px !important;
   padding: 0.5rem 1.5rem !important;
+  color: #fff !important;
   a{
     font-size: 1.1rem;
     text-decoration: none;
@@ -45,4 +46,11 @@ body {
     
   }
   
+}
+.outline__btn {
+  background-color: #fff !important;
+  border: 2px solid $primary-color !important;
+  border-radius: 20px !important;
+  padding: 0.5rem 1.5rem !important;
+  color: $primary-color !important;
 }

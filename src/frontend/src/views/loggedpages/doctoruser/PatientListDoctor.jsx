@@ -17,6 +17,14 @@ const PatientListDoctor = () => {
             email: 'tvmina@gmail.com',
             phone: '098888888',
         },
+        {
+            id: 'BN02',
+            name: 'Trần Võ anini',
+            gender: 'Nữ',
+            birth: '30/04/2004',
+            email: 'tvmina@gmail.com',
+            phone: '098888888',
+        },
     ];
     const title = [
         {Header: "ID", accessor: 'id'},

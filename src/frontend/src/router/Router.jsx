@@ -23,13 +23,14 @@ import WarehouseDoctor from "../views/loggedpages/doctoruser/WarehouseDoctor";
 import WarehousePharmacist from "../views/loggedpages/pharmacistuser/WarehousePharmacist";
 import PatientListPharmacist from "../views/loggedpages/pharmacistuser/PatientListPharmacist";
 import Invoice from "../views/loggedpages/pharmacistuser/Invoice";
+import Prescription from "../views/loggedpages/doctoruser/Prescription";
 
 const PrivateRoutes = () => {
     let isAuth = false;
     const Auth = localStorage.getItem('isAuth');
     isAuth = Auth === 'true';   
     console.log(isAuth);
-    //
+    isAuth = true 
     // call api to check logged 
     return isAuth ? <Outlet /> : <Navigate to='/login' />
   }
@@ -53,10 +54,9 @@ const Routers = () => {
                     <Route path='admin/customerreview' element = {<CustomerReview/>}/>
                     <Route path='admin/dashboard' element = {<Dashboard/>}/>
 
-                    <Route path='doctor/patients' element = {<PatientListDoctor/>}>
-                        {/* <Route path='patient/:id' element={<PatientDetail/>}/>   */}
-                    </Route>
+                    <Route path='doctor/patients' element = {<PatientListDoctor/>}/>
                     <Route path='doctor/patients/:idpatient' element={<PatientDetail/>}/>
+                    <Route path='doctor/patients/:idpatient/:idpres' element={<Prescription/>}/>
                     
                     <Route path='doctor/warehouse' element = {<WarehouseDoctor/>}/>
 
