@@ -58,7 +58,9 @@ const EmployeeManager = () => {
 
     // chỉnh sửa 
 
-
+    const onClickFix = () => {
+        setIsActive(!isActive);
+    }
 
     return (
         <>
@@ -104,8 +106,8 @@ const EmployeeManager = () => {
                     <label>Lương</label>
                     <input type="number" placeholder="luong" />
                 </div>
-                <Button className="btn-add-new">Xác nhận</Button>
-                <Button className="btn-exit">Thoát</Button>
+                <Button className="primary__btn btn-add-new">Xác nhận</Button>
+                <Button className="outline__btn btn-exit" onClick={onClickAdd}>Thoát</Button>
             </div>
         </div>}
        
@@ -130,7 +132,7 @@ const EmployeeManager = () => {
                             <td>{d.degree}</td>
                             <td>{d.role}</td>
                             <td>{d.wage}</td>
-                            <td><FaPen className="icon-fix"/></td>
+                            <td><FaPen onClick={onClickFix} className="icon-fix"/></td>
                             <td><AiOutlineDelete className="icon-delete"/></td>
                         </tr>)
                     })
