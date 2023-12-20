@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import DoctorCard from "../../components/doctorCard/doctorCard";
 import "../../styles/Booking.scss";
 import { fetchDoctorsIDName } from "../../utils/fetchFromAPI";
+import { FaExclamationTriangle } from "react-icons/fa";
 // result list query from database
 
 const nav__item__1 = [
@@ -39,21 +40,31 @@ const nav__item__3 = [
 ];
 const Booking = () => {
   const [doctors, setDoctors] = useState([]);
-
+  const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const doctorsData = await fetchDoctorsIDName();
         setDoctors(doctorsData.doctorsList); // Assuming your API response has a 'doctorsList' property
+        // if (doctors.length === 0) {
+        //   console.log ("hihi");
+        //   setIsActive(true);
+        // }
+        
         
       } catch (error) {
         console.error("Error fetching doctors data:", error);
+        // if (doctors.length === 0) {
+        //   console.log ("hihi");
+        //   setIsActive(true);
+        // }
       }
     };
     
     fetchData();
   }, []);
   console.log(doctors);
+  
   return (
     <>
       <Container>
@@ -65,6 +76,7 @@ const Booking = () => {
                   <input type="text" placeholder="Search.." />
                 </div>
                 <div className="doctor-list">
+                {/* {isActive && <p  className = "warning"> <FaExclamationTriangle />      Không tìm thấy thông tin bác sĩ</p>} */}
                   {doctors.map((doctor_index) => (
                     <DoctorCard doctor={doctor_index} />
                   ))}
