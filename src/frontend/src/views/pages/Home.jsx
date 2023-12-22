@@ -1,4 +1,4 @@
-import React from "react";
+import React,  { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "reactstrap";
 
 import '../../styles/Home.scss'
@@ -8,6 +8,27 @@ import image1 from "../../assets/images/1.png"
 
 import { features } from "../../assets/data/features";
 const Home = () => {
+    const [mapContent, setMapContent] = useState('');
+
+    useEffect(() => {
+      const fetchUserLocation = async () => {
+        try {
+          const position = await new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+          });
+  
+          const { latitude, longitude } = position.coords;
+          const iframeSrc = `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
+          setMapContent(`<iframe width="100%" height="300" src="${iframeSrc}"></iframe>`);
+        } catch (error) {
+          console.error('Error getting user location:', error);
+          // Handle error as needed
+        }
+      };
+  
+      fetchUserLocation();
+    }, []); // Empty dependency array means the effect runs once after the initial render
+  
     return (
     <>
     {/* ==========intro - section ===================== */}
@@ -86,8 +107,14 @@ const Home = () => {
                     </div>
                 </Col>
               </Row>
+              
         </Container>
+        
     </section>
+    <section className="local">
+        <div id="map" dangerouslySetInnerHTML={{ __html: mapContent }} className="map-container" />;
+    </section>
+    
     </>
     )
 } 
