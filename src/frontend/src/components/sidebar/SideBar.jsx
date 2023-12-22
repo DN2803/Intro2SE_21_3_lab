@@ -48,11 +48,6 @@ const nav__links__parmacist = [
         path: './pharmacist/warehouse',
         display: 'Kho thuốc',
         icon: <BsInboxesFill className="icon"/>
-    },
-    {
-        path: './pharmacist/invoice',
-        display: 'Hóa đơn',
-        icon: <BsFileEarmarkCheck className="icon"/>
     }
 ]
 const Sidebar = ({user}) => {

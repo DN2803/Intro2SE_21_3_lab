@@ -23,9 +23,16 @@
        
     }
 }
-.input-pair {
-    padding-bottom: 2rem;
+.table{
+    max-height: 250px;
+    overflow: scroll;
+    display: flex;
+    padding-bottom: 1rem;
+    .input-pair {
+        padding-bottom: 2rem;
+    }
 }
+
 .add {
     border: none;
     background-color: none;

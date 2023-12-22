@@ -24,13 +24,14 @@ import WarehousePharmacist from "../views/loggedpages/pharmacistuser/WarehousePh
 import PatientListPharmacist from "../views/loggedpages/pharmacistuser/PatientListPharmacist";
 import Invoice from "../views/loggedpages/pharmacistuser/Invoice";
 import Prescription from "../views/loggedpages/doctoruser/Prescription";
-
+import PatientDetailPharmacist from "../views/loggedpages/pharmacistuser/PatientDetail";
+import PrescriptionPharmacist from "../views/loggedpages/pharmacistuser/Prescription";
 const PrivateRoutes = () => {
     let isAuth = false;
     const Auth = localStorage.getItem('isAuth');
     isAuth = Auth === 'true';   
     console.log(isAuth);
-    //isAuth = true 
+    isAuth = true 
     // call api to check logged 
     return isAuth ? <Outlet /> : <Navigate to='/login' />
   }
@@ -61,8 +62,11 @@ const Routers = () => {
                     <Route path='doctor/warehouse' element = {<WarehouseDoctor/>}/>
 
                     <Route path='pharmacist/patients' element = {<PatientListPharmacist/>}/>
+                    <Route path='pharmacist/patients/:idpatient' element={<PatientDetailPharmacist/>}/>
+                    <Route path='pharmacist/patients/:idpatient/:idpres' element={<PrescriptionPharmacist/>}/>
+                    <Route path='pharmacist/patients/:idpatient/:idpres/invoice' element={<Invoice/>}/>
                     <Route path='pharmacist/warehouse' element = {<WarehousePharmacist/>}/>
-                    <Route path='pharmacist/invoice' element= {<Invoice/>}/>
+                    
                 </Route>
             </Route>
                 
