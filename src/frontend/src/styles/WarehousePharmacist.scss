@@ -30,13 +30,13 @@
 .wrapper {
     position: fixed;//relative;
     transform: translateX(14rem);
-    background-color: rgba(242, 241, 241, 0.8);
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: white;
+    border: 2px solid $primary-color;
     border-radius: 10px;
     justify-items: center;
     align-items: center;
-    width: 30rem;
-    height: 550px;
+    width: 20rem;
+    height: 30rem;
     display: flex;
     margin: auto;
     .add-drug{
@@ -57,6 +57,10 @@
         label {
             width: 5rem;
             height: auto;
+        }
+        input {
+            border: none;
+            background-color: #e2dcdc5e;
         }
         
         

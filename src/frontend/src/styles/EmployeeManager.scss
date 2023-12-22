@@ -30,13 +30,9 @@
 .wrapper {
     position: fixed;//relative;
     transform: translateX(14rem);
-    background-color: rgba(242, 241, 241, 0.8);
-    border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     justify-items: center;
     align-items: center;
-    width: 30rem;
-    height: 550px;
     display: flex;
     margin: auto;
     .add-employee{
@@ -58,7 +54,10 @@
             width: 5rem;
             height: auto;
         }
-        
+        input {
+            border: none;
+            background-color: #e2dcdc5e;
+        }
         
         .btn-add-new {
             display: grid;
