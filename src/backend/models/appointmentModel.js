@@ -3,16 +3,15 @@ const sql = require("mssql");
 
 class AppointmentModel {
   constructor({
-    name,//
-    gender,//
-    address,//
-    phonenumber,//
-    email,//
-    period,//
+    name, //
+    gender, //
+    address, //
+    phonenumber, //
+    email, //
+    period, //
     type,
-    date,//
-    doctorID,//
-    status,//
+    date, //
+    doctorID, //
   }) {
     this.name = name;
     this.gender = gender;
@@ -23,27 +22,29 @@ class AppointmentModel {
     this.type = type;
     this.date = date;
     this.doctorID = doctorID;
-    this.status = status;
   }
   static async createAppointment(appointmentData) {
     let pool;
     try {
       pool = await db.connectToDatabase();
-
       const request = pool.request();
-      // Thêm logic kiểm tra hợp lệ của dữ liệu ở đây...
-
       // Thực hiện truy vấn INSERT để tạo lịch hẹn
       const result = await request
-        .input("patientId", sql.Int, appointmentData.patientId)
-        .input("doctorId", sql.Int, appointmentData.doctorId)
-        .input("appointmentTime", sql.DateTime, appointmentData.appointmentTime)
-        .output("appointmentId", sql.Int)
+        .input("phoneNum", sql.Char(10), appointmentData.phonenumber)
+        .input("date", sql.Date, appointmentData.date)
+        .input("period", sql.NVarChar(10), appointmentData.period)
+        .input("doctorID", sql.Int, appointmentData.doctorID)
+        .input("patientName", sql.NVarChar(50), appointmentData.name)
+        .input("email", sql.VarChar(30), appointmentData.email)
+        .input("gender", sql.NVarChar(3), appointmentData.gender)
+        .input("address", sql.NVarChar(50), appointmentData.address)
+        .input("service", sql.NVarChar(50), appointmentData.type)
+        .output("responseMessage", sql.NVarChar(250))
         .execute("dbo.uspCreateAppointment");
 
-      const createdAppointmentId = result.output.appointmentId;
-
-      return createdAppointmentId;
+      const responseMessage = result.output.responseMessage;
+      
+      return responseMessage;
     } catch (error) {
       console.error("Error creating appointment:", error.message);
       throw new Error("Failed to create appointment");

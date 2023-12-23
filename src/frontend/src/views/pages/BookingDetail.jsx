@@ -34,7 +34,6 @@ const BookingDetail = () => {
         return;
       }
 
-
       const phoneNumberRegex = /^\d{10}$/;
       if (
         !phoneNumberRegex.test(document.getElementById("Số_điện_thoại").value)
@@ -42,7 +41,7 @@ const BookingDetail = () => {
         alert("Số điện thoại không hợp lệ. Vui lòng nhập 10 số.");
         return;
       }
-      
+
       if (field === "Email" && !element.checkValidity()) {
         alert(
           "Email không hợp lệ. Vui lòng nhập địa chỉ email đúng định dạng."
@@ -73,18 +72,23 @@ const BookingDetail = () => {
         type: type,
         doctor: doctor,
         date: date,
-        id: idDoctor
+        id: idDoctor,
       };
 
       // Gọi hàm gửi dữ liệu lịch hẹn lên server (thay thế bằng hàm thực tế)
-      await createAppointment(appointmentData);
+      const response = await createAppointment(appointmentData);
 
-      // Hiển thị thông báo thành công (thay thế bằng cách thực hiện thực tế)
-      alert("Đặt lịch thành công!");
+      // Check the response for success or error
+      if (response.success) {
+        // Handle success (e.g., show a success message)
+        alert(response.message);
+      } else if (!response.success) {
+        // Handle error (e.g., show an error message)
+        alert(`Không thể đặt lịch hẹn: ${response.message}`);
+      }
     } catch (error) {
-      console.error("Error creating appointment:", error.message);
-      // Xử lý lỗi nếu có
-      alert("Đã xảy ra lỗi khi đặt lịch. Vui lòng thử lại sau.");
+      // Handle any unexpected errors
+      console.error("Lỗi", error.message);
     }
   };
 
