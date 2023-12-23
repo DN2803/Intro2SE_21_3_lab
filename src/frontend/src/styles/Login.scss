@@ -4,6 +4,14 @@
     }
     .login_form {
         position: relative;
+
         transform: translateY(50%) ;
+       form {
+        width: 23rem;
+       }
+    }
+    .error{
+        color: red;
+        display: inline;
     }
 }

@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 const db = require('./models/connect');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const webRoutes = require('./routes/web');
 const loginRoute = require('./routes/authRoutes');
+=======
+const db = require("./models/connect");
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const booking = require("./routes/doctorRoutes");
+const loginRoute = require("./routes/authRoutes");
+const appointmentRoute = require("./routes/appointmentRoutes");
+>>>>>>> df1b76e81900ad8c9ea567125c44711175c403c3
 const app = express();
 const port = 2212;
 
@@ -13,6 +23,7 @@ app.use(bodyParser.json());
 // Enable CORS for all routes
 app.use(cors());
 
+<<<<<<< HEAD
 db.connectToDatabase()
   .then(() => {
     console.log('Connected to the database');
@@ -34,6 +45,11 @@ app.use(loginRoute);
 //   console.log('Password:', password);
 // });
 
+=======
+app.use(loginRoute);
+app.use(booking);
+app.use(appointmentRoute);
+>>>>>>> df1b76e81900ad8c9ea567125c44711175c403c3
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

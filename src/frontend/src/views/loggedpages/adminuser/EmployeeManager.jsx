@@ -58,7 +58,9 @@ const EmployeeManager = () => {
 
     // chỉnh sửa 
 
-
+    const onClickFix = () => {
+        setIsActive(!isActive);
+    }
 
     return (
         <>
@@ -77,35 +79,35 @@ const EmployeeManager = () => {
                 {/* <h4>Chỉnh sửa</h4> */}
                 <div className="group-from">
                     <label>ID</label>
-                    <input type="text" placeholder="ID" />
+                    <input type="text" />
                 </div>
                 <div className="group-from">
                     <label>Họ tên</label>
-                    <input type="text" placeholder="Họ tên"/>
+                    <input type="text"/>
                 </div>
                 <div className="group-from">
                 
                     <label>Email</label>
-                    <input type="email" placeholder="email"/>
+                    <input type="email"/>
                 </div>
                 <div className="group-from">
                     <label>SĐT</label>
-                    <input type="phone number" placeholder="0988888888" />
+                    <input type="phone number"/>
                 </div>
                 <div className="group-from">
                     <label>Bằng cấp</label>
-                    <input type="text" placeholder="thac si" />
+                    <input type="text"/>
                 </div>
                 <div className="group-from">
                     <label>Chức vụ</label>
-                    <input type="text" placeholder="nhap chuc vu" />
+                    <input type="text"/>
                 </div>
                 <div className="group-from">
                     <label>Lương</label>
-                    <input type="number" placeholder="luong" />
+                    <input type="number"/>
                 </div>
-                <Button className="btn-add-new">Xác nhận</Button>
-                <Button className="btn-exit">Thoát</Button>
+                <Button className="primary__btn btn-add-new">Xác nhận</Button>
+                <Button className="outline__btn btn-exit" onClick={onClickAdd}>Thoát</Button>
             </div>
         </div>}
        
@@ -130,7 +132,7 @@ const EmployeeManager = () => {
                             <td>{d.degree}</td>
                             <td>{d.role}</td>
                             <td>{d.wage}</td>
-                            <td><FaPen className="icon-fix"/></td>
+                            <td><FaPen onClick={onClickFix} className="icon-fix"/></td>
                             <td><AiOutlineDelete className="icon-delete"/></td>
                         </tr>)
                     })

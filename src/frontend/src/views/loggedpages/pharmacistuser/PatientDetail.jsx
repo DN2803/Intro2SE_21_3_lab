@@ -1,9 +1,8 @@
 import React from "react";
 import { useParams, Link,  useNavigate } from "react-router-dom";
 import { Button, Row, Col, Container } from "reactstrap";
-import { FaEye } from "react-icons/fa";
 import '../../../styles/PatientDetail.scss'
-const PatientDetail = () => {
+const PatientDetailPharmacist = () => {
     const { idpatient } = useParams();
     // get medical history from database 
     // get information from database where patient's id = id patient
@@ -99,12 +98,7 @@ const PatientDetail = () => {
                             <label>Dị ứng</label>
                             <input type="text"></input>
                         </Row>
-                        <Row>
-                        <Button className="btn primary__btn create-prescription">
-                
-                            <Link to = {`./${idmake}`}>Tạo đơn thuốc</Link>
-                        </Button>
-                        </Row>
+                        
                     </Col>
                 </Row>
                 
@@ -131,7 +125,7 @@ const PatientDetail = () => {
                                     <td>{index +1}</td>
                                     <td>{t.date}</td>
                                     <td>{t.diagnostic}</td>
-                                    <td><Link to ={`./${id}`}><FaEye /></Link> </td>
+                                    <td><Link to ={`./${id}`}>Xem đơn thuốc</Link> </td>
                                 </tr>
                                     
                                     )
@@ -143,12 +137,9 @@ const PatientDetail = () => {
             </div>
         <div className="button">
             <Row>
-                <Col>
-                <Button className="btn primary__btn save"> Lưu thay đổi</Button>
-                </Col>
-                <Col>
+                
                 <Button className="btn outline__btn back " onClick={goBack}>Thoát</Button>
-                </Col>
+                
             </Row>
         </div>
         
@@ -157,4 +148,4 @@ const PatientDetail = () => {
         </>
     )
 }
-export default PatientDetail
+export default PatientDetailPharmacist

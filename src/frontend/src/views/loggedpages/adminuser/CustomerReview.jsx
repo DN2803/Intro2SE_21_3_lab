@@ -5,14 +5,13 @@ const CustomerReview = () =>{
     const title = [
         {Header: "ID", accessor: 'id'},
         {Header: "Họ Tên", accessor: 'name'},
-        {Header: "Email", accessor: 'email'},
         {Header: "Điện thoại", accessor: 'phone'},
         {Header: "Mô tả"},
         {Header: "Đánh giá"}
     ];
     return (
         <>
-        <Container>
+        <Container className="customer">  
         <div className="table-customer">
             <table>
                 <thead>

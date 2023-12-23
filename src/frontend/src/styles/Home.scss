@@ -98,7 +98,13 @@
         margin: 3rem 2rem;
     }
 }
-
+.local {
+    padding: 4rem 6rem 4rem 6rem;
+    .map-container {
+        width: 100%;
+      }
+      
+}
 
 /* Mobile */
 @media screen and (max-width: 768px) {
@@ -121,5 +127,10 @@
     }
     .client-features {
         grid-template-columns: repeat(1, 1fr);
+    }
+    .local{
+        .map-container {
+            height: 400px;
+          }
     }
 }

@@ -30,12 +30,16 @@
 .wrapper {
     position: fixed;//relative;
     transform: translateX(14rem);
+    background-color: white;
+    border: 2px solid $primary-color;
     border-radius: 10px;
     justify-items: center;
     align-items: center;
+    width: 20rem;
+    height: 30rem;
     display: flex;
     margin: auto;
-    .add-employee{
+    .add-drug{
         width: 100%;
         
         display: grid;
@@ -59,6 +63,7 @@
             background-color: #e2dcdc5e;
         }
         
+        
         .btn-add-new {
             display: grid;
             justify-content: center;
@@ -74,7 +79,7 @@
         }
     }
 }
-.table-employee {
+.table-warehouse {
     td, th{
         //border: 1px solid #ddd;
         padding: 11px;

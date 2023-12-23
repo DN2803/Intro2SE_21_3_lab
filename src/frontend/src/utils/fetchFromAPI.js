@@ -1,5 +1,9 @@
 export async function submitForm(submitForm) {
+<<<<<<< HEAD
     const email = document.getElementById('exampleInputEmail1').value;
+=======
+    const text = document.getElementById('exampleInputEmail1').value;
+>>>>>>> df1b76e81900ad8c9ea567125c44711175c403c3
     const password = document.getElementById('exampleInputPassword1').value;
   
     try {
@@ -9,7 +13,11 @@ export async function submitForm(submitForm) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+<<<<<<< HEAD
           email: email,
+=======
+          text: text,
+>>>>>>> df1b76e81900ad8c9ea567125c44711175c403c3
           password: password,
         }),
       });
@@ -18,13 +26,65 @@ export async function submitForm(submitForm) {
         const data = await response.json();
         console.log('Response from BE:', data);
         // Handle successful response from the backend
+<<<<<<< HEAD
       } else {
         console.error('Error:', response.statusText);
         // Handle error response from the backend
+=======
+        return data;
+      } else {
+        console.error('Error:', response.statusText);
+        // Handle error response from the backend
+        return null;
+>>>>>>> df1b76e81900ad8c9ea567125c44711175c403c3
       }
     } catch (error) {
       console.error('Error:', error.message);
       // Handle network or other errors
+<<<<<<< HEAD
     }
 }
   
+=======
+      return null;
+    }
+}
+
+
+export const fetchDoctorsIDName = async () => {
+  try {
+    const response = await fetch('http://localhost:2212/bookingDocs');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error.message);
+    throw error;
+  }
+};
+
+export async function createAppointment(appointmentData) {
+  try {
+    const response = await fetch("http://localhost:2212/createAppointment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(appointmentData),
+    });
+
+    if (!response.ok) {
+      // Handle non-successful response (e.g., server error)
+      throw new Error("Failed to create appointment");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error creating appointment:", error.message);
+    throw error;
+  }
+}
+>>>>>>> df1b76e81900ad8c9ea567125c44711175c403c3
