@@ -31,7 +31,7 @@ const PrivateRoutes = () => {
     const Auth = localStorage.getItem('isAuth');
     isAuth = Auth === 'true';   
     console.log(isAuth);
-    //isAuth = true 
+        isAuth = true 
     // call api to check logged 
     return isAuth ? <Outlet /> : <Navigate to='/login' />
   }
