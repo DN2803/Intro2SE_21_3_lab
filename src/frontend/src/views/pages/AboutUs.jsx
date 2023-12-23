@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from 'react-slick'
-
+import '../../styles/AboutUs.scss'
 const AboutUs = () => {
     const settings = {
         dots: true,
@@ -15,11 +15,13 @@ const AboutUs = () => {
     return (
         <>
         <section className="AboutUs">
-            <h1>Về chúng tôi</h1>
-            <p>Phòng khám mắt Teyvat tự hào có đội ngũ chuyên gia, y bác sĩ giỏi và giàu kinh nghiệm về nhãn khoa và khúc xạ nhãn khoa. Hơn thế nữa, trong những năm hoạt động, Phòng khám Mắt Teyvat đã khám và điều trị cho hàng nghìn lượt bệnh nhân, tạo dựng được niềm tin của hàng triệu người khi khám bệnh về mắt. Chính vì vậy Phòng Khám Mắt Teyvat là sự lựa chọn hàng đầu cho bạn và gia đình bạn!</p>
+            <div className="blur">
+            <h1 className="h1">Về chúng tôi</h1>
+            <p className="p">Phòng khám mắt Teyvat tự hào có đội ngũ chuyên gia, y bác sĩ giỏi và giàu kinh nghiệm về nhãn khoa và khúc xạ nhãn khoa. Hơn thế nữa, trong những năm hoạt động, Phòng khám Mắt Teyvat đã khám và điều trị cho hàng nghìn lượt bệnh nhân, tạo dựng được niềm tin của hàng triệu người khi khám bệnh về mắt. Chính vì vậy Phòng Khám Mắt Teyvat là sự lựa chọn hàng đầu cho bạn và gia đình bạn!</p>
+            </div>
         </section>
         <section className="our__doctors">
-            <h2>Đội ngũ bác sĩ</h2>
+            <h2 className="h2">Đội ngũ bác sĩ</h2>
             <div>
 
            
@@ -42,7 +44,7 @@ const AboutUs = () => {
                         )}
                     </div>
                 </div> */}
-                 <div>
+                    <div>
                     <h3>1</h3>
                     </div>
                     <div>

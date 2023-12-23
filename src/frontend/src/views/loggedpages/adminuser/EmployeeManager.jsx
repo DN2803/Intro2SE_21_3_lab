@@ -50,18 +50,110 @@ const EmployeeManager = () => {
     ];
     // Sử dụng state để lưu trạng thái của đối tượng
     const [isActive, setIsActive] = useState(false);
+    const onClickAddNew = () => {
+
+        let dataCopy = [...data];
+        dataCopy.push({
+            id: data.length +1,
+            name: newName,
+            email: newEmail,
+            phone: newPhone, 
+            degree: newDegree,
+            role: newRole, 
+            wage: newWage,
+        })
+        setdata(dataCopy);
+        setNewId("");
+        setNewName("");
+        setNewEmail("");
+        setNewDegree("");
+        setNewRole("");
+        setNewWage("");
+        setIsActive(!isActive);
+    }
     const onClickAdd = () => {
+        setIsActive(!isActive);
+    }
+    const onClickBack = () => {
         setIsActive(!isActive);
     }
 
     // thêm mới đối tượng 
+    const [newId, setNewId] = useState("");
+    const [newName, setNewName] = useState("");
+    const [newEmail, setNewEmail] = useState("");
+    const [newPhone, setNewPhone] = useState("");
+    const [newDegree, setNewDegree] = useState("");
+    const [newRole, setNewRole] = useState("");
+    const [newWage, setNewWage] = useState("");
 
+
+    const onchangeNewName = (e) => {
+        setNewName(e.currentTarget.value);
+    } 
+    const onchangeNewEmail = (e) => {
+        setNewEmail(e.currentTarget.value);
+    }
+    const onchangeNewPhone = (e) => {
+        setNewPhone(e.currentTarget.value);
+    }
+    const onchangeNewDegree = (e) => {
+        setNewDegree(e.currentTarget.value);
+    }
+    const onchangeNewRole = (e) => {
+        setNewRole(e.currentTarget.value);
+    }
+    const onchangeNewWage = (e) => {
+        setNewWage(e.currentTarget.value);
+    }
     // chỉnh sửa 
 
-    const onClickFix = () => {
+    const [editRow, setEditRow] = useState('');
+
+    const onClickFix = (employee) => {
+        console.log(employee);
+        setIsActive(!isActive);
+        setEditRow(employee.id);
+        setNewId(employee.id);
+        setNewName(employee.name);
+        setNewEmail(employee.email);
+        setNewPhone(employee.phone);
+        setNewDegree(employee.degree);
+        setNewRole(employee.role);
+        setNewWage(employee.wage);
+    }
+    const onClickUpdate = () =>{
+        let index = data.findIndex(d=>d.id === editRow)
+        let dataCopy = [...data];
+        dataCopy[index] = {
+            id: editRow,
+            name: newName,
+            email: newEmail,
+            phone: newPhone, 
+            degree: newDegree,
+            role: newRole, 
+            wage: newWage,
+        }
+        setdata(dataCopy);
+        setNewId("");
+        setNewName("");
+        setNewEmail("");
+        setNewPhone("");
+        setNewDegree("");
+        setNewRole("");
+        setNewWage("");
+        setEditRow("");
         setIsActive(!isActive);
     }
+    // xóa 
 
+    const onClickDelete = (employee) =>{
+        let IDDelete = data.findIndex(d=> d===employee)
+        console.log(IDDelete);
+
+        let dataCopy = data.filter(d => d !== employee);
+        setdata(dataCopy);
+    }
     return (
         <>
         <div className="search-bar d-flex align-items-center">
@@ -76,38 +168,64 @@ const EmployeeManager = () => {
         {isActive &&<div className="wrapper">
             
             <div className="add-employee">
-                {/* <h4>Chỉnh sửa</h4> */}
-                <div className="group-from">
-                    <label>ID</label>
-                    <input type="text" />
-                </div>
                 <div className="group-from">
                     <label>Họ tên</label>
-                    <input type="text"/>
+                    <input 
+                        type="text"
+                        name ='name'
+                        value={newName}
+                        onChange={onchangeNewName}/>
                 </div>
                 <div className="group-from">
                 
                     <label>Email</label>
-                    <input type="email"/>
+                    <input 
+                        type="email"
+                        name = 'email'
+                        value={newEmail}
+                        onChange={onchangeNewEmail}/>
                 </div>
                 <div className="group-from">
                     <label>SĐT</label>
-                    <input type="phone number"/>
+                    <input 
+                        type="phone number"
+                        name = 'phone'
+                        value={newPhone}
+                        onChange={onchangeNewPhone}/>
                 </div>
                 <div className="group-from">
                     <label>Bằng cấp</label>
-                    <input type="text"/>
+                    <input 
+                        type="text"
+                        name= "degree"
+                        value={newDegree}
+                        onChange={onchangeNewDegree}/>
                 </div>
                 <div className="group-from">
                     <label>Chức vụ</label>
-                    <input type="text"/>
+                    <input 
+                        type="text"
+                        name= 'role'
+                        value={newRole}
+                        onChange={onchangeNewRole}/>
                 </div>
                 <div className="group-from">
                     <label>Lương</label>
-                    <input type="number"/>
+                    <input 
+                        type="number"
+                        name = 'wage'
+                        value={newWage}
+                        onChange={onchangeNewWage}/>
                 </div>
-                <Button className="primary__btn btn-add-new">Xác nhận</Button>
-                <Button className="outline__btn btn-exit" onClick={onClickAdd}>Thoát</Button>
+                {
+                    editRow
+                    ? 
+                    <Button className="primary__btn btn-add-new" onClick={onClickUpdate}>Cập nhật</Button>
+                    :
+                    <Button className="primary__btn btn-add-new" onClick={onClickAddNew}>Xác nhận</Button>
+                }
+                
+                <Button className="outline__btn btn-exit" onClick={onClickBack}>Thoát</Button>
             </div>
         </div>}
        
@@ -132,8 +250,8 @@ const EmployeeManager = () => {
                             <td>{d.degree}</td>
                             <td>{d.role}</td>
                             <td>{d.wage}</td>
-                            <td><FaPen onClick={onClickFix} className="icon-fix"/></td>
-                            <td><AiOutlineDelete className="icon-delete"/></td>
+                            <td><FaPen onClick={e => onClickFix(d)} className="icon-fix"/></td>
+                            <td><AiOutlineDelete onClick = {e=>onClickDelete(d)}className="icon-delete"/></td>
                         </tr>)
                     })
                 }
