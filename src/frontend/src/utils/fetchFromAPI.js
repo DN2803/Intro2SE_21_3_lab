@@ -55,13 +55,8 @@ export async function createAppointment(appointmentData) {
       },
       body: JSON.stringify(appointmentData),
     });
-
-    if (!response.ok) {
-      // Handle non-successful response (e.g., server error)
-      throw new Error("Failed to create appointment");
-    }
-
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error("Error creating appointment:", error.message);

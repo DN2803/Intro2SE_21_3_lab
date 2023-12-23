@@ -1,7 +1,7 @@
 const sql = require("mssql");
 
 const config = {
-  server: "DESKTOP-HN1UKRD",
+  server: "localhost",
   authentication: {
     type: "default",
     options: {
