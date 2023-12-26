@@ -50,8 +50,6 @@ const Booking = () => {
         //   console.log ("hihi");
         //   setIsActive(true);
         // }
-        
-        
       } catch (error) {
         console.error("Error fetching doctors data:", error);
         // if (doctors.length === 0) {

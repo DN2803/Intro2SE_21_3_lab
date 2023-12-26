@@ -1,49 +1,36 @@
-import React, { useState } from "react";
 import { Button} from "reactstrap";
 import { FaPen } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoSearch } from "react-icons/io5";
+import React, { useState, useEffect } from "react";
+import { fetchEmployees } from "../../../utils/fetchFromAPI";
 //get from database 
 import '../../../styles/EmployeeManager.scss'
 
 const EmployeeManager = () => {
+    const [data, setdata] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const employeeData = await fetchEmployees();
+            console.log(employeeData);
+            setdata(employeeData.employeeList); // Assuming your API response has a 'doctorsList' property
+          } catch (error) {
+            console.error("Error fetching doctors data:", error);
+          }
+        };
+        fetchData();
+      }, []);
+      console.log(data);
 
-    const [data, setdata] = useState([
-        {
-            id:1,
-            name: "Nguyễn Văn A",
-            email: "nva@gmail.com",
-            phone: "0989898989",
-            degree: "thạc sĩ",
-            role: "doctor",
-            wage: 10000
-        },
-        {
-            id:2,
-            name: "Nguyễn Văn B",
-            email: "nva@gmail.com",
-            phone: "0989898989",
-            degree: "thạc sĩ",
-            role: "doctor",
-            wage: 10000
-        },
-        {
-            id:3,
-            name: "Nguyễn Văn C",
-            email: "nva@gmail.com",
-            phone: "0989898989",
-            degree: "thạc sĩ",
-            role: "doctor",
-            wage: 10000
-        }
-    ]);
+
+    
     const title = [
         {Header: "ID", accessor: 'id'},
         {Header: "Họ Tên", accessor: 'name'},
         {Header: "Email", accessor: 'email'},
         {Header: "Điện thoại", accessor: 'phone'},
         {Header: "Bằng cấp", accessor: 'degree'},
-        {Header: "Chức vụ", accessor: 'role'},
         {Header: "Lương", accessor: 'wage'},
         {Header: ""},
         {Header: ""}
@@ -59,7 +46,6 @@ const EmployeeManager = () => {
             email: newEmail,
             phone: newPhone, 
             degree: newDegree,
-            role: newRole, 
             wage: newWage,
         })
         setdata(dataCopy);
@@ -67,7 +53,6 @@ const EmployeeManager = () => {
         setNewName("");
         setNewEmail("");
         setNewDegree("");
-        setNewRole("");
         setNewWage("");
         setIsActive(!isActive);
     }
@@ -84,9 +69,7 @@ const EmployeeManager = () => {
     const [newEmail, setNewEmail] = useState("");
     const [newPhone, setNewPhone] = useState("");
     const [newDegree, setNewDegree] = useState("");
-    const [newRole, setNewRole] = useState("");
     const [newWage, setNewWage] = useState("");
-
 
     const onchangeNewName = (e) => {
         setNewName(e.currentTarget.value);
@@ -100,12 +83,12 @@ const EmployeeManager = () => {
     const onchangeNewDegree = (e) => {
         setNewDegree(e.currentTarget.value);
     }
-    const onchangeNewRole = (e) => {
-        setNewRole(e.currentTarget.value);
-    }
     const onchangeNewWage = (e) => {
         setNewWage(e.currentTarget.value);
     }
+
+
+    
     // chỉnh sửa 
 
     const [editRow, setEditRow] = useState('');
@@ -119,7 +102,6 @@ const EmployeeManager = () => {
         setNewEmail(employee.email);
         setNewPhone(employee.phone);
         setNewDegree(employee.degree);
-        setNewRole(employee.role);
         setNewWage(employee.wage);
     }
     const onClickUpdate = () =>{
@@ -131,7 +113,6 @@ const EmployeeManager = () => {
             email: newEmail,
             phone: newPhone, 
             degree: newDegree,
-            role: newRole, 
             wage: newWage,
         }
         setdata(dataCopy);
@@ -140,7 +121,6 @@ const EmployeeManager = () => {
         setNewEmail("");
         setNewPhone("");
         setNewDegree("");
-        setNewRole("");
         setNewWage("");
         setEditRow("");
         setIsActive(!isActive);
@@ -193,6 +173,14 @@ const EmployeeManager = () => {
                         value={newPhone}
                         onChange={onchangeNewPhone}/>
                 </div>
+                <div className="group-form">
+                    <label>Vị trí</label>
+                    <select name="position">
+                        <option value="BS">Bác sĩ</option>
+                        <option value="DS">Dược sĩ</option>
+                        
+                    </select>
+                </div>
                 <div className="group-from">
                     <label>Bằng cấp</label>
                     <input 
@@ -200,14 +188,6 @@ const EmployeeManager = () => {
                         name= "degree"
                         value={newDegree}
                         onChange={onchangeNewDegree}/>
-                </div>
-                <div className="group-from">
-                    <label>Chức vụ</label>
-                    <input 
-                        type="text"
-                        name= 'role'
-                        value={newRole}
-                        onChange={onchangeNewRole}/>
                 </div>
                 <div className="group-from">
                     <label>Lương</label>
@@ -248,7 +228,6 @@ const EmployeeManager = () => {
                             <td>{d.email}</td>
                             <td>{d.phone}</td>
                             <td>{d.degree}</td>
-                            <td>{d.role}</td>
                             <td>{d.wage}</td>
                             <td><FaPen onClick={e => onClickFix(d)} className="icon-fix"/></td>
                             <td><AiOutlineDelete onClick = {e=>onClickDelete(d)}className="icon-delete"/></td>
