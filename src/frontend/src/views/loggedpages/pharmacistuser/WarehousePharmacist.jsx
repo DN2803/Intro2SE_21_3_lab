@@ -36,11 +36,79 @@ const WarehousePharmacist = () =>{
         setIsActive(!isActive);
     }
 
+    const onClickAddNew = () => {
+        let dataCopy = [...data];
+        dataCopy.push({
+            id: 'MD00' + (data.length + 1),
+            name: newName,
+            volume: newVolume,
+            unit: newUnit,
+            iPrice: newIPrice,
+            oPrice: newOPirce
+        })
+        setdata(dataCopy);
+        setNewName("");
+        setNewUnit("");
+        setNewVolume("");
+        setNewIPrice("");
+        setNewOPrice("");
+        setIsActive(!isActive);
+    }
     // thêm mới đối tượng 
+    const [newName, setNewName] = useState("");
+    const [newVolume, setNewVolume] = useState("");
+    const [newUnit, setNewUnit] = useState("");
+    const [newIPrice, setNewIPrice] = useState("");
+    const [newOPirce, setNewOPrice] = useState("");
+    const [editRow, setEditRow] = useState("");
+
+
+    const onchangeNewName = (e) =>{
+        setNewName(e.currentTarget.value);
+    } 
+    const onchangeNewVolume = (e)=>{
+        setNewVolume(e.currentTarget.value);
+    }
+    const onchangeNewUnit = (e) => {
+        setNewUnit(e.currentTarget.value);
+    }
+    const onchangeNewIPrice = (e) => {
+        setNewIPrice(e.currentTarget.value);
+    }
+    const onchangeNewOPrice = (e) => {
+        setNewOPrice(e.currentTarget.value);
+    }
 
     // chỉnh sửa 
 
-    const onClickFix = () => {
+    const onClickFix = (medicine) => {
+        setIsActive(!isActive);
+        setEditRow(medicine.id);
+        setNewName(medicine.name);
+        setNewUnit(medicine.unit);
+        setNewVolume(medicine.volume);
+        setNewIPrice(medicine.iPrice);
+        setNewOPrice(medicine.oPrice);
+        
+    }
+    const onClickUpdate = () => {
+        let index = data.findIndex(d => d.id === editRow)
+        let dataCopy = [...data]
+        dataCopy[index] = {
+            id: editRow,
+            name:newName,
+            volume: newVolume,
+            unit: newUnit,
+            iPrice: newIPrice, 
+            oPrice: newOPirce,
+        }
+        setdata(dataCopy);
+        setEditRow("");
+        setNewName("");
+        setNewUnit("");
+        setNewVolume("");
+        setNewIPrice("");
+        setNewOPrice("");
         setIsActive(!isActive);
     }
 
@@ -60,28 +128,53 @@ const WarehousePharmacist = () =>{
             <div className="add-drug">
                 {/* <h4>Chỉnh sửa</h4> */}
                 <div className="group-from">
-                    <label>ID</label>
-                    <input type="text" />
-                </div>
-                <div className="group-from">
                     <label>Tên thuốc</label>
-                    <input type="text"/>
+                    <input 
+                        type="text"
+                        name="name"
+                        value={newName}
+                        onChange={onchangeNewName}/>
                 </div>
                 <div className="group-from">
                 
                     <label>Đơn vị tính</label>
-                    <input type="text"/>
+                    <input 
+                        type="text"
+                        name= "unit"
+                        value={newUnit}
+                        onChange={onchangeNewUnit}/>
+                </div>
+                <div className="group-from">
+                    <label>Số lượng</label>
+                    <input 
+                        type="number"
+                        name="volume"
+                        value={newVolume}
+                        onChange={onchangeNewVolume}/>
                 </div>
                 <div className="group-from">
                     <label>Giá nhập</label>
-                    <input type="number"/>
+                    <input 
+                        type="number"
+                        name="iPrice"
+                        value={newIPrice}
+                        onChange={onchangeNewIPrice}/>
                 </div>
                 <div className="group-from">
                     <label>Giá bán</label>
-                    <input type="number" />
+                    <input 
+                        type="number" 
+                        name ="oPrice"
+                        value = {newOPirce}
+                        onChange={onchangeNewOPrice}/>
                 </div>
-                
-                <Button className="primary__btn btn-add-new">Xác nhận</Button>
+                {
+                editRow
+                    ? 
+                    <Button className="primary__btn btn-add-new" onClick={onClickUpdate}>Cập nhật</Button>
+                    :
+                    <Button className="primary__btn btn-add-new" onClick={onClickAddNew}>Xác nhận</Button>
+                }
                 <Button className="outline__btn btn-exit" onClick={onClickAdd}>Thoát</Button>
             </div>
         </div>}
@@ -106,8 +199,8 @@ const WarehousePharmacist = () =>{
                             <td>{d.unit}</td>
                             <td>{d.iPrice}</td>
                             <td>{d.oPrice}</td>
-                            <td><FaPen onClick={onClickFix} className="icon-fix"/></td>
-                            <td><AiOutlineDelete className="icon-delete"/></td>
+                            <td><FaPen onClick={ e=> onClickFix(d)} className="icon-fix"/></td>
+                            <td><AiOutlineDelete  className="icon-delete"/></td>
                         </tr>)
                     })
                 }

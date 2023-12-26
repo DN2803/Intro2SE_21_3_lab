@@ -40,20 +40,24 @@ const EmployeeManager = () => {
     const onClickAddNew = () => {
 
         let dataCopy = [...data];
+        
         dataCopy.push({
-            id: data.length +1,
+            
+            id: newPosition,
             name: newName,
             email: newEmail,
             phone: newPhone, 
             degree: newDegree,
             wage: newWage,
         })
+        console.log(newPosition) ;
         setdata(dataCopy);
         setNewId("");
         setNewName("");
         setNewEmail("");
         setNewDegree("");
         setNewWage("");
+        setPosition("BS");
         setIsActive(!isActive);
     }
     const onClickAdd = () => {
@@ -70,6 +74,7 @@ const EmployeeManager = () => {
     const [newPhone, setNewPhone] = useState("");
     const [newDegree, setNewDegree] = useState("");
     const [newWage, setNewWage] = useState("");
+    const [newPosition, setPosition] = useState("BS");
 
     const onchangeNewName = (e) => {
         setNewName(e.currentTarget.value);
@@ -86,7 +91,9 @@ const EmployeeManager = () => {
     const onchangeNewWage = (e) => {
         setNewWage(e.currentTarget.value);
     }
-
+    const onchangeNewPosition = (e) => {
+        setPosition(e.currentTarget.value);
+    }
 
     
     // chỉnh sửa 
@@ -175,7 +182,7 @@ const EmployeeManager = () => {
                 </div>
                 <div className="group-form">
                     <label>Vị trí</label>
-                    <select name="position">
+                    <select name="position" onClick={onchangeNewPosition}>
                         <option value="BS">Bác sĩ</option>
                         <option value="DS">Dược sĩ</option>
                         
