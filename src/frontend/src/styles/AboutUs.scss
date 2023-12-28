@@ -46,10 +46,38 @@
 
     
 }
+
+
 .our__doctors {
+    padding: 5% 0px ;
     .h2{
         display: flex;
         color: $primary-color;
         justify-content: center;
+        padding-bottom: 2rem;
+    }
+    
+}
+.our_devices {
+
+    padding: 5% 0px ;
+    .h2{
+        display: flex;
+        color: $primary-color;
+        justify-content: center;
+    }
+    .device-item {
+        padding: 1rem;
+        justify-items: center;
+        align-items: center;
+        &-img {
+            height: 260px;
+            width: 350px;
+            border-radius: 30px;
+        }
+        &-title{
+            color: $primary-color;
+        }
+
     }
 }

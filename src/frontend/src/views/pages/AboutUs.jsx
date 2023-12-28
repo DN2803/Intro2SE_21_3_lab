@@ -1,11 +1,23 @@
 import React from "react";
 import Slider from 'react-slick'
+import {device} from '../../assets/data/device'
 import '../../styles/AboutUs.scss'
+import { Col, Row, Container } from "reactstrap";
 const AboutUs = () => {
-    const settings = {
+    const settings1 = {
         dots: true,
         infinite: true,
         slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        speed: 5000,
+        autoplaySpeed: 4000,
+        cssEase: "linear"
+      };
+      const settings2 = {
+        dots: true,
+        infinite: true,
+        slidesToShow: 2,
         slidesToScroll: 1,
         autoplay: true,
         speed: 5000,
@@ -22,28 +34,10 @@ const AboutUs = () => {
         </section>
         <section className="our__doctors">
             <h2 className="h2">Đội ngũ bác sĩ</h2>
-            <div>
+            <Container>
 
            
-            <Slider {...settings}>
-                {/* <div className="w-3/4 m-auto">
-                    <div className="mt-20">
-                        {data.map((d)=> (
-                            <div>
-                                <div>
-                                    <img src={d.img} alt=""/>
-                                </div>
-                                <div>
-                                    <p>{d.name}</p>
-                                    <p>{d.review}</p>
-                                </div>
-                            </div>
-                            
-                        )
-                            
-                        )}
-                    </div>
-                </div> */}
+            <Slider {...settings1}>
                     <div>
                     <h3>1</h3>
                     </div>
@@ -63,9 +57,41 @@ const AboutUs = () => {
                         <h3>6</h3>
           </div>
             </Slider>
-            </div>
+            </Container>
         </section>
         <section className="our_devices">
+            
+            
+            <Container>
+                <Row>
+            <Col lg="4" md = "12">
+                <h2 className="h2">Trang thiết bị hiện đại</h2>
+                <p>Phòng khám mắt Teyvat đầu tư đồng bộ về cơ sở vật chất, trang thiết bị nhập khẩu từ các thương hiệu hàng đầu thế giới như: Philips (Hà Lan/Mỹ), GE Healthcare (Mỹ), Beckman Coulter (Mỹ), Roche-Hitachi (Nhật Bản), Olympus (Nhật Bản), Nihon Kohden (Nhật Bản),... đảm bảo các tiêu chí về hiệu quả, an toàn, tiết kiệm thời gian, chính xác và thân thiện với môi trường.</p>
+            </Col>
+            <Col lg ="1" md ="12"></Col>
+            <Col lg ="7" md ="12">
+                <Slider {...settings2}>
+                    {
+                        device.map(({image, name, description}, index)=>{
+                            return (
+                                <div className='device-item' key={index}>
+                                    
+                                    <img src={image} className='device-item-img' alt='' />
+                                    <h4 className='device-item-title'>{name}</h4>
+                                    
+                                    <p className='device-item-description'>{description}</p>
+          
+                                </div>
+                            )
+                        }
+
+                        )
+                        
+                    }
+                </Slider>
+            </Col>
+            </Row>
+            </Container>
 
         </section>
         </>

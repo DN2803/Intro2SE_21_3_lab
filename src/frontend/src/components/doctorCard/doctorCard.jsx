@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import './doctorCard.scss'
 const DoctorCard = ({doctor}) => {
-;
     const { hashtag, name, img, specialty} = doctor;
     const data = hashtag +' '+ name
     return (
