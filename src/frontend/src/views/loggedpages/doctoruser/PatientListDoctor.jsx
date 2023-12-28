@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { IoSearch } from "react-icons/io5";
 
 import '../../../styles/PatientListDoctor.scss'
 const PatientListDoctor = () => {
-    const data = [
+    const [data, setData] = useState([
         {
             id: 'BN01',
             name: 'Trần Võ Mi Na',
@@ -25,7 +25,7 @@ const PatientListDoctor = () => {
             email: 'tvmina@gmail.com',
             phone: '098888888',
         },
-    ];
+    ]);
     const title = [
         {Header: "ID", accessor: 'id'},
         {Header: "Họ Tên", accessor: 'name'},
@@ -42,7 +42,7 @@ const PatientListDoctor = () => {
             <div className="search-bar-input">
             <IoSearch className="icon-search"/>
             <input type="text" placeholder={ "Search ID"}/>
-            </div>            
+            </div>
         </div>
         <div className="table-patients">
             <table>
