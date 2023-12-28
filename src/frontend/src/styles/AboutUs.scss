@@ -11,14 +11,14 @@
     align-items: center;
     height: 541px;
     .blur {
-        background: rgba(0, 0, 0, 0.4); // Make sure this color has an opacity of less than 1
-        //backdrop-filter: blur(8px); // This be the blur
-        height: 541px;
-        width: 100%;
-        display: grid;
-        align-content: center;
-        justify-items: center;
-        align-items: center;
+        // background: rgba(0, 0, 0, 0.4); // Make sure this color has an opacity of less than 1
+        // //backdrop-filter: blur(8px); // This be the blur
+        // height: 541px;
+        // width: 100%;
+         display: grid;
+         align-content: center;
+         justify-items: center;
+         align-items: center;
         .h1 {
             color: #ffffff;
             font-family: "Signika-Regular", Helvetica;

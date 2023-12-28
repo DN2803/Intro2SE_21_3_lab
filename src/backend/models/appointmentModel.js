@@ -33,7 +33,7 @@ class AppointmentModel {
         .input("phoneNum", sql.Char(10), appointmentData.phonenumber)
         .input("date", sql.Date, appointmentData.date)
         .input("period", sql.NVarChar(10), appointmentData.period)
-        .input("doctorID", sql.Int, appointmentData.doctorID)
+        .input("doctorID", sql.Char(10), appointmentData.doctorID)
         .input("patientName", sql.NVarChar(50), appointmentData.name)
         .input("email", sql.VarChar(30), appointmentData.email)
         .input("gender", sql.NVarChar(3), appointmentData.gender)

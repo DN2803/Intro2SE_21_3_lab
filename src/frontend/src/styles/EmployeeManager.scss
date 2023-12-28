@@ -58,7 +58,11 @@
             border: none;
             background-color: #e2dcdc5e;
         }
-        
+        select {
+            border: none;
+            background-color: #e2dcdc5e;
+            width: auto;
+        }
         .btn-add-new {
             display: grid;
             justify-content: center;

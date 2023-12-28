@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const booking = require("./routes/doctorRoutes");
 const loginRoute = require("./routes/authRoutes");
 const appointmentRoute = require("./routes/appointmentRoutes");
+const employeeRoutes = require("./routes/employeeRoutes");
 const app = express();
 const port = 2212;
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(loginRoute);
 app.use(booking);
 app.use(appointmentRoute);
+app.use(employeeRoutes);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

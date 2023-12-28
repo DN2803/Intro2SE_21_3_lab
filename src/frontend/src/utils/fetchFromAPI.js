@@ -63,3 +63,36 @@ export async function createAppointment(appointmentData) {
     throw error;
   }
 }
+
+
+export const fetchEmployees = async () => {
+  try {
+    const response = await fetch('http://localhost:2212/getEmployees');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error.message);
+    throw error;
+  }
+};
+
+export const addNewEmployee = async (newEmployeeData) => {
+  try {
+    const response = await fetch("http://localhost:2212/addNewEmployee", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newEmployeeData),
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error creating new employee:", error.message);
+    throw error;
+  }
+};
