@@ -79,6 +79,8 @@
     }
 }
 .table-employee {
+    display: flex;
+  
     td, th{
         //border: 1px solid #ddd;
         padding: 11px;

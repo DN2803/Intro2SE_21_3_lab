@@ -3,7 +3,12 @@ import { FaPen } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoSearch } from "react-icons/io5";
 import React, { useState, useEffect } from "react";
-import { fetchEmployees, addNewEmployee } from "../../../utils/fetchFromAPI";
+import {
+  fetchEmployees,
+  addNewEmployee,
+  updateEmployee,
+  deleteEmployee
+} from "../../../utils/fetchFromAPI";
 //get from database
 import "../../../styles/EmployeeManager.scss";
 
@@ -42,7 +47,6 @@ const EmployeeManager = () => {
         wage: newWage,
       });
 
-      // Call fetchData directly here
       fetchData();
 
       // Reset the form
@@ -105,11 +109,9 @@ const EmployeeManager = () => {
   };
 
   // chỉnh sửa
-
   const [editRow, setEditRow] = useState("");
 
   const onClickFix = (employee) => {
-    console.log(employee);
     setIsActive(!isActive);
     setEditRow(employee.id);
     setNewId(employee.id);
@@ -119,35 +121,57 @@ const EmployeeManager = () => {
     setNewDegree(employee.degree);
     setNewWage(employee.wage);
   };
-  const onClickUpdate = () => {
-    let index = data.findIndex((d) => d.id === editRow);
-    let dataCopy = [...data];
-    dataCopy[index] = {
-      id: editRow,
-      name: newName,
-      email: newEmail,
-      phone: newPhone,
-      degree: newDegree,
-      wage: newWage,
-    };
-    setdata(dataCopy);
-    setNewId("");
-    setNewName("");
-    setNewEmail("");
-    setNewPhone("");
-    setNewDegree("");
-    setNewWage("");
-    setEditRow("");
-    setIsActive(!isActive);
+
+  const onClickUpdate = async () => {
+    try {
+      let index = data.findIndex((d) => d.id === editRow);
+      let dataCopy = [...data];
+      let updatedEmployeeData = {
+        id: editRow,
+        name: newName,
+        email: newEmail,
+        phone: newPhone,
+        degree: newDegree,
+        wage: newWage,
+      };
+
+      console.log(dataCopy[index]);
+      const response = await updateEmployee(updatedEmployeeData);
+
+      fetchData();
+
+      // Xử lí response trả về
+      if (response.success) {
+        alert(response.message);
+      } else if (!response.success) {
+        alert(`Không thể thay đổi thông tin nhân viên: ${response.message}`);
+      }
+    } catch (error) {
+      console.error("Error updating the employee:", error);
+    }
   };
   // xóa
+  const onClickDelete = async (employee) => {
+    try {
+      let IDDelete = data.findIndex((d) => d === employee);
+      let idNeedDeleted = data[IDDelete].id
+      let dataCopy = data.filter((d) => d !== employee);
 
-  const onClickDelete = (employee) => {
-    let IDDelete = data.findIndex((d) => d === employee);
-    console.log(IDDelete);
+      setdata(dataCopy);
 
-    let dataCopy = data.filter((d) => d !== employee);
-    setdata(dataCopy);
+      const response = await deleteEmployee(idNeedDeleted);
+
+      fetchData();
+
+      // Xử lí response trả về
+      if (response.success) {
+        alert(response.message);
+      } else if (!response.success) {
+        alert(`Không thể xóa nhân viên: ${response.message}`);
+      }
+    } catch (error) {
+      console.error("Error updating the employee:", error);
+    }
   };
   return (
     <>

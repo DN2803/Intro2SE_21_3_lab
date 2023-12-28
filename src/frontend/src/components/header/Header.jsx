@@ -26,24 +26,23 @@ const nav__links = [
 const Header = () => {
     const headerRef = useRef(null);
 
-    // Nếu cuộn xuống 80px trở xuống thì cho header sticky
-    const stickyHeaderFunc = () => {
-        window.addEventListener("scroll", () => {
-            if (
-                document.body.scrollTop > 80 ||
-                document.documentElement.scrollTop > 80
-            ) {
+    useEffect(() => {
+        // Add event listener on component mount
+        const handleScroll = () => {
+            if (window.scrollY > 80) {
                 headerRef.current.classList.add("sticky__header");
             } else {
                 headerRef.current.classList.remove("sticky__header");
             }
-        });
-    };
-    useEffect(() => {
-        stickyHeaderFunc();
+        };
 
-        return window.removeEventListener("scroll", stickyHeaderFunc);
-    });
+        window.addEventListener("scroll", handleScroll);
+
+        // Remove event listener on component unmount
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []); // Empty dependency array ensures the effect runs once on mount
 
     const [showSubnav, setShowSubnav] = useState(false);
 

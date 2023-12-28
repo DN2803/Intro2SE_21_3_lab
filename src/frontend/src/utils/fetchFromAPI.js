@@ -110,3 +110,40 @@ export const fetchPatients = async () => {
     throw error;
   }
 };
+
+export const updateEmployee = async (updatedEmployeeData) => {
+  try {
+    const response = await fetch("http://localhost:2212/updateEmployee", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedEmployeeData),
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error updating new employee:", error.message);
+    throw error;
+  }
+};
+
+
+export const deleteEmployee = async (idNeedDeleted) => {
+  try {
+    const response = await fetch(`http://localhost:2212/deleteEmployee/${idNeedDeleted}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error updating new employee:", error.message);
+    throw error;
+  }
+};
+

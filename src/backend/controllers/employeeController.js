@@ -58,3 +58,76 @@ exports.addNewEmployee= async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+
+exports.updateEmployee= async (req, res) => {
+  try {
+    const {
+      degree,
+      email,
+      id,
+      name,
+      phone,
+      wage,
+    } = req.body;
+    const updatedData = {
+      ID: id,
+      name:name,
+      email: email,
+      phone: phone,
+      degree: degree,
+      wage: wage,
+    };
+    console.log("Received appointment data from Frontend(update):");
+    console.log("Name:", updatedData.name);
+    console.log("Phone Number:", updatedData.phone);
+    console.log("Email:", updatedData.email);
+    console.log("ID:", updatedData.ID);
+    console.log("Degree:", updatedData.degree);
+    console.log("Wage:", updatedData.wage);
+    const updatedEmployee = new EmployeeModel(updatedData);
+    // Gọi phương thức thêm nhân viên từ EmployeeModel
+    const responseFromDB = await EmployeeModel.updateEmployee(updatedEmployee);
+    console.log(responseFromDB);
+    if (responseFromDB === "Update thành công") {
+      return res.status(201).json({
+        success: true,
+        message: 'Cập nhật nhân viên thành công.',
+      });
+    } 
+    else{
+      return res.json({
+        success: false,
+        message: `Cập nhật nhân viên thất bại. Lỗi: ${responseFromDB}`,
+      });
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+exports.deleteEmployee= async (req, res) => {
+  const idEmployee = req.params.id;
+  try {
+    console.log("Received appointment data from Frontend(update):");
+    console.log(idEmployee);
+    
+    // Gọi phương thức thêm nhân viên từ EmployeeModel
+    const responseFromDB = await EmployeeModel.deleteEmployee(idEmployee);
+    if (responseFromDB === "Xóa thành công") {
+      return res.json({
+        success: true,
+        message: 'Xóa nhân viên thành công.',
+      });
+    } 
+    else{
+      return res.json({
+        success: false,
+        message: `Xóa nhân viên thất bại. Lỗi: ${responseFromDB}`,
+      });
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
