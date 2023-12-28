@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import '../../../styles/CustomerReview.scss'
 import { Container } from "reactstrap";
 const CustomerReview = () =>{
+    const [data, setData] = useState([
+        {
+            id: 1,
+            name: "Nguyễn Văn A",
+            phone: '0915418495',
+            description: "giá cả phù hợp",
+            estimate: "5/5"
+        }
+    ]);
     const title = [
         {Header: "ID", accessor: 'id'},
         {Header: "Họ Tên", accessor: 'name'},
         {Header: "Điện thoại", accessor: 'phone'},
-        {Header: "Mô tả"},
-        {Header: "Đánh giá"}
+        {Header: "Mô tả", accessor: "description"},
+        {Header: "Đánh giá", accessor: "estimate"}
     ];
     return (
         <>
@@ -21,6 +30,19 @@ const CustomerReview = () =>{
                         })
                     }
                 </thead>
+                <tbody>
+                        {data.map((d) => {
+                    return (
+                        <tr key={d.id}>
+                        <td>{d.id}</td>
+                        <td>{d.name}</td>
+                        <td>{d.phone}</td>
+                        <td>{d.description}</td>
+                        <td>{d.estimate}</td>
+                        </tr>
+                    );
+                    })}
+                </tbody>
             </table>
         
         </div>
