@@ -45,7 +45,7 @@ class EmployeeModel {
         .input("maNV", sql.Char(10), employeeData.ID)
         .input("degree", sql.NVarChar(30), employeeData.degree)
         .input("email", sql.NVarChar(30), employeeData.email)
-        .input("name", sql.VarChar(50), employeeData.name)
+        .input("name", sql.NVarChar(50), employeeData.name)
         .input("phone", sql.Char(10), employeeData.phone)
         .input("wage", sql.VarChar(30), employeeData.wage)
         .output("responseMessage", sql.NVarChar(250))
