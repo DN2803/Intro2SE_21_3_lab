@@ -10,8 +10,8 @@ const CChart = () => {
           { name: 'Thiết bị y tế', data: 50 },
           { name: 'Thuốc', data: 20 },
         ]}
-        chartWidth={300}
-        chartHeight={500}
+        chartWidth={400}
+        chartHeight={400}
         title=""
         chartThemeConfig={{
           series: {

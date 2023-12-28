@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Button} from "reactstrap";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import '../../../styles/Invoice.scss'
 const Invoice =() => {
@@ -43,6 +43,10 @@ const Invoice =() => {
     
     console.log(inputFields);
     const sum =100000
+    const navigate = useNavigate();
+    const goBack = () => {
+      navigate(-1); // Go back one step in the history stack
+  };
     return (
         <>
         <h1 className="hoadon">Hóa đơn</h1>
@@ -103,7 +107,7 @@ const Invoice =() => {
             <h3>Tổng tiền: {sum} VND</h3>
         </div>
         
-        <Button className = "outline__btn back">Thoát</Button>
+        <Button className = "outline__btn back" onClick={goBack}>Thoát</Button>
         </div>
         </>
     )
