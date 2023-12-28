@@ -78,3 +78,21 @@ export const fetchEmployees = async () => {
     throw error;
   }
 };
+
+export const addNewEmployee = async (newEmployeeData) => {
+  try {
+    const response = await fetch("http://localhost:2212/addNewEmployee", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newEmployeeData),
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error creating new employee:", error.message);
+    throw error;
+  }
+};
