@@ -1,7 +1,6 @@
 const db = require("./connect");
 const sql = require("mssql");
 
-
 class EmployeeModel {
   constructor({ ID, name, email, phone, degree, wage }) {
     this.ID = ID;
@@ -58,6 +57,57 @@ class EmployeeModel {
     } catch (error) {
       console.error("Error adding new employee:", error.message);
       throw new Error("Failed to add new employee");
+    } finally {
+      if (pool) {
+        await db.closeDatabaseConnection(pool);
+      }
+    }
+  }
+  static async updateEmployee(updatedData) {
+    let pool;
+    try {
+      pool = await db.connectToDatabase();
+      const request = pool.request();
+      // Thực hiện truy vấn INSERT để tạo lịch hẹn
+      const result = await request
+        .input("maNV", sql.Char(10), updatedData.ID)
+        .input("degree", sql.NVarChar(30), updatedData.degree)
+        .input("email", sql.NVarChar(30), updatedData.email)
+        .input("name", sql.NVarChar(50), updatedData.name)
+        .input("phone", sql.Char(10), updatedData.phone)
+        .input("wage", sql.Money, updatedData.wage)
+        .output("responseMessage", sql.NVarChar(250))
+        .execute("dbo.uspUpdateEmployee");
+
+      const responseMessage = result.output.responseMessage;
+
+      return responseMessage;
+    } catch (error) {
+      console.error("Error updating the employee:", error.message);
+      throw new Error("Failed to update the employee");
+    } finally {
+      if (pool) {
+        await db.closeDatabaseConnection(pool);
+      }
+    }
+  }
+
+  static async deleteEmployee(idEmployee) {
+    let pool;
+    try {
+      pool = await db.connectToDatabase();
+      const request = pool.request();
+      const result = await request
+        .input("maNV", sql.Char(10), idEmployee)
+        .output("responseMessage", sql.NVarChar(250))
+        .execute("dbo.uspDeleteEmployee");
+
+      const responseMessage = result.output.responseMessage;
+
+      return responseMessage;
+    } catch (error) {
+      console.error("Error updating the employee:", error.message);
+      throw new Error("Failed to update the employee");
     } finally {
       if (pool) {
         await db.closeDatabaseConnection(pool);
