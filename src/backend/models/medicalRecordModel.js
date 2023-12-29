@@ -18,13 +18,14 @@ class MedicalRecordModel {
     this.patientMail = patientMail;
   }
 
-  static async getListPatientsByDate(date) {
+  static async getListPatientsByDate(date, doctorID) {
     let pool;
     try {
       pool = await db.connectToDatabase();
       const request = pool.request();
       const result = await request
         .input("date", sql.VarChar, date)
+        .input("doctorID", sql.Char(10), doctorID)
         .execute("dbo.uspGetPatientsByDate");
 
       const patientsList = result.recordset.map((row) => ({

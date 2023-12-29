@@ -3,7 +3,7 @@ const MedicalRecordModel = require("../models/medicalRecordModel");
 exports.getListPatients = async (req, res) => {
   try {
     // Coi lại nên truyền tham số gì vào?
-    const patientsList = await MedicalRecordModel.getListPatientsByDate("2023-12-03");
+    const patientsList = await MedicalRecordModel.getListPatientsByDate("2023-12-03", 'NULL');
     console.log(patientsList);
     return res.status(200).json({ patientsList });
   } catch (error) {
