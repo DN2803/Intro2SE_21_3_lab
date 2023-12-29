@@ -32,7 +32,7 @@ const Feedback = () => {
     return(
         <>
         <div className="feedback">
-        <h1>BẠN CẢM THẤY NHƯ THẾ NÀO ?</h1>
+        <h2>BẠN CẢM THẤY NHƯ THẾ NÀO ?</h2>
         
 
 
@@ -43,8 +43,8 @@ const Feedback = () => {
                 <input className="name" required></input>
             </div>
             <div className="feedback-form-input">
-                <label htmlFor="text">Địa chỉ</label>
-                <input className="address" required></input>
+                <label htmlFor="text">Số điện thoại</label>
+                <input className="phone number" required></input>
             </div>
             <div className="feedback-form-input">
                 <label htmlFor="text">Cảm nhận của bạn về phòng khám</label>
