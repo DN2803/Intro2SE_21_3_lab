@@ -7,6 +7,7 @@ const loginRoute = require("./routes/authRoutes");
 const appointmentRoute = require("./routes/appointmentRoutes");
 const employeeRoutes = require("./routes/employeeRoutes");
 const medicalRecordRoutes = require("./routes/medicalRecordRoutes");
+const feedbackRoutes = require("./routes/feedbackRoutes");
 const app = express();
 const port = 2212;
 
@@ -20,7 +21,8 @@ app.use(loginRoute);
 app.use(booking);
 app.use(appointmentRoute);
 app.use(employeeRoutes);
-app.use(medicalRecordRoutes)
+app.use(medicalRecordRoutes);
+app.use(feedbackRoutes);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

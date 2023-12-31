@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../../../styles/CustomerReview.scss'
 import { Container } from "reactstrap";
+
+import { fetchFeedback } from "../../../utils/fetchFromAPI";
+
 const CustomerReview = () =>{
-    const [data, setData] = useState([
-        {
-            id: 1,
-            name: "Nguyễn Văn A",
-            phone: '0915418495',
-            description: "giá cả phù hợp",
-            estimate: "5/5"
+    const [data, setData] = useState([]);
+    const fetchData = async () => {
+        try {
+            const feedbackData = await fetchFeedback();
+            console.log(feedbackData);
+            setData(feedbackData.feedbackList);
+        } catch (error) {
+            console.error("Error fetching feedback data:", error);
         }
-    ]);
+    };
+
     const title = [
         {Header: "ID", accessor: 'id'},
         {Header: "Họ Tên", accessor: 'name'},
@@ -18,6 +23,11 @@ const CustomerReview = () =>{
         {Header: "Mô tả", accessor: "description"},
         {Header: "Đánh giá", accessor: "estimate"}
     ];
+
+    useEffect(() => {
+        fetchData();
+      }, []);
+
     return (
         <>
         <Container className="customer">  
