@@ -180,3 +180,48 @@ export const fetchFeedback = async () => {
     throw error;
   }
 };
+
+export const fetchDrug = async () => {
+  try {
+    const response = await fetch("http://localhost:2212/getListDrug");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    throw error;
+  }
+};
+
+
+export const findDrug = async (nameOrID) => {
+  if (typeof nameOrID !== 'string' || nameOrID.trim() === '') {
+    throw new Error("Search term must be a non-empty string.");
+  }
+
+  try {
+    const url = new URL("http://localhost:2212/findDrug");
+    url.searchParams.append("nameOrID", nameOrID);
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Không cần phần body cho phương thức GET
+    });
+
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    throw error;
+  }
+};
