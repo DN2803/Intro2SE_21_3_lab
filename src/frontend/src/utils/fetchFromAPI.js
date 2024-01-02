@@ -195,9 +195,8 @@ export const fetchDrug = async () => {
   }
 };
 
-
 export const findDrug = async (nameOrID) => {
-  if (typeof nameOrID !== 'string' || nameOrID.trim() === '') {
+  if (typeof nameOrID !== "string" || nameOrID.trim() === "") {
     throw new Error("Search term must be a non-empty string.");
   }
 
@@ -219,9 +218,26 @@ export const findDrug = async (nameOrID) => {
 
     const data = await response.json();
     return data;
-
   } catch (error) {
     console.error("Error fetching data:", error.message);
+    throw error;
+  }
+};
+
+export const addNewDrug = async (newDrugData) => {
+  try {
+    const response = await fetch("http://localhost:2212/addDrug", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newDrugData),
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error creating new drug:", error.message);
     throw error;
   }
 };

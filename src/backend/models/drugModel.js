@@ -64,6 +64,34 @@ class DrugModel {
       }
     }
   }
+
+  static async addDrug(drugData) {
+    let pool;
+    try {
+      pool = await db.connectToDatabase();
+      const request = pool.request();
+
+      const result = await request
+        .input("id", sql.Char(4), drugData.id)
+        .input("name", sql.NVarChar(15), drugData.name)
+        .input("unit", sql.NVarChar(10), drugData.unit)
+        .input("stock", sql.Int, drugData.stock)
+        .input("iPrice", sql.Money, drugData.iPrice)
+        .input("oPrice", sql.Money, drugData.oPrice)
+        .output("responseMessage", sql.NVarChar(100))
+        .execute("dbo.uspAddDrug");
+
+      const responseMessage = result.output.responseMessage;
+      return responseMessage;
+    } catch (error) {
+      console.error("Error adding new drug:", error.message);
+      throw new Error("Failed to add new drug");
+    } finally {
+      if (pool) {
+        await db.closeDatabaseConnection(pool);
+      }
+    }
+  }
 }
 
 module.exports = DrugModel;

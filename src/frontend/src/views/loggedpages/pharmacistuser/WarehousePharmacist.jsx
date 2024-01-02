@@ -6,11 +6,17 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { IoSearch } from "react-icons/io5";
 
 import "../../../styles/WarehousePharmacist.scss";
-import { fetchDrug, findDrug } from "../../../utils/fetchFromAPI";
+import { addNewDrug, fetchDrug, findDrug } from "../../../utils/fetchFromAPI";
 
 const WarehousePharmacist = () => {
   const [data, setdata] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [newName, setNewName] = useState("");
+  const [newStock, setNewVolume] = useState("");
+  const [newUnit, setNewUnit] = useState("");
+  const [newIPrice, setNewIPrice] = useState("");
+  const [newOPirce, setNewOPrice] = useState("");
+  const [editRow, setEditRow] = useState("");
 
   const fetchData = async () => {
     try {
@@ -38,31 +44,49 @@ const WarehousePharmacist = () => {
     setIsActive(!isActive);
   };
 
-  const onClickAddNew = () => {
-    let dataCopy = [...data];
-    dataCopy.push({
-      id: "MD00" + (data.length + 1),
-      name: newName,
-      volume: newVolume,
-      unit: newUnit,
-      iPrice: newIPrice,
-      oPrice: newOPirce,
-    });
-    setdata(dataCopy);
-    setNewName("");
-    setNewUnit("");
-    setNewVolume("");
-    setNewIPrice("");
-    setNewOPrice("");
-    setIsActive(!isActive);
+  const onClickAddNew = async () => {
+    try {
+      const response = await addNewDrug({
+        //id: newID,
+        name: newName,
+        stock: newStock,
+        unit: newUnit,
+        iPrice: newIPrice,
+        oPrice: newOPirce,
+      });
+
+      fetchData();
+
+    // thêm mới đối tượng
+      setNewName("");
+      setNewUnit("");
+      setNewVolume("");
+      setNewIPrice("");
+      setNewOPrice("");
+      setIsActive(!isActive);
+
+      // let dataCopy = [...data];
+      // dataCopy.push({
+      //   id: "MD00" + (data.length + 1),
+      //   name: newName,
+      //   volume: newVolume,
+      //   unit: newUnit,
+      //   iPrice: newIPrice,
+      //   oPrice: newOPirce,
+      // });
+      // setdata(dataCopy);
+
+      //Xử lí response trả về
+      if (response.success) {
+        alert(response.message);
+      } else if (!response.success) {
+        alert(`Không thể thêm thuốc: ${response.message}`);
+      }
+    } catch (error) {
+      console.error("Error adding new drug:", error);
+    }
   };
-  // thêm mới đối tượng
-  const [newName, setNewName] = useState("");
-  const [newVolume, setNewVolume] = useState("");
-  const [newUnit, setNewUnit] = useState("");
-  const [newIPrice, setNewIPrice] = useState("");
-  const [newOPirce, setNewOPrice] = useState("");
-  const [editRow, setEditRow] = useState("");
+  
 
   const onchangeNewName = (e) => {
     setNewName(e.currentTarget.value);
@@ -96,7 +120,7 @@ const WarehousePharmacist = () => {
     dataCopy[index] = {
       id: editRow,
       name: newName,
-      volume: newVolume,
+      stock: newStock,
       unit: newUnit,
       iPrice: newIPrice,
       oPrice: newOPirce,
@@ -177,7 +201,7 @@ const WarehousePharmacist = () => {
               <input
                 type="number"
                 name="volume"
-                value={newVolume}
+                value={newStock}
                 onChange={onchangeNewVolume}
               />
             </div>

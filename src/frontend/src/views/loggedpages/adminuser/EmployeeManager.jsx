@@ -7,7 +7,7 @@ import {
   fetchEmployees,
   addNewEmployee,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
 } from "../../../utils/fetchFromAPI";
 //get from database
 import "../../../styles/EmployeeManager.scss";
@@ -154,7 +154,7 @@ const EmployeeManager = () => {
   const onClickDelete = async (employee) => {
     try {
       let IDDelete = data.findIndex((d) => d === employee);
-      let idNeedDeleted = data[IDDelete].id
+      let idNeedDeleted = data[IDDelete].id;
       let dataCopy = data.filter((d) => d !== employee);
 
       setdata(dataCopy);
