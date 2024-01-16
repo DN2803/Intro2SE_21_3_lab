@@ -2,8 +2,21 @@ const MedicalRecordModel = require("../models/medicalRecordModel");
 
 exports.getListPatients = async (req, res) => {
   try {
+    const doctorID = req.params.id
+    console.log(doctorID);
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    const day = currentDate.getDate().toString().padStart(2, "0");
+
+    const formattedDate = `${year}/${month}/${day}`;
+
+    console.log(formattedDate);
     // Coi lại nên truyền tham số gì vào?
-    const patientsList = await MedicalRecordModel.getListPatientsByDate("2023-12-03", 'NULL');
+    const patientsList = await MedicalRecordModel.getListPatientsFromAppointment(
+      "2023-12-29",
+      doctorID
+    );
     console.log(patientsList);
     return res.status(200).json({ patientsList });
   } catch (error) {

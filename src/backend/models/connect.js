@@ -5,8 +5,8 @@ const config = {
   authentication: {
     type: "default",
     options: {
-      userName: "sa",
-      password: "duong4403",
+      userName: "khuevo098",
+      password: "dragon0987",
     },
   },
   options: {

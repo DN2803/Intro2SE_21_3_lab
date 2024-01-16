@@ -1,0 +1,11 @@
+CREATE PROCEDURE uspGetPatientFromAppointment
+    @date VARCHAR(100),
+	@doctorID CHAR(10)
+AS
+BEGIN
+	DECLARE @dateValue DATE;
+	SET @dateValue = CAST(@date AS DATE);
+
+	SELECT HOTEN,GIOITINH,SDT FROM LICHHEN
+	WHERE NGAYKHAM = @dateValue
+END;

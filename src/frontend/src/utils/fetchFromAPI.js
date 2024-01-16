@@ -97,9 +97,14 @@ export const addNewEmployee = async (newEmployeeData) => {
   }
 };
 
-export const fetchPatients = async () => {
+export const fetchPatients = async (doctorID) => {
   try {
-    const response = await fetch("http://localhost:2212/getListPatients");
+    const response = await fetch(`http://localhost:2212/getListPatients/${doctorID}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
