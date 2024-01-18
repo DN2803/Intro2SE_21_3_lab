@@ -3,16 +3,14 @@ const sql = require("mssql");
 
 class MedicalRecordModel {
   constructor({
-    patientID,
+    patientSTT,
     patientName,
-    patientDOB,
     patientGender,
     patientPhone,
     patientMail,
   }) {
-    this.patientID = patientID;
+    this.patientSTT = patientSTT;
     this.patientName = patientName;
-    this.patientDOB = patientDOB;
     this.patientGender = patientGender;
     this.patientPhone = patientPhone;
     this.patientMail = patientMail;
@@ -29,7 +27,9 @@ class MedicalRecordModel {
         .execute("dbo.uspGetPatientFromAppointment");
 
       const patientsList = result.recordset.map((row) => ({
+        patientSTT: row.STT,
         patientName: row.HOTEN,
+        patientMail: row.EMAIL,
         patientGender: row.GIOITINH,
         patientPhone: row.SDT,
       }));

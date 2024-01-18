@@ -14,7 +14,7 @@ exports.getListPatients = async (req, res) => {
     console.log(formattedDate);
     // Coi lại nên truyền tham số gì vào?
     const patientsList = await MedicalRecordModel.getListPatientsFromAppointment(
-      "2023-12-29",
+      formattedDate,
       doctorID
     );
     console.log(patientsList);
