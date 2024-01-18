@@ -11,11 +11,10 @@ const PatientListDoctor = () => {
   const [data, setData] = useState([]);
   const id = useParams();
   const doctor_id = id.id;
-  console.log(doctor_id);
   const fetchData = async () => {
     try {
       const patientsData = await fetchPatients(doctor_id);
-      console.log(patientsData);
+      //console.log(patientsData);
       setData(patientsData.patientsList);
     } catch (error) {
       console.error("Error fetching patients data:", error);
@@ -23,12 +22,11 @@ const PatientListDoctor = () => {
   };
 
   const title = [
-    { Header: "ID", accessor: "id" },
+    { Header: "STT", accessor: "stt" },
     { Header: "Họ Tên", accessor: "name" },
     { Header: "Giới tính", accessor: "gender" },
-    { Header: "Ngày sinh", accessor: "birth" },
     { Header: "Email", accessor: "email" },
-    { Header: "Số điện thoai", accessor: "phone" },
+    { Header: "Số điện thoại", accessor: "phone" },
     { Header: "" },
     { Header: "" },
   ];
@@ -55,16 +53,15 @@ const PatientListDoctor = () => {
           <tbody>
             {data.map((d) => {
               return (
-                <tr key={d.patientID}>
-                  <td>{d.patientID}</td>
+                <tr key={d.patientSTT}>
+                  <td>{d.patientSTT}</td>
                   <td>{d.patientName}</td>
                   <td>{d.patientGender}</td>
-                  <td>{d.patientDOB}</td>
                   <td>{d.patientMail}</td>
                   <td>{d.patientPhone}</td>
 
                   <td>
-                    <Link to={`./${d.patientID}`}>
+                    <Link to={`./${d.patientSTT}`}>
                       <FaPen className="icon-fix" />
                     </Link>
                   </td>
