@@ -16,7 +16,6 @@ const Login = () => {
             // Assuming submitForm returns a Promise
             let user = await submitForm(event.target);
             user = user.loginName;
-            console.log(user);
             setData(user);
             if (!user) {
                 setIsLogged(false);

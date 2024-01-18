@@ -19,16 +19,15 @@ const users =
 
 const Logged = () => {
     const id = useParams().id
-    console.log(id);    
     users.username = id;
-    console.log(id.search("doctor"));
+    
     if (id.search("doctor") === 0) {
         users.type = 2;
     }
     if (id.search("admin") === 0) {
         users.type = 1;
     }
-    console.log(users.type);
+   
     {localStorage.removeItem('isAuth')}
     return(
         <>
