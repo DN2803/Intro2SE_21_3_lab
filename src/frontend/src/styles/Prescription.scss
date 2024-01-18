@@ -16,7 +16,7 @@
         padding-bottom: 2rem;
     }
     .group-form{
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
         input {
             width: 70%;
         }
@@ -30,6 +30,14 @@
     padding-bottom: 1rem;
     .input-pair {
         padding-bottom: 2rem;
+        label {
+            padding-left: 2rem;
+            
+        }
+        input {
+            width: 20%;
+            margin-right: 5rem;
+        }
     }
 }
 
