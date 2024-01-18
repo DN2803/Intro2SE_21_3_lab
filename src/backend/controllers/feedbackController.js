@@ -22,6 +22,12 @@ exports.writeFeedback = async (req, res) => {
         success: true,
         message: "Gửi đánh giá thành công!",
       });
+    }
+    else if (responseFromDB === "Invalid information"){
+      return res.status(201).json({
+        success: false,
+        message: "Thiếu thông tin",
+      });
     } else {
         // status 500 ?!?
       console.error("Failed to write feedback data to the database.");
