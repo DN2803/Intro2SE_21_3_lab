@@ -15,7 +15,7 @@ const CChart = () => {
         title=""
         chartThemeConfig={{
           series: {
-            colors: ['#ffe0bd', '#670303', '#6cbfce'],
+            colors: ['#85EAF0', '#0F97FF', '#7DD4F9'],
             
           },
           chartExportMenu: {
