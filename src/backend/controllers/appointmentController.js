@@ -71,7 +71,6 @@ exports.createAppointment = async (req, res) => {
 exports.getListPatients = async (req, res) => {
   try {
     const doctorID = req.params.id
-    console.log(doctorID);
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
@@ -79,14 +78,26 @@ exports.getListPatients = async (req, res) => {
 
     const formattedDate = `${year}/${month}/${day}`;
 
-    console.log(formattedDate);
+ 
     // Coi lại nên truyền tham số gì vào?
     const patientsList = await AppointmentModel.getListPatientsFromAppointment(
       formattedDate,
       doctorID
     );
-    console.log(patientsList);
     return res.status(200).json({ patientsList });
+  } catch (error) {
+    console.error("Error: ", error.message);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+
+exports.getPatientBySTT = async (req, res) => {
+  try {
+    const patientSTT = req.params.patientSTT
+  
+    const patient = await AppointmentModel.getPatientBySTT(patientSTT);
+    return res.status(200).json({ patient });
   } catch (error) {
     console.error("Error: ", error.message);
     return res.status(500).json({ error: "Internal Server Error" });
