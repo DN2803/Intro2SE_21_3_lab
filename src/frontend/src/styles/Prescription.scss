@@ -2,7 +2,7 @@
 
 .detail {
     label {
-        padding-left: 2rem;
+        padding-left: 0rem;
         width: 10rem;
     }
     input {
@@ -24,7 +24,7 @@
     }
 }
 .table{
-    max-height: 250px;
+    max-height: 2500px;
     overflow: scroll;
     display: flex;
     padding-bottom: 1rem;

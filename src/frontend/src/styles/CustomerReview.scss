@@ -1,7 +1,11 @@
 @import './global.scss';
 .customer {
     padding-top: 3rem;
+    
     .table-customer {
+        table{
+            width: 75%;
+        }
         padding: auto;
         td, th{
             //border: 1px solid #ddd;
