@@ -61,31 +61,31 @@ const PatientDetailPharmacist = () => {
         <div className="patient">
             <label>Thông tin bệnh nhân</label>
             <div className="patient-information">
-                <Row>
+                <Row className="patient-information-detail">
                     <Col>
-                        <Row>
+                        <Row className="patient-information-detail-group">
                             <label>Họ và tên</label>
                             <input type="text" value={patient.name} readOnly></input>
                         </Row>
-                        <Row>
+                        <Row className="patient-information-detail-group">
                             <label>Giới tính</label>
                             <input type="text" value={patient.gender} readOnly></input>
                         </Row>
-                        <Row>
+                        <Row className="patient-information-detail-group">
                             <label>Email</label>
                             <input type="text" value={patient.email} readOnly></input>
                         </Row>
-                        <Row>
+                        <Row className="patient-information-detail-group">
                             <label>SĐT</label>
                             <input type="text" value={patient.phone} readOnly></input>
                         </Row>
                     </Col>
                     <Col>
-                        <Row>
+                        <Row className="patient-information-detail-group">
                             <label>Ngày sinh</label>
                             <input type="text" value={patient.birth} readOnly></input>
                         </Row>
-                        <Row>
+                        <Row className="patient-information-detail-group">
                             <label>Chống chỉ định</label>
                             <input 
                                 type="text"
@@ -94,7 +94,7 @@ const PatientDetailPharmacist = () => {
                                 // disabled={patient.contraindicated !== ''}
                             ></input>
                         </Row>
-                        <Row>
+                        <Row className="patient-information-detail-group">
                             <label>Dị ứng</label>
                             <input type="text"></input>
                         </Row>

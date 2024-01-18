@@ -7,6 +7,8 @@ const PatientDetail = () => {
     const { idpatient } = useParams();
     // get medical history from database 
     // get information from database where patient's id = id patient
+    console.log(idpatient);
+    
     const patient = {
         name: 'Trần Võ Mi Na',
         gender: 'Nữ',
@@ -15,7 +17,6 @@ const PatientDetail = () => {
         phone: '098888888', 
         contraindicated: null,
         allergy: null, 
-
     }
     // table chứa lịch sửu khám 
     const title_medical_history = [
@@ -53,7 +54,7 @@ const PatientDetail = () => {
     // Biến đổi ngày thành chuỗi hiển thị
     const formattedDate = currentDate.toLocaleDateString();
     const idmake = formattedDate.replace(/\//g, '-') ;
-    console.log(formattedDate);
+    //console.log(formattedDate);
     return (
         <>
         <Container className="detail">
@@ -66,25 +67,25 @@ const PatientDetail = () => {
                     <Col>
                         <Row>
                             <label>Họ và tên</label>
-                            <input type="text" value={patient.name} readOnly></input>
+                            <input type="text" value={patient.name}></input>
                         </Row>
                         <Row>
                             <label>Giới tính</label>
-                            <input type="text" value={patient.gender} readOnly></input>
+                            <input type="text" value={patient.gender}></input>
                         </Row>
                         <Row>
                             <label>Email</label>
-                            <input type="text" value={patient.email} readOnly></input>
+                            <input type="text" value={patient.email}></input>
                         </Row>
                         <Row>
                             <label>SĐT</label>
-                            <input type="text" value={patient.phone} readOnly></input>
+                            <input type="text" value={patient.phone}></input>
                         </Row>
                     </Col>
                     <Col>
                         <Row>
                             <label>Ngày sinh</label>
-                            <input type="text" value={patient.birth} readOnly></input>
+                            <input type="text" value={patient.birth}></input>
                         </Row>
                         <Row>
                             <label>Chống chỉ định</label>

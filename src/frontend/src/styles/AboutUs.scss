@@ -66,18 +66,19 @@
         color: $primary-color;
         justify-content: center;
     }
-    .device-item {
-        padding: 1rem;
-        justify-items: center;
-        align-items: center;
-        &-img {
-            height: 260px;
-            width: 350px;
-            border-radius: 30px;
-        }
-        &-title{
-            color: $primary-color;
-        }
 
+}
+.device-item {
+    padding: 1rem;
+    justify-items: center;
+    align-items: center;
+    &-img {
+        height: 260px;
+        width: 350px;
+        border-radius: 30px;
     }
+    &-title{
+        color: $primary-color;
+    }
+
 }

@@ -40,6 +40,7 @@ exports.addNewEmployee= async (req, res) => {
     console.log(newEmployeeData);
     // Gọi phương thức thêm nhân viên từ EmployeeModel
     const responseFromDB = await EmployeeModel.addEmployee(newEmployee);
+    const duplicateFault = "Violation of UNIQUE KEY constraint 'UQ__BACSI__DE78A40D736CE37A'. Cannot insert duplicate key in obj"
     console.log(responseFromDB);
     if (responseFromDB === "Success") {
       return res.status(201).json({
@@ -47,7 +48,19 @@ exports.addNewEmployee= async (req, res) => {
         message: 'Thêm nhân viên thành công.',
       });
     } 
-    else{
+    else if (responseFromDB === "Invalid information") {
+      return res.status(201).json({
+        success: false,
+        message: 'Thiếu thông tin.',
+      });
+    } 
+    else if (responseFromDB.includes(duplicateFault))
+    {
+      return res.status(201).json({
+        success: false,
+        message: 'Trùng số điện thoại.',
+      });
+    } else{
       return res.status(422).json({
         success: false,
         message: `Thêm nhân viên thất bại. Lỗi: ${responseFromDB}`,
