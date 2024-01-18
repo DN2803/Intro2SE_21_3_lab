@@ -2,7 +2,7 @@
 
 .detail {
     label {
-        padding-left: 2rem;
+        padding-left: 0rem;
         width: 10rem;
     }
     input {
@@ -16,7 +16,7 @@
         padding-bottom: 2rem;
     }
     .group-form{
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
         input {
             width: 70%;
         }
@@ -24,12 +24,20 @@
     }
 }
 .table{
-    max-height: 250px;
+    max-height: 2500px;
     overflow: scroll;
     display: flex;
     padding-bottom: 1rem;
     .input-pair {
         padding-bottom: 2rem;
+        label {
+            padding-left: 2rem;
+            
+        }
+        input {
+            width: 20%;
+            margin-right: 5rem;
+        }
     }
 }
 

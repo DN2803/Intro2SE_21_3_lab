@@ -14,9 +14,12 @@
     .patient {
         padding: 1rem;
         &-information {
-            .row{
-            
+            .row {
                 padding:0.2rem 2rem;
+            } 
+            &-detail-group{
+                display: grid;
+                
             }
         }
         &-history{

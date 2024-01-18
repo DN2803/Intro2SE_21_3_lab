@@ -80,7 +80,9 @@
 }
 .table-employee {
     display: flex;
-  
+    table{
+        width: 75%;
+    }
     td, th{
         //border: 1px solid #ddd;
         padding: 11px;

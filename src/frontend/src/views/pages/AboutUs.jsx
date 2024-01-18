@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from 'react-slick'
 import {device} from '../../assets/data/device'
+import { doctors } from "../../assets/data/doctor";
 import '../../styles/AboutUs.scss'
 import { Col, Row, Container } from "reactstrap";
 const AboutUs = () => {
@@ -38,25 +39,22 @@ const AboutUs = () => {
 
            
             <Slider {...settings1}>
-                    <div>
-                    <h3>1</h3>
-                    </div>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <h3>5</h3>
-                    </div>
-                    <div>
-                        <h3>6</h3>
-          </div>
-            </Slider>
+                    {
+                        doctors.map(({image, name}, index)=>{
+                            return (
+                                <div className='device-item' key={index}>
+                                    
+                                    <img src={image} className='device-item-img' alt='' />
+                                    <h4 className='device-item-title'>{name}</h4>
+          
+                                </div>
+                            )
+                        }
+
+                        )
+                        
+                    }
+                </Slider>
             </Container>
         </section>
         <section className="our_devices">
