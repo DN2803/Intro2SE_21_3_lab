@@ -43,7 +43,7 @@ class AppointmentModel {
         .execute("dbo.uspCreateAppointment");
 
       const responseMessage = result.output.responseMessage;
-      
+
       return responseMessage;
     } catch (error) {
       console.error("Error creating appointment:", error.message);
@@ -54,7 +54,6 @@ class AppointmentModel {
       }
     }
   }
-
 
   static async getListPatientsFromAppointment(date, doctorID) {
     let pool;
@@ -74,6 +73,33 @@ class AppointmentModel {
         patientPhone: row.SDT,
       }));
       return patientsList;
+    } catch (error) {
+      console.error("Error:", error.message);
+      throw error;
+    } finally {
+      if (pool) {
+        await db.closeDatabaseConnection(pool);
+      }
+    }
+  }
+
+  static async getPatientBySTT(STT) {
+    let pool;
+    try {
+      pool = await db.connectToDatabase();
+      const request = pool.request();
+      const result = await request
+        .input("STT", STT)
+        .query("SELECT * FROM LICHHEN WHERE STT = @STT");
+
+        const patientData = result.recordset.map((row) => ({
+          patientSTT: row.STT,
+          patientName: row.HOTEN,
+          patientMail: row.EMAIL,
+          patientGender: row.GIOITINH,
+          patientPhone: row.SDT,
+        }));
+        return patientData;
     } catch (error) {
       console.error("Error:", error.message);
       throw error;

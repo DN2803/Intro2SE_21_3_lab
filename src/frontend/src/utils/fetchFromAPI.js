@@ -18,8 +18,6 @@ export async function submitForm(submitForm) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log("Response from BE:", data);
-      // Handle successful response from the backend
       return data;
     } else {
       console.error("Error:", response.statusText);
@@ -116,9 +114,9 @@ export const fetchPatients = async (doctorID) => {
   }
 };
 
-export const fetchPatientsWithID = async (patientID) => {
+export const fetchPatientBySTT = async (patientSTT) => {
   try {
-    const response = await fetch(`http://localhost:2212/getPatientWithID/${patientID}`, {
+    const response = await fetch(`http://localhost:2212/getPatientBySTT/${patientSTT}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
