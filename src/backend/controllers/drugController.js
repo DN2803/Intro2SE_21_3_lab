@@ -59,3 +59,30 @@ exports.addDrug = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.deleteDrug = async (req, res) => {
+  const drugID = req.params.id;
+  console.log("Received: ", drugID);
+  try {
+    console.log("Received drug's ID need to delete: ");
+    console.log(drugID);
+
+    //Gọi phương thức xoá thuốc
+    const responseFromDB = await DrugModel.deleteDrug(drugID);
+    if (responseFromDB.localeCompare("successfully")) {
+      return res.json({
+        success: true,
+        message: 'Xoá thành công!',
+      })
+    }
+    else {
+      return res.json({
+        success: false,
+        message: `Đã có lỗi xảy ra! Lỗi: ${responseFromDB}`,
+      })
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};

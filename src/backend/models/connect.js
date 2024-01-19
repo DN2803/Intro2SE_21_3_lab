@@ -6,7 +6,7 @@ const config = {
     type: "default",
     options: {
       userName: "sa",
-      password: "dungle1012",
+      password: "duong4403",
     },
   },
   options: {

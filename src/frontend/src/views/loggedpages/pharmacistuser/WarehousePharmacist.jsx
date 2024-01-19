@@ -6,13 +6,19 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { IoSearch } from "react-icons/io5";
 
 import "../../../styles/WarehousePharmacist.scss";
-import { addNewDrug, fetchDrug, findDrug } from "../../../utils/fetchFromAPI";
+import {
+  addNewDrug,
+  fetchDrug,
+  findDrug,
+  deleteDrug,
+} from "../../../utils/fetchFromAPI";
 
 const WarehousePharmacist = () => {
   const [data, setdata] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const [newName, setNewName] = useState("");
-  const [newStock, setNewVolume] = useState("");
+  const [newStock, setNewStock] = useState("");
   const [newUnit, setNewUnit] = useState("");
   const [newIPrice, setNewIPrice] = useState("");
   const [newOPirce, setNewOPrice] = useState("");
@@ -30,7 +36,7 @@ const WarehousePharmacist = () => {
   const title = [
     { Header: "ID", accessor: "id" },
     { Header: "Tên thuốc", accessor: "name" },
-    { Header: "Số lượng tồn", accessor: "volume" },
+    { Header: "Số lượng tồn", accessor: "stock" },
     { Header: "Đơn vị tính", accessor: "unit" },
     { Header: "Giá nhập kho", accessor: "iPrice" },
     { Header: "Giá bán", accessor: "oPrice" },
@@ -45,6 +51,12 @@ const WarehousePharmacist = () => {
   };
 
   const onClickAddNew = async () => {
+    // Kiểm tra các trường đã điền đầy đủ thông tin chưa
+    if (!newName || !newStock || !newUnit || !newIPrice || !newOPirce) {
+      alert("Vui lòng điền đầy đủ thông tin cho tất cả các trường!");
+      return;
+    }
+
     try {
       const response = await addNewDrug({
         //id: newID,
@@ -57,10 +69,10 @@ const WarehousePharmacist = () => {
 
       fetchData();
 
-    // thêm mới đối tượng
+      // Reset form
       setNewName("");
       setNewUnit("");
-      setNewVolume("");
+      setNewStock("");
       setNewIPrice("");
       setNewOPrice("");
       setIsActive(!isActive);
@@ -80,19 +92,18 @@ const WarehousePharmacist = () => {
       if (response.success) {
         alert(response.message);
       } else if (!response.success) {
-        alert(`Không thể thêm thuốc: ${response.message}`);
+        alert(`${response.message}`);
       }
     } catch (error) {
       console.error("Error adding new drug:", error);
     }
   };
-  
 
   const onchangeNewName = (e) => {
     setNewName(e.currentTarget.value);
   };
   const onchangeNewVolume = (e) => {
-    setNewVolume(e.currentTarget.value);
+    setNewStock(e.currentTarget.value);
   };
   const onchangeNewUnit = (e) => {
     setNewUnit(e.currentTarget.value);
@@ -110,11 +121,16 @@ const WarehousePharmacist = () => {
     setEditRow(medicine.id);
     setNewName(medicine.name);
     setNewUnit(medicine.unit);
-    setNewVolume(medicine.volume);
+    setNewStock(medicine.stock);
     setNewIPrice(medicine.iPrice);
     setNewOPrice(medicine.oPrice);
   };
   const onClickUpdate = () => {
+    if (!newName || !newStock || !newUnit || !newIPrice || !newOPirce) {
+      alert("Không được để trống bất kỳ trường nào!");
+      return;
+    }
+
     let index = data.findIndex((d) => d.id === editRow);
     let dataCopy = [...data];
     dataCopy[index] = {
@@ -125,15 +141,18 @@ const WarehousePharmacist = () => {
       iPrice: newIPrice,
       oPrice: newOPirce,
     };
+
     setdata(dataCopy);
+
     setEditRow("");
     setNewName("");
     setNewUnit("");
-    setNewVolume("");
+    setNewStock("");
     setNewIPrice("");
     setNewOPrice("");
     setIsActive(!isActive);
   };
+
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSearch();
@@ -141,13 +160,35 @@ const WarehousePharmacist = () => {
   };
 
   const handleSearch = async () => {
-    if (!searchTerm) return;
+    setIsSearching(true);
+    if (!searchTerm) {
+      fetchData();
+      setIsSearching(false);
+      return;
+    }
 
     try {
       const results = await findDrug(searchTerm);
       setdata(results.drugFound);
     } catch (error) {
       console.error("Error searching for drugs:", error);
+    }
+  };
+
+  const onDeleteClick = async (drugID) => {
+    const confirmDelete = window.confirm("Đồng ý xoá loại thuốc này?");
+    if (confirmDelete) {
+      try {
+        const response = await deleteDrug(drugID);
+        if (response.success) {
+          alert("Xóa thuốc thành công!");
+          fetchData(); // Gọi lại fetchData để cập nhật danh sách sau khi xóa
+        } else {
+          alert(`${response.message}`);
+        }
+      } catch (error) {
+        console.error("Error deleting drug:", error);
+      }
     }
   };
 
@@ -200,7 +241,7 @@ const WarehousePharmacist = () => {
               <label>Số lượng</label>
               <input
                 type="number"
-                name="volume"
+                name="stock"
                 value={newStock}
                 onChange={onchangeNewVolume}
               />
@@ -246,36 +287,49 @@ const WarehousePharmacist = () => {
       )}
 
       <div className="table-warehouse">
-        <table>
-          <thead>
-            {title.map((t) => {
-              return <td key={t}>{t.Header}</td>;
-            })}
-          </thead>
-          <tbody>
-            {data.map((d) => {
-              return (
-                <tr key={d.id}>
-                  <td>{d.id}</td>
-                  <td>{d.name}</td>
-                  <td>{d.volume}</td>
-                  <td>{d.unit}</td>
-                  <td>{d.iPrice}</td>
-                  <td>{d.oPrice}</td>
-                  <td>
-                    <FaPen
-                      onClick={(e) => onClickFix(d)}
-                      className="icon-fix"
-                    />
-                  </td>
-                  <td>
-                    <AiOutlineDelete className="icon-delete" />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {data.length > 0 ? (
+          <table>
+            <thead>
+              {title.map((t) => {
+                return <td key={t}>{t.Header}</td>;
+              })}
+            </thead>
+            <tbody>
+              {data.map((d) => {
+                return (
+                  <tr key={d.id}>
+                    <td>{d.id}</td>
+                    <td>{d.name}</td>
+                    <td>{d.stock}</td>
+                    <td>{d.unit}</td>
+                    <td>{d.iPrice}</td>
+                    <td>{d.oPrice}</td>
+                    <td>
+                      <FaPen
+                        onClick={(e) => onClickFix(d)}
+                        className="icon-fix"
+                      />
+                    </td>
+                    <td>
+                      <AiOutlineDelete
+                        className="icon-delete"
+                        onClick={(e) => onDeleteClick(d.id)}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : isSearching ? (
+          <div style={{ color: "red", textAlign: "left", fontStyle: "italic" }}>
+            Không tìm thấy thuốc này!
+          </div>
+        ) : (
+          <div style={{ color: "red", textAlign: "left", fontStyle: "italic" }}>
+            Hiện không có loại thuốc nào!
+          </div>
+        )}
       </div>
     </>
   );

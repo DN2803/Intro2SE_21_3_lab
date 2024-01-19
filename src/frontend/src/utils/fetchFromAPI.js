@@ -270,3 +270,23 @@ export const addNewDrug = async (newDrugData) => {
     throw error;
   }
 };
+
+export const deleteDrug = async (drugID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:2212/deleteDrug/${drugID}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error deleting the drug:", error.message);
+    throw error;
+  }
+};

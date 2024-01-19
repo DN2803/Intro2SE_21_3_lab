@@ -92,6 +92,28 @@ class DrugModel {
       }
     }
   }
+
+  static async deleteDrug(drugID) {
+    let pool;
+    try {
+      pool = await db.connectToDatabase();
+      const request = pool.request();
+      const result = await request
+      .input("maThuoc", sql.Char(4), drugID)
+      .output("responseMessage", sql.Char(100))
+      .execute("dbo.uspDeleteDrug");
+
+      const responseMessage = result.output.responseMessage;
+      return responseMessage;
+    } catch (error) {
+      console.error("Error while deleting the drug: ", error.message);
+      throw new Error("Failed to delete the drug");
+    } finally {
+      if (pool) {
+        await db.closeDatabaseConnection(pool);
+      }
+    }
+  }
 }
 
 module.exports = DrugModel;
