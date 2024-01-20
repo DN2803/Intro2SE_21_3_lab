@@ -133,7 +133,24 @@ export const fetchPatientBySTT = async (patientSTT) => {
   }
 };
 
-
+export const fetchPatientsPharmacist = async () => {
+  try {
+    const response = await fetch(`http://localhost:2212/getListPatientsPharmacist`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    throw error;
+  }
+};
 
 
 
