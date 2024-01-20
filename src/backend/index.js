@@ -10,7 +10,7 @@ const medicalRecordRoutes = require("./routes/medicalRecordRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const drugRoutes = require("./routes/drugRoutes");
 const patientRoutes = require("./routes/patientRoutes");
-const medicalHistoryRoutes = require("./routes/medicalHistoryRoutes")
+const medicalHistoryRoutes = require("./routes/medicalHistoryRoutes");
 const app = express();
 const port = 2212;
 

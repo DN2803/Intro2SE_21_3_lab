@@ -37,3 +37,15 @@ exports.addPatient = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.getPatientDetailInformation = async (req, res) => {
+  const maBN = req.params.maBN;
+  try {
+    const patientInformation = await PatientModel.getPatientDetailInformation(maBN);
+    //console.log(patientInformation);
+    return res.status(200).json({ patientInformation });
+  } catch (error) {
+    console.error("Error: ", error.message);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+}

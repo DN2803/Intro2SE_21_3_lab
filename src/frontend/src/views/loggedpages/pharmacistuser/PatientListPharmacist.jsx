@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
 
 import { IoSearch } from "react-icons/io5";
-import { fetchPatients } from "../../../utils/fetchFromAPI";
+import { fetchPatientsPharmacist } from "../../../utils/fetchFromAPI";
 
 import "../../../styles/PatientListDoctor.scss";
 
@@ -11,8 +11,7 @@ const PatientListPharmacist = () => {
   const [data, setdata] = useState([]);
   const fetchData = async () => {
     try {
-      const patientsData = await fetchPatients();
-      console.log(patientsData);
+      const patientsData = await fetchPatientsPharmacist();
       setdata(patientsData.patientsList);
     } catch (error) {
       console.error("Error fetching patients data:", error);

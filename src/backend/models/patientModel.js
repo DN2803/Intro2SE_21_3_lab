@@ -14,17 +14,18 @@ class PatientModel {
     DIUNG,
     STT,
   }) {
-    this.MABN = MABN,
-      this.HOTEN = HOTEN_BN,
-      this.NGAYSINH = NGAYSINH,
-      this.SDT = SDT_BN,
-      this.EMAIL = EMAIL_BN,
-     this.DIACHI = DIACHI,
-      this.CHONGCHIDINH = CHONGCHIDINH,
-      this.DIUNG = DIUNG,
-      this.STT = STT,
-      this.GIOITINH = GIOITINH;
+    (this.MABN = MABN),
+      (this.HOTEN = HOTEN_BN),
+      (this.NGAYSINH = NGAYSINH),
+      (this.SDT = SDT_BN),
+      (this.EMAIL = EMAIL_BN),
+      (this.DIACHI = DIACHI),
+      (this.CHONGCHIDINH = CHONGCHIDINH),
+      (this.DIUNG = DIUNG),
+      (this.STT = STT),
+      (this.GIOITINH = GIOITINH);
   }
+
   static async addPatient(patientData) {
     let pool;
     try {
@@ -47,6 +48,38 @@ class PatientModel {
         .execute("uspAddPatient");
       console.log(result);
       return result;
+    } catch (error) {
+      console.error("Error:", error.message);
+      throw error;
+    } finally {
+      if (pool) {
+        await db.closeDatabaseConnection(pool);
+      }
+    }
+  }
+
+  static async getPatientDetailInformation(maBN) {
+    let pool;
+    try {
+      pool = await db.connectToDatabase();
+      const request = pool.request();
+      const result = await request
+        .input("maBN", sql.Char(15), maBN)
+        .execute("dbo.uspGetPatientDetailInformation");
+
+      const patientInformation = result.recordset.map((row) => ({
+        MABN: row.MABN,
+        HOTEN_BN: row.HOTEN_BN,
+        NGAYSINH: row.NGAYSINH,
+        GIOITINH: row.GIOITINH,
+        SDT_BN: row.SDT_BN,
+        EMAIL_BN: row.EMAIL_BN,
+        DIACHI: row.DIACHI,
+        CHONGCHIDINH: row.CHONGCHIDINH,
+        DIUNG: row.DIUNG,
+        STT: row.ID,
+      }));
+      return patientInformation;
     } catch (error) {
       console.error("Error:", error.message);
       throw error;

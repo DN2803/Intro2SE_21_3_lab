@@ -133,6 +133,26 @@ export const fetchPatientBySTT = async (patientSTT) => {
   }
 };
 
+export const fetchPatientsPharmacist = async () => {
+  try {
+    const response = await fetch(`http://localhost:2212/getListPatientsPharmacist`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    throw error;
+  }
+};
+
+
 export const addPatient = async (patientData) => {
   try {
     const response = await fetch("http://localhost:2212/addPatient", {
@@ -149,6 +169,26 @@ export const addPatient = async (patientData) => {
     throw error;
   }
 };
+
+export const fetchPatientDetailInformation = async (maBN) => {
+  try {
+    const response = await fetch(`http://localhost:2212/getPatientDetailInformation/${maBN}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    throw error;
+  }
+}
 
 
 export const updateEmployee = async (updatedEmployeeData) => {
@@ -320,27 +360,13 @@ export const updateDrug = async (updatedDrugData) => {
   }
 };
 
-export const addOrUpdateMedicalHistory = async (caseInformation) => {
-  try {
-    const response = await fetch("http://localhost:2212/addOrUpdateMedicalHistory", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(caseInformation),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error adding and updating medical history:", error.message);
-    throw error;
-  }
-};
 
-export const fetchMedicalHistory = async (mabn, ngaykham, doctor_username) => {
+export const fetchMedicalHistory = async (maBN) => {
   try {
-    // Tạo URL với các tham số truyền vào
-    const response = await fetch(`http://localhost:2212/getMedicalHistory/${mabn}/${ngaykham}/${doctor_username}`, {
+    const url = new URL("http://localhost:2212/getListMedicalHistory");
+    url.searchParams.append("maBN", maBN);
+
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -350,7 +376,6 @@ export const fetchMedicalHistory = async (mabn, ngaykham, doctor_username) => {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Error fetching data:", error.message);

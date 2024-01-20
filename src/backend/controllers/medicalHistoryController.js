@@ -47,12 +47,29 @@ exports.getMedicalHistory = async (req, res) => {
     const formattedDate = req.params.ngaykham;
     const doctor_username = req.params.username;
     console.log(req.params);
-    
-    const medicalHistoryInformation = await MedicalHistoryModel.getMedicalHistory(patient_id,formattedDate,doctor_username);
+
+    const medicalHistoryInformation =
+      await MedicalHistoryModel.getMedicalHistory(
+        patient_id,
+        formattedDate,
+        doctor_username
+      );
     console.log(medicalHistoryInformation);
     return res.json({ medicalHistoryInformation });
   } catch (error) {
     console.error("Error:", error.message);
+  }
+};
+exports.getListMedicalHistory = async (req, res) => {
+  try {
+    const maBN = req.query.maBN;
+    const medicalHistories = await MedicalHistoryModel.getListMedicalHistory(
+      maBN
+    );
+    console.log(medicalHistories);
+    return res.status(200).json({ medicalHistories });
+  } catch (error) {
+    console.error("Error: ", error.message);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
