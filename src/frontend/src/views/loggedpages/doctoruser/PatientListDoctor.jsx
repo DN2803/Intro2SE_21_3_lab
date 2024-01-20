@@ -19,7 +19,7 @@ const PatientListDoctor = () => {
   };
 
   const title = [
-    { Header: "STT", accessor: "patientSTT" }, // Adjust the accessor names
+    { Header: "STT", accessor: "patientSTT" }, 
     { Header: "Họ Tên", accessor: "patientName" },
     { Header: "Giới tính", accessor: "patientGender" },
     { Header: "Email", accessor: "patientMail" },

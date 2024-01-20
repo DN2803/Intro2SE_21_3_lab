@@ -143,8 +143,6 @@ export const addPatient = async (patientData) => {
       body: JSON.stringify(patientData),
     });
     const data = await response.json();
-    console.log("Fetch from API")
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Error adding the patient:", error.message);
@@ -318,6 +316,44 @@ export const updateDrug = async (updatedDrugData) => {
     return data;
   } catch (error) {
     console.error("Error updating drug:", error.message);
+    throw error;
+  }
+};
+
+export const addOrUpdateMedicalHistory = async (caseInformation) => {
+  try {
+    const response = await fetch("http://localhost:2212/addOrUpdateMedicalHistory", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(caseInformation),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error adding and updating medical history:", error.message);
+    throw error;
+  }
+};
+
+export const fetchMedicalHistory = async (mabn, ngaykham, doctor_username) => {
+  try {
+    // Tạo URL với các tham số truyền vào
+    const response = await fetch(`http://localhost:2212/getMedicalHistory/${mabn}/${ngaykham}/${doctor_username}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
     throw error;
   }
 };

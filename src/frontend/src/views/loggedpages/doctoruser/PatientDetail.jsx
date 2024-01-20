@@ -25,9 +25,7 @@ const PatientDetail = () => {
         const response = await fetchPatientBySTT(idpatient);
         //cái này quan trọng này, vì mỗi bệnh nhân là phần tử thứ 0 nên phải lấy tại vị trí 0 nó mới chịu...
         const patientData = response?.patient?.[0] || {}; // Get the first element or an empty object
-        console.log(patientData);
-
-        setPatient(editableFields);
+        setPatient(editableFields)
 
         //mục đích để vừa hiển thị vừa retype được đó(thấy ko, nó gán cho cái patientData, có thì nó hiển thị, ko thì nó là "")
         //xong rồi nó hiển thị, muốn retype j cũng được
@@ -74,8 +72,6 @@ const PatientDetail = () => {
       };
       // Gửi dữ liệu lên server
       const response = await addPatient(dataToSend);
-      console.log("Patient Detail");
-      console.log(dataToSend)
     } catch (error) {
       // Handle any unexpected errors
       console.error("Lỗi", error.message);
@@ -203,7 +199,7 @@ const PatientDetail = () => {
                   />
                 </Row>
                 <Row>
-                  <Button className="btn primary__btn create-prescription">
+                  <Button className="btn primary__btn create-prescription" onClick={handleSubmit}>
                     <Link to={`./${idmake}`}>Tạo đơn thuốc</Link>
                   </Button>
                 </Row>

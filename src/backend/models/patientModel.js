@@ -46,14 +46,6 @@ class PatientModel {
 
         .execute("uspAddPatient");
       console.log(result);
-      //   const patientsList = result.recordset.map((row) => ({
-      //     patientID: row.MABN,
-      //     patientName: row.HOTEN_BN,
-      //     patientDOB: row.NGAYSINH,
-      //     patientGender: row.GIOITINH,
-      //     patientPhone: row.SDT_BN,
-      //     patientMail: row.EMAIL_BN,
-      //   }));
       return result;
     } catch (error) {
       console.error("Error:", error.message);
