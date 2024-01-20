@@ -153,6 +153,24 @@ export const fetchPatientsPharmacist = async () => {
 };
 
 
+export const addPatient = async (patientData) => {
+  try {
+    const response = await fetch("http://localhost:2212/addPatient", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(patientData),
+    });
+    const data = await response.json();
+    console.log("Fetch from API")
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error adding the patient:", error.message);
+    throw error;
+  }
+};
 
 
 export const updateEmployee = async (updatedEmployeeData) => {
@@ -165,7 +183,7 @@ export const updateEmployee = async (updatedEmployeeData) => {
       body: JSON.stringify(updatedEmployeeData),
     });
     const data = await response.json();
-    console.log(data);
+    ///console.log(data);
     return data;
   } catch (error) {
     console.error("Error updating new employee:", error.message);

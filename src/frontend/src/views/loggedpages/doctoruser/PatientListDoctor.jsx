@@ -7,11 +7,11 @@ import "../../../styles/PatientListDoctor.scss";
 
 const PatientListDoctor = () => {
   const [data, setData] = useState([]);
-  const doctor_id = useParams().id;
+  const doctorUSERNAME = useParams().id;
 
   const fetchData = async () => {
     try {
-      const patientsData = await fetchPatients(doctor_id);
+      const patientsData = await fetchPatients(doctorUSERNAME);
       setData(patientsData.patientsList);
     } catch (error) {
       console.error("Error fetching patients data:", error);

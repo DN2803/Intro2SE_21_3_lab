@@ -26,17 +26,17 @@ exports.createAppointment = async (req, res) => {
       date: date,
       doctorID: id,
     };
-    console.log("Received appointment data from Frontend:");
-    console.log("Name:", appointmentData.name);
-    console.log("Gender:", appointmentData.gender);
-    console.log("Address:", appointmentData.address);
-    console.log("Phone Number:", appointmentData.phonenumber);
-    console.log("Email:", appointmentData.email);
-    console.log("Period:", appointmentData.period);
-    console.log("Type:", appointmentData.type);
-    console.log("Doctor:", doctor);
-    console.log("Date:", appointmentData.date);
-    console.log("ID:", appointmentData.doctorId);
+    // console.log("Received appointment data from Frontend:");
+    // console.log("Name:", appointmentData.name);
+    // console.log("Gender:", appointmentData.gender);
+    // console.log("Address:", appointmentData.address);
+    // console.log("Phone Number:", appointmentData.phonenumber);
+    // console.log("Email:", appointmentData.email);
+    // console.log("Period:", appointmentData.period);
+    // console.log("Type:", appointmentData.type);
+    // console.log("Doctor:", doctor);
+    // console.log("Date:", appointmentData.date);
+    // console.log("ID:", appointmentData.doctorId);
     const newAppointment = new AppointmentModel(appointmentData);
     console.log(newAppointment);
     // Gọi phương thức tạo lịch hẹn từ AppointmentModel
@@ -77,7 +77,6 @@ exports.getListPatients = async (req, res) => {
     const day = currentDate.getDate().toString().padStart(2, "0");
 
     const formattedDate = `${year}/${month}/${day}`;
-
  
     // Coi lại nên truyền tham số gì vào?
     const patientsList = await AppointmentModel.getListPatientsFromAppointment(
@@ -97,6 +96,9 @@ exports.getPatientBySTT = async (req, res) => {
     const patientSTT = req.params.patientSTT
   
     const patient = await AppointmentModel.getPatientBySTT(patientSTT);
+    console.log("appointment controller");
+    console.log(patient);
+
     return res.status(200).json({ patient });
   } catch (error) {
     console.error("Error: ", error.message);

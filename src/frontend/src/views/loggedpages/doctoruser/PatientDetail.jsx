@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button, Row, Col, Container } from "reactstrap";
 import { FaEye } from "react-icons/fa";
-import { fetchPatientBySTT } from "../../../utils/fetchFromAPI";
+import { fetchPatientBySTT, addPatient } from "../../../utils/fetchFromAPI";
 import "../../../styles/PatientDetail.scss";
+
 
 const PatientDetail = () => {
   const { idpatient } = useParams();
@@ -14,6 +15,9 @@ const PatientDetail = () => {
     patientGender: "",
     patientMail: "",
     patientPhone: "",
+    patientBirth: "",
+    patientContraindication:"",
+    patientAllergy:""
   });
   useEffect(() => {
     const fetchPatientData = async () => {
@@ -23,17 +27,19 @@ const PatientDetail = () => {
         const patientData = response?.patient?.[0] || {}; // Get the first element or an empty object
         console.log(patientData);
 
-        setPatient(patientData);
+        setPatient(editableFields);
 
         //mục đích để vừa hiển thị vừa retype được đó(thấy ko, nó gán cho cái patientData, có thì nó hiển thị, ko thì nó là "")
         //xong rồi nó hiển thị, muốn retype j cũng được
         setEditableFields({
-            patientName: patientData.patientName || "",
-            patientGender: patientData.patientGender || "",
-            patientMail: patientData.patientMail || "",
-            patientPhone: patientData.patientPhone || "",
-          });
-
+          patientName: patientData.patientName || "",
+          patientGender: patientData.patientGender || "",
+          patientMail: patientData.patientMail || "",
+          patientPhone: patientData.patientPhone || "",
+          patientBirth: patientData.patientBirth || "",
+          patientContraindication: patientData.patientContraindication || "",
+          patientAllergy: patientData.patientAllergy || "",
+        });
       } catch (error) {
         console.error("Error fetching patient data:", error);
         setPatient({}); // Set an empty object in case of an error
@@ -46,12 +52,34 @@ const PatientDetail = () => {
     }
   }, [idpatient]);
 
-
   const handleInputChange = (field, value) => {
     setEditableFields((prevFields) => ({
       ...prevFields,
       [field]: value,
     }));
+  };
+  const handleSubmit = async () => {
+    try {
+      let patientID = "BN" + idpatient;
+      const dataToSend = {
+        patientSTT: idpatient,
+        patientName: editableFields.patientName,
+        patientGender: editableFields.patientGender,
+        patientMail: editableFields.patientMail,
+        patientPhone: editableFields.patientPhone,
+        patientBirth: editableFields.patientBirth,
+        patientContraindication: editableFields.patientContraindication,
+        patientAllergy: editableFields.patientAllergy,
+        patientID: patientID,
+      };
+      // Gửi dữ liệu lên server
+      const response = await addPatient(dataToSend);
+      console.log("Patient Detail");
+      console.log(dataToSend)
+    } catch (error) {
+      // Handle any unexpected errors
+      console.error("Lỗi", error.message);
+    }
   };
   // table chứa lịch sửu khám
   const title_medical_history = [
@@ -90,11 +118,11 @@ const PatientDetail = () => {
   // Biến đổi ngày thành chuỗi hiển thị
   const formattedDate = currentDate.toLocaleDateString();
   const idmake = formattedDate.replace(/\//g, "-");
-
+  const patientCode = 'BN'+ idpatient
   return (
     <>
       <Container className="detail">
-        <h1 className="idpatient">#{idpatient}</h1>
+        <h1 className="idpatient">#{patientCode||idpatient}</h1>
 
         <div className="patient">
           <label>Thông tin bệnh nhân</label>
@@ -106,7 +134,9 @@ const PatientDetail = () => {
                   <input
                     type="text"
                     value={editableFields.patientName}
-                    onChange={(e) => handleInputChange("patientName", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("patientName", e.target.value)
+                    }
                   />
                 </Row>
                 <Row>
@@ -114,7 +144,9 @@ const PatientDetail = () => {
                   <input
                     type="text"
                     value={editableFields.patientGender}
-                    onChange={(e) => handleInputChange("patientGender", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("patientGender", e.target.value)
+                    }
                   />
                 </Row>
                 <Row>
@@ -122,7 +154,9 @@ const PatientDetail = () => {
                   <input
                     type="text"
                     value={editableFields.patientMail}
-                    onChange={(e) => handleInputChange("patientMail", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("patientMail", e.target.value)
+                    }
                   />
                 </Row>
                 <Row>
@@ -130,22 +164,43 @@ const PatientDetail = () => {
                   <input
                     type="text"
                     value={editableFields.patientPhone}
-                    onChange={(e) => handleInputChange("patientPhone", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("patientPhone", e.target.value)
+                    }
                   />
                 </Row>
               </Col>
               <Col>
                 <Row>
                   <label>Ngày sinh</label>
-                  <input type="text" value={""}></input>
+                  <input
+                    type="date"
+                    id="Ngày"
+                    value={editableFields.patientBirth}
+                    onChange={(e) =>
+                      handleInputChange("patientBirth", e.target.value)
+                    }
+                  />
                 </Row>
                 <Row>
                   <label>Chống chỉ định</label>
-                  <input type="text" value={""}></input>
+                  <input
+                    type="text"
+                    value={editableFields.patientContraindication}
+                    onChange={(e) =>
+                      handleInputChange("patientContraindication", e.target.value)
+                    }
+                  />
                 </Row>
                 <Row>
                   <label>Dị ứng</label>
-                  <input type="text" value={""}></input>
+                  <input
+                    type="text"
+                    value={editableFields.patientAllergy}
+                    onChange={(e) =>
+                      handleInputChange("patientAllergy", e.target.value)
+                    }
+                  />
                 </Row>
                 <Row>
                   <Button className="btn primary__btn create-prescription">
@@ -191,7 +246,13 @@ const PatientDetail = () => {
           <div className="button">
             <Row>
               <Col>
-                <Button className="btn primary__btn save"> Lưu thay đổi</Button>
+                <Button
+                  className="btn primary__btn save"
+                  onClick={handleSubmit}
+                >
+                  {" "}
+                  Lưu thay đổi
+                </Button>
               </Col>
               <Col>
                 <Button className="btn outline__btn back " onClick={goBack}>
