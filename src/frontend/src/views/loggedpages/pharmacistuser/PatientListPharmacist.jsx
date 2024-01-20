@@ -12,7 +12,6 @@ const PatientListPharmacist = () => {
   const fetchData = async () => {
     try {
       const patientsData = await fetchPatientsPharmacist();
-      console.log(patientsData);
       setdata(patientsData.patientsList);
     } catch (error) {
       console.error("Error fetching patients data:", error);

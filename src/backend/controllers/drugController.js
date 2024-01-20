@@ -13,10 +13,10 @@ exports.getListDrug = async (req, res) => {
 exports.findDrug = async (req, res) => {
   try {
     const nameOrID = req.query.nameOrID;
-    console.log(req.nameOrID);
+    //console.log(req.nameOrID);
     const drugFound = await DrugModel.findDrug(nameOrID);
-    console.log("Got your data: ");
-    console.log(drugFound);
+    //console.log("Got your data: ");
+    //console.log(drugFound);
     return res.status(200).json({ drugFound });
   } catch (error) {
     console.error("Error: ", error.message);

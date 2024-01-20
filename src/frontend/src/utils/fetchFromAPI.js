@@ -172,6 +172,26 @@ export const addPatient = async (patientData) => {
   }
 };
 
+export const fetchPatientDetailInformation = async (maBN) => {
+  try {
+    const response = await fetch(`http://localhost:2212/getPatientDetailInformation/${maBN}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    throw error;
+  }
+}
+
 
 export const updateEmployee = async (updatedEmployeeData) => {
   try {
@@ -338,6 +358,29 @@ export const updateDrug = async (updatedDrugData) => {
     return data;
   } catch (error) {
     console.error("Error updating drug:", error.message);
+    throw error;
+  }
+};
+
+
+export const fetchMedicalHistory = async (maBN) => {
+  try {
+    const url = new URL("http://localhost:2212/getListMedicalHistory");
+    url.searchParams.append("maBN", maBN);
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
     throw error;
   }
 };
