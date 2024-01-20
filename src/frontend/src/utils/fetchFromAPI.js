@@ -283,3 +283,41 @@ export const addNewDrug = async (newDrugData) => {
     throw error;
   }
 };
+
+export const deleteDrug = async (drugID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:2212/deleteDrug/${drugID}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error deleting the drug:", error.message);
+    throw error;
+  }
+};
+
+export const updateDrug = async (updatedDrugData) => {
+  try {
+    const response = await fetch("http://localhost:2212/updateDrug", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedDrugData),
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error updating drug:", error.message);
+    throw error;
+  }
+};

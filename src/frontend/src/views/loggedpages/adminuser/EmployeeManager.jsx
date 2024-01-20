@@ -170,7 +170,7 @@ const EmployeeManager = () => {
         alert(`Không thể xóa nhân viên: ${response.message}`);
       }
     } catch (error) {
-      console.error("Error updating the employee:", error);
+      console.error("Error deleting the employee:", error);
     }
   };
   return (

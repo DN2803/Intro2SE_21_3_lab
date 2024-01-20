@@ -92,6 +92,57 @@ class DrugModel {
       }
     }
   }
+
+  static async deleteDrug(drugID) {
+    let pool;
+    try {
+      pool = await db.connectToDatabase();
+      const request = pool.request();
+      const result = await request
+      .input("maThuoc", sql.Char(4), drugID)
+      .output("responseMessage", sql.Char(100))
+      .execute("dbo.uspDeleteDrug");
+
+      const responseMessage = result.output.responseMessage;
+      return responseMessage;
+    } catch (error) {
+      console.error("Error while deleting the drug: ", error.message);
+      throw new Error("Failed to delete the drug");
+    } finally {
+      if (pool) {
+        await db.closeDatabaseConnection(pool);
+      }
+    }
+  }
+
+  static async updateDrug(updatedData) {
+    let pool;
+    try {
+      pool = await db.connectToDatabase();
+      const request = pool.request();
+
+      const result = await request
+        .input("maThuoc", sql.Char(4), updatedData.id)
+        .input("tenThuoc", sql.NVarChar(15), updatedData.name)
+        .input("donViTinh", sql.NVarChar(10), updatedData.unit)
+        .input("soLuong", sql.Int, updatedData.stock)
+        .input("giaNhap", sql.Money, updatedData.iPrice)
+        .input("giaBan", sql.Money, updatedData.oPrice)
+        .output("responseMessage", sql.NVarChar(250))
+        .execute("dbo.uspUpdateDrug");
+
+      const responseMessage = result.output.responseMessage;
+
+      return responseMessage;
+    } catch (error) {
+      console.error("Error updating the drug:", error.message);
+      throw new Error("Failed to update the drug");
+    } finally {
+      if (pool) {
+        await db.closeDatabaseConnection(pool);
+      }
+    }
+  }
 }
 
 module.exports = DrugModel;

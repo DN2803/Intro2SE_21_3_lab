@@ -106,8 +106,8 @@ class EmployeeModel {
 
       return responseMessage;
     } catch (error) {
-      console.error("Error updating the employee:", error.message);
-      throw new Error("Failed to update the employee");
+      console.error("Error deleting the employee:", error.message);
+      throw new Error("Failed to delete the employee");
     } finally {
       if (pool) {
         await db.closeDatabaseConnection(pool);
