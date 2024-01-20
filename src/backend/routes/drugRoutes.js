@@ -1,5 +1,5 @@
 const express = require("express");
-const { getListDrug, findDrug, addDrug, deleteDrug } = require("../controllers/drugController");
+const { getListDrug, findDrug, addDrug, deleteDrug, updateDrug } = require("../controllers/drugController");
 
 const drugRoutes = express.Router();
 
@@ -8,5 +8,6 @@ drugRoutes.get("/getListDrug", getListDrug);
 drugRoutes.get("/findDrug", findDrug);
 drugRoutes.post("/addDrug", addDrug);
 drugRoutes.delete("/deleteDrug/:id", deleteDrug);
+drugRoutes.post("/updateDrug", updateDrug);
 
 module.exports = drugRoutes;

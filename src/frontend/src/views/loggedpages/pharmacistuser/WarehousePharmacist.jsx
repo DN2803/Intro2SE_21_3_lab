@@ -11,6 +11,7 @@ import {
   fetchDrug,
   findDrug,
   deleteDrug,
+  updateDrug,
 } from "../../../utils/fetchFromAPI";
 
 const WarehousePharmacist = () => {
@@ -21,7 +22,7 @@ const WarehousePharmacist = () => {
   const [newStock, setNewStock] = useState("");
   const [newUnit, setNewUnit] = useState("");
   const [newIPrice, setNewIPrice] = useState("");
-  const [newOPirce, setNewOPrice] = useState("");
+  const [newOPrice, setNewOPrice] = useState("");
   const [editRow, setEditRow] = useState("");
 
   const fetchData = async () => {
@@ -46,13 +47,25 @@ const WarehousePharmacist = () => {
   ];
   // Sử dụng state để lưu trạng thái của đối tượng
   const [isActive, setIsActive] = useState(false);
+  const resetForm = () => {
+    setNewName("");
+    setNewUnit("");
+    setNewStock("");
+    setNewIPrice("");
+    setNewOPrice("");
+    setEditRow("");
+  };  
   const onClickAdd = () => {
     setIsActive(!isActive);
+    if (!isActive) {
+      resetForm();
+    }
   };
 
   const onClickAddNew = async () => {
+
     // Kiểm tra các trường đã điền đầy đủ thông tin chưa
-    if (!newName || !newStock || !newUnit || !newIPrice || !newOPirce) {
+    if (!newName || !newStock || !newUnit || !newIPrice || !newOPrice) {
       alert("Vui lòng điền đầy đủ thông tin cho tất cả các trường!");
       return;
     }
@@ -64,7 +77,7 @@ const WarehousePharmacist = () => {
         stock: newStock,
         unit: newUnit,
         iPrice: newIPrice,
-        oPrice: newOPirce,
+        oPrice: newOPrice,
       });
 
       fetchData();
@@ -125,32 +138,50 @@ const WarehousePharmacist = () => {
     setNewIPrice(medicine.iPrice);
     setNewOPrice(medicine.oPrice);
   };
-  const onClickUpdate = () => {
-    if (!newName || !newStock || !newUnit || !newIPrice || !newOPirce) {
-      alert("Không được để trống bất kỳ trường nào!");
-      return;
+
+  const onClickUpdate = async () => {
+    try {
+      if (!newName || !newStock || !newUnit || !newIPrice || !newOPrice) {
+        alert("Không được để trống bất kỳ trường nào!");
+        return;
+      }
+
+      if (newStock < 0 || newIPrice <= 0 || newOPrice <= 0) {
+        alert("Giá trị của trường không hợp lệ, vui lòng kiểm tra lại!");
+        return;
+      }
+
+      //let index = data.findIndex((d) => d.id === editRow);
+      //let dataCopy = [...data];
+      let updatedDrugData = {
+        id: editRow,
+        name: newName,
+        stock: newStock,
+        unit: newUnit,
+        iPrice: newIPrice,
+        oPrice: newOPrice,
+      };
+
+      const response = await updateDrug(updatedDrugData);
+      fetchData();
+      // setdata(dataCopy);
+
+      setEditRow("");
+      setNewName("");
+      setNewUnit("");
+      setNewStock("");
+      setNewIPrice("");
+      setNewOPrice("");
+      // setIsActive(!isActive);
+      if (response.success) {
+        alert(response.message);
+        setIsActive(!isActive);
+      } else {
+        alert(`Không thể thay đổi thông tin thuốc: ${response.message}`);
+      }
+    } catch (error) {
+      console.error("Đã có lỗi xảy ra:", error);
     }
-
-    let index = data.findIndex((d) => d.id === editRow);
-    let dataCopy = [...data];
-    dataCopy[index] = {
-      id: editRow,
-      name: newName,
-      stock: newStock,
-      unit: newUnit,
-      iPrice: newIPrice,
-      oPrice: newOPirce,
-    };
-
-    setdata(dataCopy);
-
-    setEditRow("");
-    setNewName("");
-    setNewUnit("");
-    setNewStock("");
-    setNewIPrice("");
-    setNewOPrice("");
-    setIsActive(!isActive);
   };
 
   const handleKeyPress = (e) => {
@@ -260,7 +291,7 @@ const WarehousePharmacist = () => {
               <input
                 type="number"
                 name="oPrice"
-                value={newOPirce}
+                value={newOPrice}
                 onChange={onchangeNewOPrice}
               />
             </div>
