@@ -55,14 +55,14 @@ class AppointmentModel {
     }
   }
 
-  static async getListPatientsFromAppointment(date, doctorID) {
+  static async getListPatientsFromAppointment(date, doctorUSERNAME) {
     let pool;
     try {
       pool = await db.connectToDatabase();
       const request = pool.request();
       const result = await request
         .input("date", sql.VarChar, date)
-        .input("doctorID", sql.Char(10), doctorID)
+        .input("doctorUSERNAME", sql.Char(10), doctorUSERNAME)
         .execute("dbo.uspGetPatientFromAppointment");
 
       const patientsList = result.recordset.map((row) => ({
@@ -71,6 +71,7 @@ class AppointmentModel {
         patientMail: row.EMAIL,
         patientGender: row.GIOITINH,
         patientPhone: row.SDT,
+        patientDoctor: row.MABACSI
       }));
       return patientsList;
     } catch (error) {
@@ -89,17 +90,25 @@ class AppointmentModel {
       pool = await db.connectToDatabase();
       const request = pool.request();
       const result = await request
-        .input("STT", STT)
-        .query("SELECT * FROM LICHHEN WHERE STT = @STT");
+        .input("STT", sql.Int, STT)
+        .execute("uspGetPatientBySTT");
 
-        const patientData = result.recordset.map((row) => ({
-          patientSTT: row.STT,
-          patientName: row.HOTEN,
-          patientMail: row.EMAIL,
-          patientGender: row.GIOITINH,
-          patientPhone: row.SDT,
-        }));
-        return patientData;
+      const patientData = result.recordset.map((row) => ({
+        //Lấy từ lịch hẹn
+        patientSTT: row.STT,
+        patientName: row.HOTEN,
+        patientMail: row.EMAIL,
+        patientGender: row.GIOITINH,
+        patientPhone: row.SDT,
+
+        //Lấy từ BENHNHAN
+        patientBirth: row.NGAYSINH,
+        patientContraindication: row.CHONGCHIDINH,
+        patientAllergy: row.DIUNG,
+      }));
+      console.log("appointment model");
+      console.log(patientData);
+      return patientData;
     } catch (error) {
       console.error("Error:", error.message);
       throw error;
