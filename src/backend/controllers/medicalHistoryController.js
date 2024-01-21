@@ -32,7 +32,7 @@ exports.addOrUpdateMedicalHistory = async (req, res) => {
     } else if (responseFromDB === "Updating") {
       return res.status(409).json({
         success: false,
-        message: "Cập nhật bệnh sử thành công",
+        message: "Cập nhật bệnh sử thành công.",
       });
     }
   } catch (error) {
