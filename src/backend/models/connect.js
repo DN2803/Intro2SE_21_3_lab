@@ -1,5 +1,4 @@
 const sql = require("mssql");
-
 const config = {
   server: "localhost",
   authentication: {
@@ -14,7 +13,6 @@ const config = {
     database: "QLPHONGKHAM",
   },
 };
-
 async function connectToDatabase() {
   try {
     const pool = await sql.connect(config);
@@ -25,7 +23,6 @@ async function connectToDatabase() {
     throw error; // Rethrow the error to indicate connection failure
   }
 }
-
 async function closeDatabaseConnection(pool) {
   try {
     await pool.close();

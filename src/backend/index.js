@@ -10,16 +10,14 @@ const medicalRecordRoutes = require("./routes/medicalRecordRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const drugRoutes = require("./routes/drugRoutes");
 const patientRoutes = require("./routes/patientRoutes");
-const medicalHistoryRoutes = require("./routes/medicalHistoryRoutes");
+const medicalHistoryRoutes = require("./routes/medicalHistoryRoutes")
 const app = express();
 const port = 2212;
 
 // Use bodyParser middleware to parse JSON
 app.use(bodyParser.json());
-
 // Enable CORS for all routes
 app.use(cors());
-
 app.use(loginRoute);
 app.use(booking);
 app.use(appointmentRoute);

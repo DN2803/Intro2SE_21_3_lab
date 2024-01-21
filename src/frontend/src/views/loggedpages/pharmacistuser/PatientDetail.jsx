@@ -11,9 +11,7 @@ const PatientDetailPharmacist = () => {
   const { idpatient } = useParams();
   const [patient, setPatient] = useState(null); // Khởi tạo state để lưu thông tin bệnh nhân
   const [medicalHistory, setMedicalHistory] = useState([]); // Thêm state để lưu trữ lịch sử điều trị
-
   const navigate = useNavigate();
-
   // get medical history from database
   // get information from database where patient's id = id patient
   useEffect(() => {
@@ -67,7 +65,6 @@ const PatientDetailPharmacist = () => {
     { Header: "Trạng thái thanh toán" },
     { Header: "Đơn thuốc" },
   ];
-
   //const medical_history = medicalHistory;
 
   const goBack = () => {

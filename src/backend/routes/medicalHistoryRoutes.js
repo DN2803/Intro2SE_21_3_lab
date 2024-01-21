@@ -1,8 +1,13 @@
 const express = require("express");
-const {getListMedicalHistory} = require("../controllers/medicalHistoryController");
 
-const router = express.Router();
+const { addOrUpdateMedicalHistory,getMedicalHistory} = require("../controllers/medicalHistoryController");
 
-router.get("/getListMedicalHistory", getListMedicalHistory);
+const medicalHistoryRouter = express.Router();
 
-module.exports = router;
+
+
+medicalHistoryRouter.post("/addOrUpdateMedicalHistory", addOrUpdateMedicalHistory);
+
+medicalHistoryRouter.get("/getMedicalHistory/:mabn/:ngaykham/:username",getMedicalHistory);
+
+module.exports = medicalHistoryRouter;
