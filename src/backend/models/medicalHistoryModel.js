@@ -9,6 +9,7 @@ class MedicalHistoryModel {
     this.patientSymptom = patientSymptom;
     this.patientDiagnose = patientDiagnose;
   }
+  
   static async addOrUpdateMedicalHistory(medicalHistory) {
     let pool;
     try {

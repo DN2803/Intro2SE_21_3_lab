@@ -361,6 +361,28 @@ export const fetchMedicalHistory = async (mabn, ngaykham, doctor_username) => {
   }
 };
 
+export const fetchMedicalHistoryPharmacist = async (maBN) => {
+  try {
+    const url = new URL("http://localhost:2212/getListMedicalHistory");
+    url.searchParams.append("maBN", maBN);
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    throw error;
+  }
+};
+
 export const fetchPatientDetailInformation = async (maBN) => {
   try {
     const response = await fetch(`http://localhost:2212/getPatientDetailInformation/${maBN}`, {
@@ -410,6 +432,30 @@ export const addMedicineToPreDetail = async (drug) => {
       },
       body: JSON.stringify(drug),
     });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    throw error;
+  }
+};
+
+export const fetchPrescription = async (maBN, ngayTao) => {
+  try {
+    const url = new URL("http://localhost:2212/getPrescription");
+    url.searchParams.append("maBN", maBN);
+    url.searchParams.append("ngayTao", ngayTao);
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

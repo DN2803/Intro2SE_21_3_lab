@@ -12,7 +12,8 @@ const drugRoutes = require("./routes/drugRoutes");
 const patientRoutes = require("./routes/patientRoutes");
 const medicalHistoryRoutes = require("./routes/medicalHistoryRoutes")
 const prescriptionDetailRouter = require("./routes/prescriptionDetailRoutes")
-
+const prescriptionRoutes = require("./routes/prescriptionRoutes");
+const med2Routes = require("./routes/medHistoryRoutes2")
 const app = express();
 const port = 2212;
 
@@ -30,6 +31,8 @@ app.use(drugRoutes);
 app.use(patientRoutes);
 app.use(medicalHistoryRoutes);
 app.use(prescriptionDetailRouter);
+app.use(med2Routes);
+app.use(prescriptionRoutes);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

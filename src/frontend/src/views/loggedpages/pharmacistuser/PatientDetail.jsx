@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button, Row, Col, Container } from "reactstrap";
 import {
-  fetchMedicalHistory,
+  fetchMedicalHistoryPharmacist,
   fetchPatientDetailInformation,
 } from "../../../utils/fetchFromAPI";
 import "../../../styles/PatientDetail.scss";
@@ -11,7 +11,9 @@ const PatientDetailPharmacist = () => {
   const { idpatient } = useParams();
   const [patient, setPatient] = useState(null); // Khởi tạo state để lưu thông tin bệnh nhân
   const [medicalHistory, setMedicalHistory] = useState([]); // Thêm state để lưu trữ lịch sử điều trị
+
   const navigate = useNavigate();
+
   // get medical history from database
   // get information from database where patient's id = id patient
   useEffect(() => {
@@ -25,7 +27,7 @@ const PatientDetailPharmacist = () => {
     };
     const fetchMedicalHistoryData = async () => {
       try {
-        const data_history = await fetchMedicalHistory(idpatient); // Gọi API lấy lịch sử điều trị
+        const data_history = await fetchMedicalHistoryPharmacist(idpatient); // Gọi API lấy lịch sử điều trị
         setMedicalHistory(data_history.medicalHistories); // Cập nhật state với dữ liệu lịch sử điều trị
       } catch (error) {
         console.error("Error fetching medical history:", error);
@@ -65,6 +67,7 @@ const PatientDetailPharmacist = () => {
     { Header: "Trạng thái thanh toán" },
     { Header: "Đơn thuốc" },
   ];
+
   //const medical_history = medicalHistory;
 
   const goBack = () => {

@@ -42,10 +42,10 @@ const AboutUs = () => {
                     {
                         doctors.map(({image, name}, index)=>{
                             return (
-                                <div className='device-item' key={index}>
+                                <div className='doctor-item' key={index}>
                                     
-                                    <img src={image} className='device-item-img' alt='' />
-                                    <h4 className='device-item-title'>{name}</h4>
+                                    <img src={image} className='doctor-item-img' alt='' />
+                                    <h4 className='doctor-item-title'>{name}</h4>
           
                                 </div>
                             )

@@ -30,7 +30,7 @@ const DoctorDetail = () => {
                 </div>
 
                 <Row>
-                    <p>description...</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, optio? Soluta vero porro pariatur possimus. Eveniet libero dicta dignissimos, ullam incidunt, ipsum quibusdam tempore omnis architecto quos voluptatem nesciunt. Itaque.</p>
                 </Row>
                 </Col>
             </Row>

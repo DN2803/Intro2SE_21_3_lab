@@ -82,3 +82,23 @@
     }
 
 }
+
+.doctor-item{
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+    &-img{
+        
+        height: 260px;
+        width: 100%;
+        border-radius: 10px;
+    
+    }
+    &-title{   
+        display: flex;
+        color: $primary-color;
+        align-items: center;
+        justify-items: center;
+        justify-content: center ;       ;
+    }
+}

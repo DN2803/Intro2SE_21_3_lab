@@ -1,6 +1,7 @@
 @import "./global.scss";
 .search-bar{
     height: 100px;
+    
     &-input {
         height: 3rem;
         width: 75%;
@@ -27,7 +28,7 @@
 
 .table-patients {
     table{
-        width: 75%;
+        width: 80%;
     }
     td, th{
         //border: 1px solid #ddd;

@@ -11,8 +11,6 @@ const WarehouseDoctor = () => {
     { Header: "Giá nhập kho", accessor: "iPrice" },
     { Header: "Giá bán", accessor: "oPrice" },
 
-    { Header: "" },
-    { Header: "" },
   ];
   const fetchData = async () => {
     try {

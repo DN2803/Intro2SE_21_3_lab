@@ -1,11 +1,11 @@
 
-import doctor1 from "../images/device/1.png"
-import doctor2 from "../images/device/2.png"
+import doctor1 from "../images/avt/3.jpg"
+import doctor2 from "../images/avt/2.jpg"
 
-import doctor3 from "../images/device/1.png"
-import doctor4 from "../images/device/2.png"
+import doctor3 from "../images/avt/4.jpg"
+import doctor4 from "../images/avt/5.jpg"
 
-import doctor5 from "../images/device/1.png"
+import doctor5 from "../images/avt/1.jpg"
 
 
 export const doctors = [
