@@ -173,7 +173,17 @@ const PatientDetailPharmacist = () => {
                           <td>{record.CHANDOAN}</td>
                           <td>{record.TRANGTHAITHANHTOAN}</td>
                           <td>
-                            <Link to={`./${id}`}>Xem đơn thuốc</Link>{" "}
+                            {/* <Link to={`./${id}`}>Xem đơn thuốc</Link> */}
+                            <Link
+                              to={{
+                                pathname: `./${id}`, // hoặc đường dẫn đến component đích
+                                state: {
+                                  maBN: idpatient,
+                                  ngayDieuTri: record.date,
+                                }, // truyền dữ liệu qua state
+                              }}>
+                              Xem đơn thuốc
+                            </Link>{" "}
                           </td>
                         </tr>
                       );

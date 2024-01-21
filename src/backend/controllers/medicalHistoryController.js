@@ -60,6 +60,7 @@ exports.getMedicalHistory = async (req, res) => {
     console.error("Error:", error.message);
   }
 };
+
 exports.getListMedicalHistory = async (req, res) => {
   try {
     const maBN = req.query.maBN;
