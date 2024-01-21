@@ -97,12 +97,15 @@ export const addNewEmployee = async (newEmployeeData) => {
 
 export const fetchPatients = async (doctorID) => {
   try {
-    const response = await fetch(`http://localhost:2212/getListPatients/${doctorID}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:2212/getListPatients/${doctorID}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -116,12 +119,15 @@ export const fetchPatients = async (doctorID) => {
 
 export const fetchPatientBySTT = async (patientSTT) => {
   try {
-    const response = await fetch(`http://localhost:2212/getPatientBySTT/${patientSTT}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:2212/getPatientBySTT/${patientSTT}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -284,15 +290,12 @@ export const addNewDrug = async (newDrugData) => {
 
 export const deleteDrug = async (drugID) => {
   try {
-    const response = await fetch(
-      `http://localhost:2212/deleteDrug/${drugID}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`http://localhost:2212/deleteDrug/${drugID}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
     console.log(data);
     return data;

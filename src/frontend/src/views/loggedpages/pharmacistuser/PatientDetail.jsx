@@ -53,8 +53,8 @@ const PatientDetailPharmacist = () => {
     birth: patient?.[0].NGAYSINH,
     email: patient?.[0].EMAIL_BN,
     phone: patient?.[0].SDT_BN,
-    contraindicated: "Chưa có",
-    allergy: "Chưa có",
+    contraindicated: patient?.[0].CHONGCHIDINH,
+    allergy: patient?.[0].DIUNG,
   };
 
   // table chứa lịch sử khám
@@ -74,7 +74,7 @@ const PatientDetailPharmacist = () => {
 
   // Biến đổi ngày thành chuỗi hiển thị
   const formattedDate = currentDate.toLocaleDateString();
-  const idmake = formattedDate.replace(/\//g, "-");
+  //const idmake = formattedDate.replace(/\//g, "-");
   return (
     <>
       {patientData ? (
@@ -170,7 +170,15 @@ const PatientDetailPharmacist = () => {
                           <td>{record.CHANDOAN}</td>
                           <td>{record.TRANGTHAITHANHTOAN}</td>
                           <td>
-                            <Link to={`./${id}`}>Xem đơn thuốc</Link>{" "}
+                            <Link
+                              to={`./${id}`}
+                              state={{
+                                medicalHistory: record,
+                                patientName: patientData.name,
+                              }}
+                            >
+                              Xem đơn thuốc
+                            </Link>{" "}
                           </td>
                         </tr>
                       );
