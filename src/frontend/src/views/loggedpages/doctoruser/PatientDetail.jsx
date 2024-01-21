@@ -69,7 +69,7 @@ const PatientDetail = () => {
       };
       // Gửi dữ liệu lên server
       const response = await addPatient(dataToSend);
-      console.log(dataToSend)
+      
       alert(response.message);
     } catch (error) {
       // Handle any unexpected errors

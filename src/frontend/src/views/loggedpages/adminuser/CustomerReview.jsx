@@ -9,7 +9,7 @@ const CustomerReview = () =>{
     const fetchData = async () => {
         try {
             const feedbackData = await fetchFeedback();
-            console.log(feedbackData);
+            
             setData(feedbackData.feedbackList);
         } catch (error) {
             console.error("Error fetching feedback data:", error);

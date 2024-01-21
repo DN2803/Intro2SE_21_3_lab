@@ -15,7 +15,7 @@ const Invoice = () => {
   const location = useLocation();
   const { prescriptionData, patientName } = location.state || {}; // Lấy đối tượng patient từ state
 
-  console.log(prescriptionData);
+
   
   // console.log(prescriptionData);
   // const data = [

@@ -100,10 +100,10 @@ class DrugModel {
       const request = pool.request();
       const result = await request
       .input("maThuoc", sql.Char(4), drugID)
-      .output("responseMessage", sql.Char(100))
+      .output("ResponseMessage", sql.NVarChar(100))
       .execute("dbo.uspDeleteDrug");
 
-      const responseMessage = result.output.responseMessage;
+      const responseMessage = result.output.ResponseMessage;
       return responseMessage;
     } catch (error) {
       console.error("Error while deleting the drug: ", error.message);

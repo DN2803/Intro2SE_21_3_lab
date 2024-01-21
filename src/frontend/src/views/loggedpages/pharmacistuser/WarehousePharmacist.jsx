@@ -211,12 +211,8 @@ const WarehousePharmacist = () => {
     if (confirmDelete) {
       try {
         const response = await deleteDrug(drugID);
-        if (response.success) {
-          alert("Xóa thuốc thành công!");
-          fetchData(); // Gọi lại fetchData để cập nhật danh sách sau khi xóa
-        } else {
-          alert(`${response.message}`);
-        }
+        alert(response.message);
+        fetchData();
       } catch (error) {
         console.error("Error deleting drug:", error);
       }

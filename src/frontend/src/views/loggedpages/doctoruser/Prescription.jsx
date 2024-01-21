@@ -93,13 +93,13 @@ const Prescription = () => {
       const response = await addOrUpdateMedicalHistory(dataToSend);
       let  drugMessages = ''
       for (const drug of drugLists) {
-        console.log(drug);
+      
         const responseDrug = await addMedicineToPreDetail(drug);
         drugMessages = drugMessages + responseDrug.message + "\n";
       }
       drugMessages = drugMessages + response.message; //tổng lại mấy cái message cho gọn
       alert(drugMessages);
-      console.log(drugMessages)
+      
     } catch (error) {
       // Handle any unexpected errors
       console.error("Lỗi", error.message);
@@ -120,8 +120,7 @@ const Prescription = () => {
       }
     }
     setInputFields(newInputFields);
-    // Console log mảng inputFields sau mỗi lần thay đổi
-    console.log("Mảng sau khi thay đổi:", newInputFields);
+    
   };
 
   const navigate = useNavigate();

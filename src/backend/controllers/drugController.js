@@ -69,15 +69,13 @@ exports.deleteDrug = async (req, res) => {
 
     //Gọi phương thức xoá thuốc
     const responseFromDB = await DrugModel.deleteDrug(drugID);
-    if (responseFromDB.localeCompare("successfully")) {
+    if (responseFromDB == "successfully") {
       return res.json({
-        success: true,
         message: "Xoá thành công!",
       });
-    } else {
+    } else if (responseFromDB == "cannot delete"){
       return res.json({
-        success: false,
-        message: `Đã có lỗi xảy ra! Lỗi: ${responseFromDB}`,
+        message: `Đã có lỗi xảy ra! Lỗi: Xung đột khóa ngoại`,
       });
     }
   } catch (error) {
