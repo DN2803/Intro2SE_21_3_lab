@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 import {
   fetchMedicalHistory,
   addOrUpdateMedicalHistory,
+  addMedicineToPreDetail
 } from "../../../utils/fetchFromAPI";
 import "../../../styles/Prescription.scss";
 import { FaEdit } from "react-icons/fa";
@@ -65,10 +66,23 @@ const Prescription = () => {
   }, [patientstt]);
 
   const handleAddField = () => {
-    setInputFields([...inputFields, ""]); // Thêm một trường nhập mới vào danh sách
-  };
+    // Thêm một đối tượng mới với các trường mặc định vào danh sách
+    setInputFields((prevInputFields) => [
+      ...prevInputFields, 
+      { name: "", quantity: "", patientID: patient_id, dateCase: formattedDate }
+    ]);
+    console.log("Mảng sau khi thêm mới:", inputFields);
+ };
   const handleSubmit = async () => {
     try {
+      const drugLists = inputFields.map((field) => ({
+        patientID : patient_id,
+        dateCase : formattedDate,
+        name: field.name,
+        quantity: field.quantity,
+
+      }));
+      console.log(drugLists)
       const dataToSend = {
         patientID: patient_id,
         dateCase: formattedDate,
@@ -76,19 +90,34 @@ const Prescription = () => {
         patientSymptom: editableFields.patientSymptom,
         patientDiagnose: editableFields.patientDiagnose,
       };
-      console.log(dataToSend);
       // Gửi dữ liệu lên server
       const response = await addOrUpdateMedicalHistory(dataToSend);
-      alert(response.message);
+      let  drugMessages = ''
+      for (const drug of drugLists) {
+        console.log(drug);
+        const responseDrug = await addMedicineToPreDetail(drug);
+        drugMessages = drugMessages + responseDrug.message + "\n";
+      }
+      drugMessages = drugMessages + response.message; //tổng lại mấy cái message cho gọn
+      alert(drugMessages);
+      console.log(drugMessages)
     } catch (error) {
       // Handle any unexpected errors
       console.error("Lỗi", error.message);
     }
   };
-  const handleChange = (index, value) => {
+  const handleChange = (index, fieldName, value) => {
     const newInputFields = [...inputFields];
-    newInputFields[index] = value;
+
+    if (index < newInputFields.length) {
+      newInputFields[index] = { ...newInputFields[index], [fieldName]: value };
+    } else {
+      newInputFields.push({ [fieldName]: value });
+    }
+
     setInputFields(newInputFields);
+    // Console log mảng inputFields sau mỗi lần thay đổi
+    console.log("Mảng sau khi thay đổi:", newInputFields);
   };
 
   const navigate = useNavigate();
@@ -100,7 +129,7 @@ const Prescription = () => {
   return (
     <>
       <Container className="detail">
-        <h2>{date}</h2>
+        <h2>{patient_id}</h2>
         <Row>
           <div className="form">
             <div className="form-doctorname">
@@ -127,13 +156,13 @@ const Prescription = () => {
                 <input
                   type="text"
                   className="name-medicince"
-                  onChange={(e) => handleChange(index, e.target.value)}
+                  onChange={(e) => handleChange(index, "name", e.target.value)}
                 />
                 <label>Số lượng</label>
                 <input
                   type="number"
                   className="quantity"
-                  onChange={(e) => handleChange(index, e.target.value)}
+                  onChange={(e) => handleChange(index, "quantity", e.target.value)}
                 />
               </div>
             ))}
