@@ -42,7 +42,6 @@ exports.getPatientDetailInformation = async (req, res) => {
   const maBN = req.params.maBN;
   try {
     const patientInformation = await PatientModel.getPatientDetailInformation(maBN);
-    //console.log(patientInformation);
     return res.status(200).json({ patientInformation });
   } catch (error) {
     console.error("Error: ", error.message);

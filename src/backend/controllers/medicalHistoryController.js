@@ -67,7 +67,6 @@ exports.getListMedicalHistory = async (req, res) => {
     const medicalHistories = await MedicalHistoryModel.getListMedicalHistory(
       maBN
     );
-    console.log(medicalHistories);
     return res.status(200).json({ medicalHistories });
   } catch (error) {
     console.error("Error: ", error.message);

@@ -2,11 +2,12 @@ const db = require("./connect");
 const sql = require("mssql");
 
 class PrescriptionModel {
-  constructor({ MABN, NGAYTAO, MATHUOC, SOLUONG }) {
+  constructor({ MABN, NGAYTAO, TENTHUOC, SOLUONG, GIABAN }) {
     (this.MABN = MABN),
       (this.NGAYTAO = NGAYTAO),
-      (this.MATHUOC = MATHUOC),
-      (this.SOLUONG = SOLUONG);
+      (this.TENTHUOC = TENTHUOC),
+      (this.SOLUONG = SOLUONG),
+      (this.GIABAN = GIABAN);
   }
 
   static async getPrescription(maBN, ngayTao) {
@@ -22,8 +23,9 @@ class PrescriptionModel {
       const prescriptionData = result.recordset.map((row) => ({
         MABN: row.MABN,
         NGAYTAO: row.NGAYTAO,
-        MATHUOC: row.MATHUOC,
+        TENTHUOC: row.TENTHUOC,
         SOLUONG: row.SOLUONG,
+        GIABAN: row.GIABAN,
       }));
       return prescriptionData;
     } catch (error) {

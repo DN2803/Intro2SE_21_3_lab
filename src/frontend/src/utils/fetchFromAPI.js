@@ -97,12 +97,15 @@ export const addNewEmployee = async (newEmployeeData) => {
 
 export const fetchPatients = async (doctorID) => {
   try {
-    const response = await fetch(`http://localhost:2212/getListPatients/${doctorID}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:2212/getListPatients/${doctorID}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -116,12 +119,15 @@ export const fetchPatients = async (doctorID) => {
 
 export const fetchPatientBySTT = async (patientSTT) => {
   try {
-    const response = await fetch(`http://localhost:2212/getPatientBySTT/${patientSTT}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:2212/getPatientBySTT/${patientSTT}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -135,12 +141,15 @@ export const fetchPatientBySTT = async (patientSTT) => {
 
 export const fetchPatientsPharmacist = async () => {
   try {
-    const response = await fetch(`http://localhost:2212/getListPatientsPharmacist`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:2212/getListPatientsPharmacist`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -151,7 +160,6 @@ export const fetchPatientsPharmacist = async () => {
     throw error;
   }
 };
-
 
 export const addPatient = async (patientData) => {
   try {
@@ -172,12 +180,15 @@ export const addPatient = async (patientData) => {
 
 export const fetchPatientDetailInformation = async (maBN) => {
   try {
-    const response = await fetch(`http://localhost:2212/getPatientDetailInformation/${maBN}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:2212/getPatientDetailInformation/${maBN}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -188,8 +199,7 @@ export const fetchPatientDetailInformation = async (maBN) => {
     console.error("Error fetching data:", error.message);
     throw error;
   }
-}
-
+};
 
 export const updateEmployee = async (updatedEmployeeData) => {
   try {
@@ -324,15 +334,12 @@ export const addNewDrug = async (newDrugData) => {
 
 export const deleteDrug = async (drugID) => {
   try {
-    const response = await fetch(
-      `http://localhost:2212/deleteDrug/${drugID}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`http://localhost:2212/deleteDrug/${drugID}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
     console.log(data);
     return data;
@@ -360,7 +367,6 @@ export const updateDrug = async (updatedDrugData) => {
   }
 };
 
-
 export const fetchMedicalHistory = async (maBN) => {
   try {
     const url = new URL("http://localhost:2212/getListMedicalHistory");
@@ -372,6 +378,30 @@ export const fetchMedicalHistory = async (maBN) => {
         "Content-Type": "application/json",
       },
     });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    throw error;
+  }
+};
+
+export const fetchPrescription = async (maBN, ngayTao) => {
+  try {
+    const url = new URL("http://localhost:2212/getPrescription");
+    url.searchParams.append("maBN", maBN);
+    url.searchParams.append("ngayTao", ngayTao);
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

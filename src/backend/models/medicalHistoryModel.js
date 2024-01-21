@@ -5,14 +5,18 @@ class MedicalHistoryModel {
   constructor({
     MABN,
     NGAYDIEUTRI,
+    TENBACSI,
     CHANDOAN,
+    TRIEUCHUNG,
     //TRANGTHAI,
     TRANGTHAITHANHTOAN,
     TONGCHIPHI,
   }) {
     (this.MABN = MABN),
       (this.NGAYDIEUTRI = NGAYDIEUTRI),
+      this.TENBACSI = TENBACSI,
       (this.CHANDOAN = CHANDOAN),
+      this.TRIEUCHUNG = TRIEUCHUNG,
       //(this.TRANGTHAI = TRANGTHAI),
       (this.TRANGTHAITHANHTOAN = TRANGTHAITHANHTOAN),
       (this.TONGCHIPHI = TONGCHIPHI);
@@ -30,7 +34,9 @@ class MedicalHistoryModel {
       const medicalHistories = result.recordset.map((row) => ({
         MABN: row.MABN,
         NGAYDIEUTRI: row.NGAYDIEUTRI,
+        TENBACSI: row.TENBACSI,
         CHANDOAN: row.CHANDOAN,
+        TRIEUCHUNG: row.TRIEUCHUNG,
         //TRANGTHAI,
         TRANGTHAITHANHTOAN: row.TRANGTHAITHANHTOAN,
         TONGCHIPHI: row.TONGCHIPHI,
