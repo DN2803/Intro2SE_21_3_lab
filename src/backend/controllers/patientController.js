@@ -29,9 +29,20 @@ exports.addPatient = async (req, res) => {
     console.log("controller");
 
     const newPatient = new PatientModel(patientData);
-    console.log(newPatient);
+  
     // Gọi phương thức tạo lịch hẹn từ AppointmentModel
     const responseFromDB = await PatientModel.addPatient(newPatient);
+    if (responseFromDB === "Inserting") {
+      return res.json({
+        success: true,
+        message: "Thêm bệnh nhân thành công.",
+      });
+    } else if (responseFromDB === "Updating") {
+      return res.json({
+        success: false,
+        message: "Cập nhật bệnh nhân thành công.",
+      });
+    }
   } catch (error) {
     console.error("Error:", error.message);
     return res.status(500).json({ error: "Internal Server Error" });

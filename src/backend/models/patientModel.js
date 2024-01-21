@@ -42,10 +42,11 @@ class PatientModel {
         .input("CHONGCHIDINH", sql.NVarChar(255), patientData.CHONGCHIDINH)
         .input("DIUNG", sql.NVarChar(255), patientData.DIUNG)
         .input("STT", sql.Int, patientData.STT)
-
+        .output("responseMessage", sql.NVarChar(250))
         .execute("uspAddPatient");
-      console.log(result);
-      return result;
+        const responseMessage = result.output.responseMessage;
+
+        return responseMessage;
     } catch (error) {
       console.error("Error:", error.message);
       throw error;

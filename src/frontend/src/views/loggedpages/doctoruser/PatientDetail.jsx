@@ -23,12 +23,10 @@ const PatientDetail = () => {
     const fetchPatientData = async () => {
       try {
         const response = await fetchPatientBySTT(idpatient);
-        //cái này quan trọng này, vì mỗi bệnh nhân là phần tử thứ 0 nên phải lấy tại vị trí 0 nó mới chịu...
-        const patientData = response?.patient?.[0] || {}; // Get the first element or an empty object
-        setPatient(editableFields)
-
-        //mục đích để vừa hiển thị vừa retype được đó(thấy ko, nó gán cho cái patientData, có thì nó hiển thị, ko thì nó là "")
-        //xong rồi nó hiển thị, muốn retype j cũng được
+        const patientData = response?.patient?.[0] || {};
+        
+        setPatient(patientData);  // Fix here
+  
         setEditableFields({
           patientName: patientData.patientName || "",
           patientGender: patientData.patientGender || "",
@@ -43,8 +41,7 @@ const PatientDetail = () => {
         setPatient({}); // Set an empty object in case of an error
       }
     };
-
-    // Call fetchPatientData when the component mounts or when idpatient changes
+  
     if (idpatient) {
       fetchPatientData();
     }
@@ -72,6 +69,8 @@ const PatientDetail = () => {
       };
       // Gửi dữ liệu lên server
       const response = await addPatient(dataToSend);
+      console.log(dataToSend)
+      alert(response.message);
     } catch (error) {
       // Handle any unexpected errors
       console.error("Lỗi", error.message);

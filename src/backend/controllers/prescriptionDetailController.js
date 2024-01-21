@@ -39,6 +39,11 @@ exports.addMedicineToPreDetail = async (req, res) => {
             message: `${preDetail.medicineName}: Tên thuốc vừa nhập không tồn tại trong kho. Vui lòng kiểm tra lại.`,
           });
       }
+      else if (responseFromDB === 'Wrong'){
+        return res.json({
+            message: `${preDetail.medicineName}: Số lượng không hợp lệ.`,
+          });
+      }
     } catch (error) {
       console.error("Error:", error.message);
       return res.status(500).json({ error: "Internal Server Error" });

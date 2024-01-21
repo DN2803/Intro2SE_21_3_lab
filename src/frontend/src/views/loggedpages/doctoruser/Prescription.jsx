@@ -82,7 +82,6 @@ const Prescription = () => {
         quantity: field.quantity,
 
       }));
-      console.log(drugLists)
       const dataToSend = {
         patientID: patient_id,
         dateCase: formattedDate,
@@ -108,13 +107,18 @@ const Prescription = () => {
   };
   const handleChange = (index, fieldName, value) => {
     const newInputFields = [...inputFields];
-
+    
     if (index < newInputFields.length) {
       newInputFields[index] = { ...newInputFields[index], [fieldName]: value };
     } else {
       newInputFields.push({ [fieldName]: value });
     }
-
+    if (Number.isInteger(value)) {
+      if (value < 1) {
+        alert("Số lượng không hợp lệ!");
+        return;
+      }
+    }
     setInputFields(newInputFields);
     // Console log mảng inputFields sau mỗi lần thay đổi
     console.log("Mảng sau khi thay đổi:", newInputFields);
