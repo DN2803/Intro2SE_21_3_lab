@@ -59,8 +59,8 @@ const Login = () => {
                                 </div>
                                 }
                                 <div className='form-group' style={{ marginTop: '2vh' }}>
-                                    <button type="submit" className="btn btn-primary">Đăng nhập ngay</button>
-                                    &nbsp; &nbsp; <a href="/">Quay về Trang chính</a>
+                                    <button type="submit" className="btn-login">Đăng nhập</button>
+                                    
                                 </div>
                             </Form>
                         </div>
