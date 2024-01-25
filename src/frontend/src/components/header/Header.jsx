@@ -29,10 +29,12 @@ const Header = () => {
     useEffect(() => {
         // Add event listener on component mount
         const handleScroll = () => {
-            if (window.scrollY >= 80) {
-                headerRef.current.classList.add("sticky__header");
-            } else {
-                headerRef.current.classList.remove("sticky__header");
+            if (headerRef.current) {
+                if (window.scrollY >= 80) {
+                    headerRef.current.classList.add("sticky__header");
+                } else {
+                    headerRef.current.classList.remove("sticky__header");
+                }
             }
         };
 
